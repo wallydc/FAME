@@ -142,18 +142,6 @@ Check the following:
 - API configuration
 - Browser console for JavaScript errors
 
-## Project Information
-
-This project was originally based on SB Admin 2 by Start Bootstrap and has been customized for the FAME IoT Platform.
-
-Original project:
-
-https://startbootstrap.com/theme/sb-admin-2/
-
-## License
-
-The original SB Admin 2 project is released under the MIT License.
-
 ## Development
 
 The FAME IoT Platform has been customized to provide IoT device monitoring, device management, authentication, mapping, dashboard visualization, and REST API integration.
