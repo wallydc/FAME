@@ -28,7 +28,7 @@ The FAME IoT Platform provides a dashboard for viewing and managing IoT devices,
 - Bootstrap
 - Chart.js
 - Mapbox
-- Parse / SashiDo
+- Parse
 - ThingsBoard REST API
 
 ## Dashboard
@@ -71,9 +71,9 @@ The platform can be used to:
 - Manage device information
 - Send and retrieve telemetry data
 
-### Parse / SashiDo
+### Parse
 
-Parse / SashiDo is used for application data and device information.
+Parse is used for application data and device information.
 
 The platform can retrieve information such as:
 
@@ -97,7 +97,7 @@ The application requires the appropriate API configuration before it can be used
 This may include:
 
 - ThingsBoard server URL
-- Parse / SashiDo configuration
+- Parse configuration
 - Mapbox access token
 - API keys
 - Authentication settings
