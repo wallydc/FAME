@@ -103,8 +103,6 @@ This may include:
 - API keys
 - Authentication settings
 
-Do not publish passwords, API keys, access tokens, or other sensitive credentials in the repository.
-
 ## Responsive Design
 
 The platform is designed to work on:
