@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Map</title>
+    
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+    <script src='https://api.mapbox.com/mapbox-gl-js/v3.14.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v3.14.0/mapbox-gl.css' rel="stylesheet">
+    
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.3/mapbox-gl-draw.js'></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl-draw/1.3.0/mapbox-gl-draw.css" rel="stylesheet">
+
+	<link href="https://api.mapbox.com/mapbox-assembly/v1.13.0/assembly.min.css" rel="stylesheet">
+	<script id="search-js" defer="" src="https://api.mapbox.com/search-js/v1.0.0-beta.25/web.js"></script>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
+
+    <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
+
+	<script src="js/74e07481c2.js" crossorigin="anonymous"></script>
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+	  <link rel="stylesheet" href="css/AdminLTE.min.css">
+	<!--link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/-->
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/3.1.2/css/buttons.dataTables.css"/>
+	<link rel="stylesheet" type="text/css" href="css/menu_tooltip.css"/>
+
+	<script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/usertypeaccess.js"></script>
+    
+	<style>
+	body { margin: 0; padding: 0; }
+	#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+	.left_map {
+		padding-left: 0px !important ;
+		padding-right: 0px !important ;
+	}
+	.topover {
+		z-index: 1;
+	}
+	.mapbar {
+		position: absolute;
+		top: 40px;
+		right: 0%;
+		z-index: 8;
+	}
+	ul {
+	  list-style-type: none;
+	  margin: 0;
+	  padding: 0;
+	  /* overflow: hidden; */
+	}
+
+    .btn.btn-file>input[type='file'] {
+        position: relative;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        font-size: unset;
+        text-align: right;
+        opacity: unset;
+        filter: alpha(opacity = 0);
+        outline: none;
+        background: none;
+        cursor: inherit;
+        display: block;
+    }
+    .btn-primary {
+        background-color: unset;
+        border-color: unset;
+    }
+    .btn-primary:hover {
+        color: #000000;
+        background-color: unset;
+        border-color: unset;
+    }
+    .btn:not(:disabled):not(.disabled) {
+        color: #8f919f;
+        border: none;
+    }
+
+	/* li {
+	  float: left;
+	}
+
+	li a {
+	  display: block;
+	  color: black;
+	  text-align: center;
+	  padding: 14px 16px;
+	  text-decoration: none;
+	}
+
+	li a:hover {
+	  background-color: #111;
+	} */
+	.photo {
+		border-radius: 40px;
+		width:35px;
+		height:35px;
+	}
+	.Online {
+		width: 12px;
+		height: 12px;
+		background: #f15d24;
+		border-radius: 12px;
+		float: left;
+		margin: 5px 6px 0 0;
+	}
+	.Offline {
+		width: 12px;
+		height: 12px;
+		background: #c0ccd9;
+		border-radius: 12px;
+		float: left;
+		margin: 5px 6px 0 0;
+	}
+	.Unknown {
+		width: 12px;
+		height: 12px;
+		background: #f9b049;
+		border-radius: 12px;
+		float: left;
+		margin: 5px 6px 0 0;
+	}
+	.line_Online {
+		border: solid 2px #f15d24;
+	}
+	.line_Offline {
+		border: solid 2px #c0ccd9;
+	}
+	.line_Unknown {
+		border: solid 2px #f9b049;
+	}
+	/* .gp_box {
+		float: left;
+		background: white;
+		border-radius: 25px;
+		padding: 5px;
+		margin-left: 15px;
+	} */
+	.user_name {
+		float: left;
+		padding: 8px 6px 0px 6px;
+	}
+	.user_online {
+		float: left;
+		margin: 13px 6px 0px 6px;
+	}
+
+    @media (min-width: 768px) {
+
+    }
+    
+    @media (max-width: 992px) {
+        
+        .container2 {
+            top: 115px;
+            width: 85%;
+            margin-left: 2%;
+            margin-right: 2%;
+        }
+
+        #findnames {
+            top: 0;
+        }
+
+        .searchbox {
+            padding: 0 15px;
+        }
+
+        .forgeofenceControls, .forrouteControls {
+            top: -50px !important;
+        }
+    }
+
+    @media (min-width: 993px) {
+
+        #findnames {
+            top: 0;
+            width: 100%;
+        }
+
+        .container2 {
+            width: 58%;
+        }
+
+        .searchbox {
+            padding: 0 15px;
+        }
+
+        .forgeofenceControls, .forrouteControls {
+            top: -50px !important;
+        }
+    }
+
+    @media (max-width: 1200px) {
+        
+    }
+
+
+    @media only screen and (max-width: 480px) {
+        #loc-controls {
+            bottom: 235px !important;
+            right: 15px !important;
+        }
+        #zoom-controls {
+            bottom: 135px !important;
+            right: 15px !important;
+        }
+        #main-control {
+            bottom: 110px !important;
+        }
+        #forInput {
+            top: 0 !important;
+            width: 100% !important;
+            left: auto;
+            margin: 0 auto;
+        }
+    }
+
+    @media only screen and (max-width: 768px) {
+        .forgeofenceControls, .forrouteControls {
+            top: -50px !important;
+        }
+        
+        .hidename {
+            display: none;
+        }
+            
+        .searchbox {
+            position: relative;
+            top: -40px;
+            display: flex;
+            margin: 0 auto;
+            z-index: 20;
+            justify-content: center;
+        }
+
+        .suggestions {
+            top: 95px;
+        }
+
+        .hoveffect:hover + .hidename {
+            display: block;
+            color: red;
+        }
+
+        /* .mapbar {
+            top: 145px;
+        } */
+
+        .container2 {
+            top: 20px;
+            position: relative;
+            margin-left: 8%;
+            margin-right: 8%;
+        }
+
+        /* .user_name {
+            display: none;
+        } */
+        #findnames {
+            display: -webkit-box;
+            width: 92% !important;
+            overflow: hidden;
+            position: relative;
+            padding: 0 2%;
+            margin: 0 auto;
+            top: 50px;
+        }
+
+        #mapcontrols {
+            width: 325px !important;
+        }
+
+        .atitle {
+            display: none;
+        }
+        
+        #main-control {
+            position: absolute;
+            bottom: 0;
+        }
+
+        #map-controls {
+            left: 15px !important;
+        }
+
+        #layer-controls {
+            left: 15px !important;
+        }
+    }
+
+    @media only screen and (max-width: 1080px) {
+
+    }
+
+    @media only screen and (max-width: 1180px) {
+
+        #map-controls {
+            /* transition: height 0.5s ease-in-out; */
+            height: 205px;
+            width: 45px;
+            left: 75px;
+            bottom: 73px;
+        }
+
+        .btn-layer {
+            /* transition: height 0.5s ease-in-out; */
+            display: flex;
+            margin: 5px 0;
+            align-items: center;
+            flex-direction: column;
+        }
+
+    }
+    
+    #controlbar {
+        /* position: relative; */
+        /* z-index: 1; */
+        width: 100%;
+        clear: both;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        /* height: 100%; */
+    }
+
+    .controlbar {
+        position: fixed;
+        z-index: 999;
+        height: 100px;
+        width: 100%;
+        bottom: 20px;
+    }
+
+    #mapcontrols {
+        width: 450px;
+        display: flex;
+        margin: 0 auto;
+    }
+
+    .mapcontrols {
+        padding: 0 25px;
+        background-color: #f9fafc;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        position: relative;
+        margin: 0 auto;
+    }
+
+    .topline {
+        background-color: #082238;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        height: 7px;
+        width: 45px;
+        display: none;
+        margin: 0 auto;
+        top: -22px;
+        position: relative;
+    }
+    
+    /* ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    } */
+
+    .li-ctrl {
+        float: left;
+        text-align: center;
+        margin: 2% 2%;
+        display: inline-flex;
+        width: 20%;
+    }
+
+    .li-ctrl a {
+        display: block;
+        /* color: white; */
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    .li-ctrl a:hover:not(.active)  {
+        /* background-color: #2d358d; */
+        /* border-top: 1px solid #2d358d; */
+        color: #2d358d;
+    }
+
+    .activecontrol {
+        color: #2d358d;
+    }
+
+    .active {
+        /* background-color: #04AA6D; */
+        display: block;
+    }
+
+    .a-link {
+        color: #5c89c7;
+    }
+
+    .atitle {
+        color: #082238;
+    }
+        
+    .marker {
+        background-size: cover;
+        width: 18px;
+        height: 32px;
+        cursor: pointer;
+        /* border-radius: 50%; */
+    }
+
+    #Online {
+        background-image: url('img/marker_1.png');
+    }
+    #Unknown {
+        background-image: url('img/marker_2.png');
+    }
+    #Offline {
+        background-image: url('img/marker_3.png');
+    }
+
+    .mapboxgl-popup-content {
+        border-radius: 8px;
+    }
+
+    .mapboxgl-popup-close-button {
+        margin: 5px;
+        font-size: 2.5em;
+        color: #d73a49;
+    }
+
+    .info {
+        font-size: 1.5em;
+    }
+    
+    #layer-controls {
+        position: absolute;
+        bottom: 25px;
+        left: 75px;
+        z-index: 1001;
+        display: flex;
+        flex-direction: column;
+        background-color: rgb(234 244 247 / 70%);
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+    #loc-controls {
+        position: absolute;
+        bottom: 125px;
+        right: 15px;
+        z-index: 1001;
+        display: flex;
+        flex-direction: column;
+        background-color: rgb(234 244 247 / 70%);
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+    #zoom-controls {
+        position: absolute;
+        bottom: 25px;
+        right: 15px;
+        z-index: 1001;
+        display: flex;
+        flex-direction: column;
+        background-color: rgb(234 244 247 / 70%);
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+    .zoom-btn, .layer-btn, .divcontainer {
+        color: #5c89c7;
+        padding: 10px;
+        height: 45px;
+        width: 45px;
+        text-align: center;
+        border: none;
+        cursor: pointer;
+        font-size: 19px;
+        font-weight: bold;
+    }
+
+    .layers-btn {
+        width: 45px;
+        text-align: center;
+        padding: 0 8px;
+    }
+    
+    .layer-btn.active, .layers-btn.active {
+        color: #080f5d;
+    }
+    .layer-btn:hover, .layers-btn:hover, .zoom-btn:hover {
+        color: #080f5d;
+    }
+    
+    .btn-layer {
+        /* transition: width 0.5s ease-in-out; */
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .divcontainer {
+        /* transition: width 0.5s ease-in-out; */
+        position: absolute;
+        /* z-index: 1000; */
+        z-index: -1;
+        bottom: 25px;
+        left: 75px;
+        background-color: rgb(234 244 247 / 70%);
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+    .divexpanded {
+        z-index: 1000;
+        left: 125px;
+        width: 300px;
+        background-color: rgb(234 244 247 / 70%);
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    /* Button Styling */
+    .btn_tooltip {
+        position: relative;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    /* Tooltip Styling */
+    .tooltip {
+        position: absolute;
+        bottom: 130%; /* Position above the button */
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #080f5d;
+        color: #ffffff;
+        padding: 8px 10px;
+        border-radius: 5px;
+        font-size: 14px;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    /* Tooltip Arrow */
+    .tooltip::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 5px;
+        border-style: solid;
+        border-color: #333 transparent transparent transparent;
+    }
+
+    /* Show Tooltip on Hover */
+    .btn_tooltip:hover .tooltip {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .geofenceControls {
+        display: inline !important;
+    }
+
+    .forgeofenceControls, .forrouteControls {
+        position: absolute;
+        width: auto;
+        background: #f9fafc;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        display: none;
+        align-items: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .menu {
+        display: flex;
+        flex-direction: column;
+        background: #333;
+        padding: 10px;
+        border-radius: 8px;
+    }
+
+    .disabled-icon {
+        opacity: 0.3;
+        pointer-events: none;
+    }
+    
+    .enabled-icon {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    /* ----- */
+
+    /* .container2 {
+        width: 92%;
+        margin-right: 2%;
+    } */
+
+    .scroll-wrapper {
+        display: flex;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+        gap: 15px;
+        padding: 0 35px;
+        justify-content: space-evenly;
+    }
+
+    .card2 {
+        min-width: auto;
+        height: 50px;
+        background-color: #f0f0f0;
+        border-radius: 10px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .arrow-btn {
+        position: absolute;
+        top: 100%;
+        /* transform: translateY(-50%); */
+        background-color: rgba(0, 0, 0, 0.6);
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        z-index: 10;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .arrow-btn.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+    #leftBtn {
+        left: 0;
+    }
+    #rightBtn {
+        right: 0;
+    }
+
+    .arrow-left {
+        left: 10px;
+    }
+
+    .arrow-right {
+        right: 10px;
+    }
+    
+	.gp_box {
+        float: left;
+        background: white;
+        border-radius: 35px;
+        gap: 10px;
+        padding: 15px 0px;
+        font-size: 100%;
+	}
+    
+
+
+    
+    .search-container {
+      position: absolute;
+      top: 32px;
+      /* left: 50%;
+      transform: translateX(-50%); */
+      display: flex;
+      align-items: center;
+      background: #f4f7fb;
+      border: 10px solid #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      padding: 8px 12px;
+      width: 350px;
+      z-index: 2;
+    }
+
+    .search-container i.fa-search {
+      color: #666;
+      margin-right: 8px;
+      font-size: 16px;
+    }
+
+    .search-container input {
+      border: none;
+      outline: none;
+      flex: 1;
+      font-size: 14px;
+    }
+
+    .search-container i {
+      margin-right: 8px;
+      color: #555;
+    }
+
+    .clear-btn {
+      display: none;
+      cursor: pointer;
+      color: #888;
+    }
+
+    .suggestions {
+      position: absolute;
+      /* top: 85px;
+      left: 50%;
+      transform: translateX(-50%); */
+      width: 350px;
+      font-size: 12px;
+      line-height: 2px;
+      background:white;
+      color:#111;
+      box-shadow:0 6px 16px rgba(0,0,0,0.18);
+      border-radius:8px;
+      max-height:320px;
+      overflow:auto;
+      z-index:20;
+    }
+    
+    .suggestion {
+      padding:10px 12px;
+      border-bottom:1px solid #eee;
+      cursor:pointer;
+      display:flex;
+      justify-content: space-between;
+      align-items: stretch;
+      gap:10px;
+    }
+    .suggestion:last-child { border-bottom:none; }
+    .suggestion:hover { background:#f5f7fa; }
+    .meta { color:#666; font-size:12px; }
+
+    .suggestions div {
+      padding: 8px 5px;
+      cursor: pointer;
+    }
+
+    .suggestions div:hover {
+      background: #f2f2f2;
+    }
+
+    .popup-close-btn {
+        /* margin: 5px; */
+    font-size: 2.5em;
+    color: #d73a49;
+
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: #ffffff;
+      /* color: white; */
+      border: none;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      /* font-size: 14px; */
+      line-height: 20px;
+      text-align: center;
+      cursor: pointer;
+      z-index: 1;
+    }
+	</style>
+	
+</head>
+
+<body id="page-top">
+    <div class="imgcenter">
+        <div class="loader"></div>
+    </div>
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+                <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- End of Topbar -->
+
+
+  <!-- Search Box -->
+  <div class="searchbox" style="display:none">
+    <div class="search-container">
+        <button id="dropdown-btn" style="background:none;border:none;cursor:pointer;margin-left:4px;color:#555;"><i class="fa fa-chevron-down"></i></button>
+        <input type="text" id="search-input" placeholder="Search..." style="background-color: #f4f7fb;">
+        <i class="fa fa-times clear-btn" id="clear-btn"></i>
+        <i class="fa fa-search"></i>
+    </div>
+  <div class="suggestions" id="suggestions"></div>
+  </div>
+
+
+                <!-- Begin Page Content -->
+                <div class="container2 mapbar" style="display:none">
+
+                    <button id="leftBtn" class="arrow-btn arrow-left hidden" onclick="scrollGoLeft()"><i class="fa fa-angle-left"></i></button>
+				    <div id="findnames" class="mapbar scroll-wrapper"></div>
+                    <button id="rightBtn" class="arrow-btn arrow-right" onclick="scrollGoRight()"><i class="fa fa-angle-right"></i></button>
+                </div>
+
+
+
+                <div class="container-fluid left_map">
+                    <div id="map"></div>
+                    <div id="main-control">
+                        <div id="map-controls" class="divcontainer">
+                            <div class="btn-layer">
+                                <!-- <div class="tooltip">Hover over me
+                                    <span class="tooltip-text">This is a custom tooltip</span>
+                                </div> -->
+    
+                                <!-- <button onclick="changeStyle('mapbox://styles/mapbox/streets-v11')">Streets</button> -->
+
+                                <button onclick="changeStyle('mapbox://styles/mapbox/streets-v11')" class="btn_tooltip layers-btn" id="default_btn" value=""><span class="tooltip">Default</span><i class="fa-solid fa-road" style="padding: 5px;"></i></button>
+                                <button onclick="changeStyle('mapbox://styles/mapbox/satellite-v9')" class="btn_tooltip layers-btn" id="satellite_btn" value=""><span class="tooltip">Satellite</span><i class="fa-solid fa-satellite" style="padding: 5px;"></i></button>
+                                <button onclick="changeStyle('mapbox://styles/mapbox/outdoors-v11')" class="btn_tooltip layers-btn" id="terrain_btn" value=""><span class="tooltip">Terrain</span><i class="fa-solid fa-globe" style="padding: 5px;"></i></button>
+                                <button onclick="changeStyle('mapbox://styles/mapbox/satellite-streets-v11')" class="btn_tooltip layers-btn" id="hybrid_btn" value=""><span class="tooltip">Hybrid</span><i class="fa-solid fa-map-location" style="padding: 5px;"></i></button>
+                                <button onclick="changeStyle('mapbox://styles/mapbox/dark-v10')" class="btn_tooltip layers-btn" id="dark_btn" value=""><span class="tooltip">Dark Mode</span><i class="fa-solid fa-map" style="padding: 5px;"></i></button>
+                                <button onclick="changeStyle('mapbox://styles/mapbox/light-v10')" class="btn_tooltip layers-btn" id="light_btn" value=""><span class="tooltip">Light Mode</span><i class="fa-regular fa-map" style="padding: 5px;"></i></button>
+                            
+
+                            </div>
+                        </div>
+                        <div id="layer-controls" style="display:none">
+                            <button class="layer-btn" id="btnlayer"><i class="fa-solid fa-layer-group"></i></button>
+                        </div>                        
+                    </div>
+
+                    <div id="loc-controls" style="display:none">
+                        <button class="zoom-btn" onclick="showLocation()"><i class="fa-solid fa-location-crosshairs"></i></button>
+                    </div>
+                    <div id="zoom-controls" style="display:none">
+                        <button class="zoom-btn" id="zoom-in"><i class="fa-solid fa-plus"></i></button>
+                        <hr style="margin-top: 0; margin-bottom: 0; border: 0; border-top: 1px solid rgba(0, 0, 0, 0.1);">
+                        <button class="zoom-btn" id="zoom-out"><i class="fa-solid fa-minus"></i></button>
+                    </div>
+                
+
+                </div>
+
+
+            </div>
+            <!-- End of Main Content -->
+
+
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+
+     
+
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+
+
+    <!-- Page level custom scripts -->
+    <!-- <script src="js/demo/datatables-demo.js"></script> -->
+
+    <script src="js/fileinput.min.js"></script>
+   
+	<!-- Bootstrap 3.3.7 -->
+	<!-- <script src="dist/js/bootstrap.min.js"></script> -->
+	
+
+    <!-- load profile avatar -->
+    <!-- <script src="js/loadprofileavatar.js"></script> -->
+
+    <!-- load map controls -->
+    <script src="js/view_mapcontrol.js"></script>
+
+
+<!-- Toast -->
+<div id="toast" style="display:none;position:fixed;bottom:120px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:10px 20px;border-radius:5px;z-index:3000;font-size:14px;"></div>
+
+<!-- Group / Location Modal -->
+<!-- <div id="groupModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:2000;justify-content:center;align-items:center;">
+  <div style="background:#fff;padding:20px;border-radius:10px;width:320px;max-height:80vh;overflow:auto;position:relative;">
+    <button id="closeLocModal" style="position:absolute;top:10px;right:10px;background:none;border:none;font-size:20px;cursor:pointer;">&times;</button>
+    <h4>Groups</h4>
+    <input type="text" id="groupSearch" placeholder="Search groups..." style="width:100%;padding:8px;margin-bottom:10px;border:1px solid #ddd;border-radius:4px;" />
+    <div id="listContainer"></div>
+  </div>
+</div> -->
+
+<!-- Track / Vessel Modal -->
+<!-- <div id="modalBackdrop" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:2000;justify-content:center;align-items:center;">
+  <div style="background:#fff;padding:20px;border-radius:10px;width:320px;max-height:80vh;overflow:auto;position:relative;">
+    <button id="closeModal" style="position:absolute;top:10px;right:10px;background:none;border:none;font-size:20px;cursor:pointer;">&times;</button>
+    <h4>Vessels</h4>
+    <input type="text" id="vesselSearch" placeholder="Search vessels..." style="width:100%;padding:8px;margin-bottom:10px;border:1px solid #ddd;border-radius:4px;" />
+    <div id="track_suggestions"></div>
+  </div>
+</div> -->
+
+<!-- Geofence / Route Controls (hidden toolbars) -->
+<!-- <div class="forgeofenceControls" style="display:block;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1000;background:#f9fafc;padding:10px;border-radius:10px;box-shadow:0 0 10px rgba(0,0,0,0.2);">
+  <button id="btnCircle" class="btn btn-sm btn-outline-secondary" style="margin:2px;"><i id="iconCircle" class="fa-solid fa-circle"></i> Circle</button>
+  <button id="btnPolygon" class="btn btn-sm btn-outline-secondary" style="margin:2px;"><i id="iconPoly" class="fa-solid fa-draw-polygon"></i> Polygon</button>
+  <button id="btnResetPoly" class="btn btn-sm btn-outline-secondary" style="margin:2px;"><i id="iconPolyreset" class="fa-solid fa-trash"></i> Reset</button>
+  <button id="btnSavePoly" class="btn btn-sm btn-outline-primary" style="margin:2px;"><i id="editpolyIcon" class="fa-solid fa-save"></i> Save</button>
+</div>
+
+<div class="forrouteControls" style="display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1000;background:#f9fafc;padding:10px;border-radius:10px;box-shadow:0 0 10px rgba(0,0,0,0.2);">
+  <button id="btnLine" class="btn btn-sm btn-outline-secondary" style="margin:2px;"><i id="iconLine" class="fa-solid fa-route"></i> Line</button>
+  <button id="btnResetLine" class="btn btn-sm btn-outline-secondary" style="margin:2px;"><i id="iconLinereset" class="fa-solid fa-trash"></i> Reset</button>
+  <button id="btnSaveLine" class="btn btn-sm btn-outline-primary" style="margin:2px;"><i id="editlineIcon" class="fa-solid fa-save"></i> Save</button>
+</div> -->
+
+<!-- Bottom control bar -->
+<!-- <div class="controlbar" style="position:fixed;z-index:999;height:100px;width:100%;bottom:20px;pointer-events:none;">
+  <div id="mapcontrols" style="pointer-events:auto;">
+    <div class="mapcontrols" style="display:flex;justify-content:center;align-items:center;padding:10px 25px;">
+      <ul style="display:flex;list-style:none;margin:0;padding:0;">
+        <li class="li-ctrl" id="loc" style="margin:0 10px;"><a href="#" id="location" style="text-decoration:none;color:#5c89c7;"><i class="fa-solid fa-location-dot" style="font-size:20px;"></i><span class="atitle" style="display:block;font-size:12px;">Location</span></a></li>
+        <li class="li-ctrl" id="trk" style="margin:0 10px;"><a href="#" id="track" style="text-decoration:none;color:#5c89c7;"><i class="fa-solid fa-ship" style="font-size:20px;"></i><span class="atitle" style="display:block;font-size:12px;">Track</span></a></li>
+        <li class="li-ctrl" id="rte" style="margin:0 10px;"><a href="#" id="route" style="text-decoration:none;color:#5c89c7;"><i class="fa-solid fa-route" style="font-size:20px;"></i><span class="atitle" style="display:block;font-size:12px;">Route</span></a></li>
+        <li class="li-ctrl" id="geo" style="margin:0 10px;"><a href="#" id="geofence" style="text-decoration:none;color:#5c89c7;"><i class="fa-solid fa-street-view" style="font-size:20px;"></i><span class="atitle" style="display:block;font-size:12px;">Geofence</span></a></li>
+      </ul>
+    </div>
+  </div>
+</div> -->
+
+<!-- <script>$(document).ready(function(){ loadprofileavatar(); });</script> -->
+</body>
+
+</html>

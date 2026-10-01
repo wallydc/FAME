@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Devices - Tables</title>
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+
+    <!-- Custom styles for this template -->
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+	  <link rel="stylesheet" href="css/AdminLTE.min.css">
+	<!--link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/-->
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/3.1.2/css/buttons.dataTables.css"/>
+
+	<script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/usertypeaccess.js"></script>
+	<script src="js/jquery-1.11.2.js"></script>
+
+	<style>
+        body {
+            font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-weight: 400;
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+        .box_device {
+            text-align: center;
+            width: 100%;
+        }
+        .btn.btn-file>input[type='file'] {
+            position: relative;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: unset;
+            text-align: right;
+            opacity: unset;
+            filter: alpha(opacity = 0);
+            outline: none;
+            background: none;
+            cursor: inherit;
+            display: block;
+        }
+        .btn-primary {
+            background-color: unset;
+            border-color: unset;
+        }
+        .btn-primary:hover {
+            color: #000000;
+            background-color: unset;
+            border-color: unset;
+        }
+        .btn:not(:disabled):not(.disabled) {
+            color: #8f919f;
+            border: none;
+        }
+
+        th {
+            background-color: #eaf1f7 !important;
+            border-style: none !important;
+        }
+        
+        .dt-length {
+            float : left;
+        }
+
+        .dt-search {
+            float : right;
+        }
+
+       .dt-info {
+            float : left;
+        }
+
+        .dt-paging {
+            float : right;
+        }
+
+        div.dt-container.dt-empty-footer .dt-scroll-body {
+            border-bottom: 1px solid rgb(244 244 244);
+        }
+        .table-bordered {
+            border: 0px solid #f4f4f4;
+        }
+        .table-bordered th, .table-bordered td {
+            border: 0px solid #e3e6f0;
+        }
+		.Online {
+			width: 12px;
+			height: 12px;
+			background: #f15d24;
+			border-radius: 12px;
+			float: left;
+			margin: 5px 6px 0 0;
+		}
+		.Offline {
+			width: 12px;
+			height: 12px;
+			background: #c0ccd9;
+			border-radius: 12px;
+			float: left;
+			margin: 5px 6px 0 0;
+		}
+		.Unknown {
+			width: 12px;
+			height: 12px;
+			background: #f9b049;
+			border-radius: 12px;
+			float: left;
+			margin: 5px 6px 0 0;
+		}
+		.icon_phone {
+			color: #32e115;
+		}
+
+		table.dataTable tbody td {
+		  vertical-align: middle !important;
+		}
+
+        .dt-search {
+            position: relative;
+            z-index: auto;
+            top: -100px;
+            right: 20px;
+            /* float: right; */
+        }
+        .dt-search-0 {
+            position: fixed;
+            right: 255px;
+            padding: 5px;
+        }
+        /* #dt-search-0 {
+            position: fixed;
+        } */
+
+        .dataTables_filter {
+            display: none;
+        }
+        .dt-scroll-head {
+            background-color: #eaf1f7;
+            overflow: hidden;
+            position: absolute !important;
+            border: 0px;
+            width: 100%;
+            /* height: 100%; */
+            z-index: 1;
+        }
+        .dt-scroll-body {
+            position: relative;
+            overflow: auto;
+            width: 100%;
+            padding: 5% 1% 0;
+        }
+        @media (min-width: 576px) {
+            .dt-scroll-body {
+                padding: 2% 1% 0;
+            }
+        }
+
+        /* FOR LOADER */
+        .loader {
+            border: 5px solid #f3f3f300;
+            border-radius: 50%;
+            border-top: 5px solid #2d358d;
+            width: 50px;
+            height: 50px;
+            -webkit-animation: spin .8s linear infinite; /* Safari */
+            animation: spin .8s linear infinite;
+        }
+
+        /* Safari */
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .imgcenter {
+            display: none;
+            margin: 0 auto;
+            position: absolute;
+            z-index: 100000;
+            width: 100%;
+            top: 50%;
+        }
+
+        .loader {
+            margin: auto;
+        }
+	</style>
+
+	<script type="text/javascript">
+        $(document).ready(function() {
+
+        $('select').on('change', function() {
+            console.log( this.value );
+            $('#transportation').val(this.value);
+        });
+        
+            loadprofileavatar();
+            sessionStorage.setItem( 'getID', '');
+        // $("#device_list").dataTable().fnDestroy();
+
+			var devices = $('#device_list').DataTable( {
+				
+		
+                "language": {
+                    searchPlaceholder: "Search",
+                    search: "Filter:",
+				},
+                "iDisplayLength": -1,
+                "aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+                "processing": false,
+                "scrollX": true,
+                dom: 'l<"toolbar">Bfrtip',
+                "scrollCollapse": true,
+                "paging":         false,
+
+                "bPaginate": false,
+                "bLengthChange": false,
+                "bFilter": true,
+                "bInfo": false,
+                "bAutoWidth": true,
+
+                fixedColumns:   {
+                    left: 1
+                },
+                buttons: [        ],
+                buttons: [        ], 
+                // initComplete: function(){
+                //     $("div.toolbar").html('<a class="button-33" data-toggle="modal" data-target="#myAddModal"><i class="ri-file-add-fill" style="font-size:15px;"></i> Add</a>');           
+                // },
+
+                "ajax": {
+                    "url": "data_device.php",
+                    "dataSrc": "results",
+                },
+
+
+				"order": [[ 1, "asc" ]],
+				
+				"columns": [
+					
+					//{ "data": "Photo", defaultContent: '' },
+					{ "data": null, render: function ( data, type, row ) {
+                        return '<img src="./uploaded_images/'+data.Photo+'.jpg" width="40" height="40" />';
+					}},
+					{ "data": "Name", defaultContent: '' },
+					{ "data": "Identifier", defaultContent: '' },
+					{ "data": "Model", defaultContent: '' },
+					{ "data": "Group", defaultContent: '' },
+					//{ "data": "Status", defaultContent: '' },
+
+					{ "data": null, render: function ( data, type, row ) {
+                        return '<div class="'+ data.Status +'"></div><div>'+ data.Status +'</div>';
+                    }}, 
+
+				]
+			} );
+
+            
+
+            var btnCust = '<button type="button" class="btn btn-secondary" title="Add picture tags" ' + '<i class="glyphicon glyphicon-tag"></i>' + '</button>';
+            
+            $("#add_uploaded_image").fileinput({
+                overwriteInitial: true,
+                maxFileSize: 1500,
+                showClose: false,
+                showCaption: false,
+                browseLabel: '',
+                removeLabel: '',
+                browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
+                removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+                removeTitle: 'Cancel or reset changes',
+                elErrorContainer: '#kv-avatar-errors-1',
+                msgErrorClass: 'alert alert-block alert-danger',
+                // defaultPreviewContent: '<img src="/uploads/default_avatar_male.jpg" alt="Your Avatar">',
+                layoutTemplates: {main2: '{preview} ' +  btnCust + ' {remove} {browse}'},
+                allowedFileExtensions: ["jpg", "png", "gif"]
+            });
+            
+            $("#update_uploaded_image").fileinput({
+                overwriteInitial: true,
+                maxFileSize: 1500,
+                showClose: false,
+                showCaption: false,
+                browseLabel: '',
+                removeLabel: '',
+                browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
+                removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+                removeTitle: 'Cancel or reset changes',
+                elErrorContainer: '#kv-avatar-errors-1',
+                msgErrorClass: 'alert alert-block alert-danger',
+                // defaultPreviewContent: '<img src="/uploads/default_avatar_male.jpg" alt="Your Avatar">',
+                layoutTemplates: {main2: '{preview} ' +  btnCust + ' {remove} {browse}'},
+                allowedFileExtensions: ["jpg", "png", "gif"]
+            });
+            
+		});
+
+        function putId(objectId){
+		    sessionStorage.setItem( 'getID', objectId);
+            // RESET INPUT
+            document.getElementById("pic_preview").innerHTML = "";
+            $('#edit_Name').val("");
+            $('#edit_Identifier').val("");
+            $('#edit_Model').val("");
+            $('#edit_Group').val("");
+            $('#edit_Contact').val("");
+            getEdit();
+
+        }
+
+        function getEdit(){
+            var objectId_data = sessionStorage.getItem("getID");
+            var param = JSON.stringify({"objectId":objectId_data});
+            var compare = '?where=';
+            var url = compare.concat(param);
+
+            $.ajax({
+                type: 'GET',
+                headers: {
+                    'X-Parse-Application-Id': APP_ID,
+                    'X-Parse-REST-API-Key': REST_API_KEY,
+                    'Content-Type': "application/json"
+                }, 
+                url: BASE_URL+"1/classes/Devices"+url, 
+                data: '{"results":[{}]}',
+                data: {order: 'createdAt'},
+                dataType: "json",
+                error: function() {
+                    //alert("No data found.");
+                },
+
+                success: function (data) {
+
+                    var jstr = JSON.stringify(data);
+                    var json = JSON.parse(jstr);
+
+                    for(var i=0; i< json.results.length; i++) {
+
+                    var objectId = json.results[i].objectId;
+                    var Photo = json.results[i].Photo;
+                    var Name = json.results[i].Name;
+                    var Identifier = json.results[i].Identifier;
+                    var Model = json.results[i].Model;
+                    var Group = json.results[i].Group;
+                    // var Status = json.results[i].Status;
+                    var ContactPerson = json.results[i].ContactPerson;
+                    var Transportation = json.results[i].Transportation;
+
+                    document.getElementById("pic_preview").innerHTML = "<img src='./uploaded_images/"+Photo+".jpg' style='width:200px; height:200px' />";
+
+                    $('#edit_Name').val(Name);
+                    $('#edit_Identifier').val(Identifier);
+                    $('#edit_Model').val(Model);
+                    $('#edit_Group').val(Group);
+                    $('#edit_Contact').val(ContactPerson);
+                    // $('#transportation').val(Transportation);
+                    $("#transportation option[value='"+Transportation+"']").prop('selected', true);
+
+                    }
+                    
+                }
+            });	
+
+        }
+        
+        function delobjtId(objectId){
+            sessionStorage.setItem( 'getID', objectId);
+            // get_row();
+        }
+
+    </script>
+</head>
+
+<table id="device_list" class="table table-bordered" style="font-weight: bold;">
+		<thead>
+			<tr>
+				<th>Photo</th>
+				<th>Name</th>
+				<th>Identifier</th>
+				<th>Model</th>
+				<th>Group</th>
+				<th>Status</th>									
+			</tr>
+		</thead>
+</table>
+		
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/datatables-demo.js"></script>
+	<script src="https://kit.fontawesome.com/74e07481c2.js" crossorigin="anonymous"></script>
+
+    <script src="js/fileinput.min.js"></script>
+   
+    <script type="text/javascript">
+    function CheckDimension() {
+        
+        var ext = $('#add_uploaded_image').val().split('.').pop();
+        if($.inArray(ext, ['jpg','JPG']) == -1) {
+
+        if(ext != ""){
+            alert('Invalid extension ".'+ext+' ", only ".jpg" is allowed!');
+        } else {
+            alert('Image required, Kindly upload the image.');
+        }
+
+
+        } else {
+            //Get reference of File.
+            var fileUpload = document.getElementById("add_uploaded_image");
+
+            //Check whether the file is valid Image.
+            var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(.jpg)$");
+            if (regex.test(fileUpload.value.toLowerCase())) {
+
+                //Check whether HTML5 is supported.
+                if (typeof (fileUpload.files) != "undefined") {
+                    //Initiate the FileReader object.
+                    var reader = new FileReader();
+                    //Read the contents of Image File.
+                    reader.readAsDataURL(fileUpload.files[0]);
+                    reader.onload = function (e) {
+                        //Initiate the JavaScript Image object.
+                        var image = new Image();
+
+                        //Set the Base64 string return from FileReader as source.
+                        image.src = e.target.result;
+                            
+                        //Validate the File Height and Width.
+                        image.onload = function () {
+                            let height = this.height;
+                            let width = this.width;
+                            if (height > 512 || width > 512) {
+
+                            //show width and height to user
+                                // document.getElementById("width").innerHTML = width;
+                                // document.getElementById("height").innerHTML= height;
+                                alert("Height and Width must not exceed 512px.");
+                                return false;
+                            }
+                                
+                            add_device();
+                            // alert("Uploaded image has valid Height and Width.");
+                            return true;
+                        };
+
+                    }
+                } else {
+                    alert("This browser does not support HTML5.");
+                    return false;
+                }
+            } else {
+                alert("Please select a valid Image file.");
+                return false;
+            }            
+        }
+
+    }
+    
+    function add_device() {
+        
+        var photo = $('#add_uploaded_image').val();
+        var name = $('#add_Name').val();
+        var identifier = $('#add_Identifier').val();
+        var model = $('#add_Model').val();
+        var group = $('#add_Group').val();
+        var contactperson = $('#add_Contact').val();
+        var transportation = $('#transportation').find(":selected").val();
+
+        //-----MY FILTER HERE
+        if (($.trim(name).length != "") || ($.trim(name).length != "0")) {
+        if (($.trim(identifier).length != "") || ($.trim(identifier).length != "0")) {
+        if (($.trim(model).length != "") || ($.trim(model).length != "0")) {
+        if (($.trim(group).length != "") || ($.trim(group).length != "0")) {
+        if (($.trim(contactperson).length != "") || ($.trim(contactperson).length != "0")) {
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("POST", BASE_URL+"1/classes/Devices", true);
+        xmlhttp.setRequestHeader("X-Parse-Application-Id", APP_ID);
+        xmlhttp.setRequestHeader("X-Parse-REST-API-Key", REST_API_KEY);
+        //   xmlhttp.setRequestHeader("X-Parse-Master-Key","x74LkLK7v04GUHLypIqbgX34Ad4hzNsSVT8cMMRU");
+        xmlhttp.setRequestHeader("Content-Type", "application/json");
+
+        xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4) {
+            var result = JSON.parse(xmlhttp.responseText);
+            if (result.objectId) {
+                //alert("saved an object with id: " + result.objectId);
+                //alert("Product upload is successful.");
+                $(".imgcenter").css("display", "block");
+
+                setTimeout(function() {
+                    $("#upload_images").click();
+                }, 3000);
+                
+                }
+            }
+        }
+
+        var data = JSON.stringify({Photo : identifier, Name : name, Identifier : identifier, Model : model, Group : group, Status : "Online", ContactPerson : contactperson, Transportation : transportation });
+        xmlhttp.send(data);
+
+
+        } else { alert("Kindly fill up the contact"); $('#add_Contact').val("");}
+        } else { alert("Kindly fill up the group"); $('#add_Group').val("");}
+        } else { alert("Kindly fill up the model"); $('#add_Model').val("");}
+        } else { alert("Kindly fill up the identifier"); $('#add_Identifier').val("");}
+        } else { alert("Kindly fill up the name"); $('#add_Name').val("");}
+                        
+    };
+
+    function reCheckDimension() {
+        
+        var ext = $('#update_uploaded_image').val().split('.').pop();
+
+        if (ext != "") {
+            if($.inArray(ext, ['jpg','JPG']) == -1) {
+
+            if(ext != ""){
+                alert('Invalid extension ".'+ext+' ", only ".jpg" is allowed!');
+            } else {
+                alert('Image required, Kindly upload the image.');
+            }
+            
+            } else {
+                //Get reference of File.
+                var fileUpload = document.getElementById("update_uploaded_image");
+
+                //Check whether the file is valid Image.
+                var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(.jpg)$");
+                if (regex.test(fileUpload.value.toLowerCase())) {
+
+                    //Check whether HTML5 is supported.
+                    if (typeof (fileUpload.files) != "undefined") {
+                        //Initiate the FileReader object.
+                        var reader = new FileReader();
+                        //Read the contents of Image File.
+                        reader.readAsDataURL(fileUpload.files[0]);
+                        reader.onload = function (e) {
+                            //Initiate the JavaScript Image object.
+                            var image = new Image();
+
+                            //Set the Base64 string return from FileReader as source.
+                            image.src = e.target.result;
+                                
+                            //Validate the File Height and Width.
+                            image.onload = function () {
+                                let height = this.height;
+                                let width = this.width;
+                                if (height > 512 || width > 512) {
+
+                                //show width and height to user
+                                    // document.getElementById("width").innerHTML = width;
+                                    // document.getElementById("height").innerHTML= height;
+                                    alert("Height and Width must not exceed 512px.");
+                                    return false;
+                                }
+                                    
+                                update_device();
+                                // alert("Uploaded image has valid Height and Width.");
+                                return true;
+                            };
+
+                        }
+                    } else {
+                        alert("This browser does not support HTML5.");
+                        return false;
+                    }
+                } else {
+                    alert("Please select a valid Image file.");
+                    return false;
+                }            
+            }
+        } else {
+          // alert("no uploaded image");
+          update_device();
+        }
+
+    }
+    
+    function update_device() {
+
+        var objID_device =	sessionStorage.getItem('getID');
+        var photo = $('#update_uploaded_image').val();
+        var name = $('#edit_Name').val();
+        var identifier = $('#edit_Identifier').val();
+        var model = $('#edit_Model').val();
+        var group = $('#edit_Group').val();
+        var transportation = $('#transportation').find(":selected").val();
+        var contactperson = $('#edit_Contact').val();
+
+        //-----MY FILTER HERE
+        if (($.trim(name).length != "") || ($.trim(name).length != "0")) {
+        if (($.trim(identifier).length != "") || ($.trim(identifier).length != "0")) {
+        if (($.trim(model).length != "") || ($.trim(model).length != "0")) {
+        if (($.trim(group).length != "") || ($.trim(group).length != "0")) {
+        if (($.trim(contactperson).length != "") || ($.trim(contactperson).length != "0")) {
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("PUT", BASE_URL+"1/classes/Devices/"+objID_device, true);
+        xmlhttp.setRequestHeader("X-Parse-Application-Id", APP_ID);
+        xmlhttp.setRequestHeader("X-Parse-REST-API-Key", REST_API_KEY);
+        // xmlhttp.setRequestHeader("X-Parse-Master-Key","x74LkLK7v04GUHLypIqbgX34Ad4hzNsSVT8cMMRU");
+        // xmlhttp.setRequestHeader('X-Parse-Session-Token', sessionToken);
+        xmlhttp.setRequestHeader("Content-Type", "application/json");
+
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4) {
+                var result = JSON.parse(xmlhttp.responseText);
+                $(".imgcenter").css("display", "block");
+                
+                setTimeout(function() {
+
+                    var get_image1 = $("#update_uploaded_image").val();/* .add_productimage */
+            
+                    if (get_image1 == "") {
+                        $('#device_list').DataTable().ajax.reload();
+                        $('#modal_edit').modal('hide');
+                        $('.close').click();
+                        $(".imgcenter").css("display", "none");
+                        // window.location.href='devices.html';
+                    } else if (get_image1 != ""){
+                        $("#upload_images2").click();
+                    }
+
+                }, 3000);
+                
+            }
+        }
+
+        var data = JSON.stringify({Photo : identifier, Name : name, Identifier : identifier, Model : model, Group : group, Status : "Online", ContactPerson : contactperson, Transportation : transportation });
+        xmlhttp.send(data);
+
+
+        } else { alert("Kindly fill up the contact"); $('#edit_Contact').val("");}
+        } else { alert("Kindly fill up the group"); $('#edit_Group').val("");}
+        } else { alert("Kindly fill up the model"); $('#edit_Model').val("");}
+        } else { alert("Kindly fill up the identifier"); $('#edit_Identifier').val("");}
+        } else { alert("Kindly fill up the name"); $('#edit_Name').val("");}
+                        
+    };
+
+    function delete_row(){
+        var id = sessionStorage.getItem( 'getID');
+        var oldURL = BASE_URL+"1/classes/Devices/";
+        var newURL = oldURL.concat(sessionStorage.getItem( 'getID'));
+    
+        $.ajax({
+            type: 'DELETE',
+            headers: {
+                'X-Parse-Application-Id': APP_ID,
+                'X-Parse-REST-API-Key': REST_API_KEY
+                // 'X-Parse-Master-Key': "x74LkLK7v04GUHLypIqbgX34Ad4hzNsSVT8cMMRU"
+            },
+            url: newURL, 
+            dataType: "json",
+            error: function() {
+            //alert(url);
+            },
+            success: function (data) {
+
+                $('#'+id).remove();
+                $(".imgcenter").css("display", "block");
+                setTimeout(function() {
+                    $('#device_list').DataTable().ajax.reload();
+                    $('#modal_delete').modal('hide');
+                    $('.close').click();
+                    $(".imgcenter").css("display", "none");
+                    // window.location.href='devices.html';
+                }, 3000);
+
+            }
+        });
+    }
+
+
+	</script>
+	<!-- Bootstrap 3.3.7 -->
+	<!-- <script src="dist/js/bootstrap.min.js"></script> -->
+	<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+	<script src="https://cdn.datatables.net/buttons/3.1.2/js/dataTables.buttons.js"></script>
+	<script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.dataTables.js"></script>
+	<script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.html5.min.js"></script>
+
+    <!-- load profile avatar -->
+    <script src="js/loadprofileavatar.js"></script>
+</body>
+
+</html>

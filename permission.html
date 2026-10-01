@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Permission</title>
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+	<script src="js/jquery-1.11.2.js"></script>
+    <!-- Custom styles for this template -->
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+	  <link rel="stylesheet" href="css/AdminLTE.min.css">
+	<!--link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/-->
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/3.1.2/css/buttons.dataTables.css"/>
+	<link rel="stylesheet" type="text/css" href="css/menu_tooltip.css"/>
+	
+	<script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/usertypeaccess.js"></script>
+	 <script src="js/jquery-1.11.2.js"></script>
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+
+	<style>
+        .box_device {
+            text-align: center;
+            width: 100%;
+        }
+
+      .btn {
+        cursor: pointer;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 6px;
+        background: #007cbf;
+        color: #fff;
+        font-size: 14px;
+      }
+        .btn.btn-file>input[type='file'] {
+            position: relative;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: unset;
+            text-align: right;
+            opacity: unset;
+            filter: alpha(opacity = 0);
+            outline: none;
+            background: none;
+            cursor: inherit;
+            display: block;
+        }
+        .btn-primary {
+            background-color: unset;
+            border-color: unset;
+        }
+        .btn-primary:hover {
+            color: #000000;
+            background-color: unset;
+            border-color: unset;
+        }
+    .btn:not(:disabled):not(.disabled) {
+        border: none;
+    }
+
+        th {
+            background-color: #eaf1f7 !important;
+            border-style: none !important;
+        }
+        
+        .dt-length {
+            float : left;
+        }
+
+        .dt-search {
+            float : right;
+        }
+
+       .dt-info {
+            float : left;
+        }
+
+        .dt-paging {
+            float : right;
+        }
+
+        div.dt-container.dt-empty-footer .dt-scroll-body {
+            border-bottom: 1px solid rgb(244 244 244);
+        }
+        .table-bordered {
+            border: 0px solid #f4f4f4;
+        }
+        .table-bordered th, .table-bordered td {
+            border: 0px solid #e3e6f0;
+        }
+
+        .dt-search {
+            position: relative;
+            z-index: auto;
+            top: -100px;
+            right: 20px;
+            /* float: right; */
+        }
+        .dt-search-0 {
+            position: fixed;
+            right: 255px;
+            padding: 5px;
+        }
+        /* #dt-search-0 {
+            position: fixed;
+        } */
+
+        .dataTables_filter {
+            display: none;
+        }
+        .dt-scroll-head {
+            background-color: #eaf1f7;
+            overflow: hidden;
+            position: absolute !important;
+            border: 0px;
+            width: 100%;
+            /* height: 100%; */
+            z-index: 1;
+        }
+        .dt-scroll-body {
+            position: relative;
+            overflow: auto;
+            width: 100%;
+            padding: 5% 1% 0;
+        }
+        @media (min-width: 576px) {
+            .dt-scroll-body {
+                padding: 2% 1% 0;
+            }
+        }
+
+        /* FOR LOADER */
+        .loader {
+            border: 5px solid #f3f3f300;
+            border-radius: 50%;
+            border-top: 5px solid #2d358d;
+            width: 50px;
+            height: 50px;
+            -webkit-animation: spin .8s linear infinite; /* Safari */
+            animation: spin .8s linear infinite;
+        }
+
+        /* Safari */
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .imgcenter {
+            display: none;
+            margin: 0 auto;
+            position: absolute;
+            z-index: 100000;
+            width: 100%;
+            top: 50%;
+        }
+
+        .loader {
+            margin: auto;
+        }
+		.box_profile {
+			padding-left: 24px;
+		}
+		.text-center {
+			text-align: center !important;
+			margin: 20px;
+		}
+		.box_radius {
+			border-radius: 15px;
+			background: #dce3e7;
+		}
+		.photo {
+			width: 150px;
+			border: #a9a3a3 solid;
+		}
+		.box_header {
+			background-color: #eaf1f7;
+		}
+		.none_padding {
+			padding: 0;
+		}
+		.none_margin {
+			margin: 0;
+		}
+		.table_th {
+			width:5%;
+			text-align:center;
+		}
+		tr td {
+			border: #f4f4f4 solid 1px;
+		}
+        .sidebar-dark .nav-item.active .nav-link {
+            padding: 1rem 1rem !important;
+        }
+    
+	</style>
+	<script>
+		$(document).ready(function() {
+            loadprofileavatar();
+
+				
+				//================ADMIN====================
+				var objectId = "vXvbEAa3yn"; 
+				var param = JSON.stringify({objectId}); 
+				var compare = '?where=';
+				var url = compare.concat(param);
+					$.ajax({
+					type: 'GET',
+					headers: {
+						'X-Parse-Application-Id': APP_ID,
+						'X-Parse-REST-API-Key': REST_API_KEY,
+						'Content-Type': "application/json"
+
+					},
+				url: BASE_URL+"1/classes/permission"+url, 
+					dataType: "json",
+					////cache: false,
+					error: function() {
+						//alert("No data found.");
+					},
+					success: function (data) {
+								var jstr = JSON.stringify(data);
+								var json = JSON.parse(jstr);
+								
+								for(var i=0; i< json.results.length; i++)
+								{
+									var objectId = json.results[i].objectId;
+									var usergroup = json.results[i].usergroup;
+									var map = json.results[i].map;
+									var notifications = json.results[i].notifications;
+									var dashboard = json.results[i].dashboard;
+									var devices = json.results[i].devices;
+									var reports = json.results[i].reports;
+									var settings = json.results[i].settings;
+								}						
+								document.getElementById("admin_map").innerHTML = '<img src="img/'+map+'.png"/>';
+								document.getElementById("admin_notifications").innerHTML = '<img src="img/'+notifications+'.png"/>';
+								document.getElementById("admin_dashboard").innerHTML = '<img src="img/'+dashboard+'.png"/>';
+								document.getElementById("admin_devices").innerHTML = '<img src="img/'+devices+'.png"/>';
+								document.getElementById("admin_reports").innerHTML = '<img src="img/'+reports+'.png"/>';
+								document.getElementById("admin_settings").innerHTML = '<img src="img/'+settings+'.png"/>';
+
+								localStorage.setItem("IDobject_admin",objectId);
+					}
+				});
+				//=================USER=======================
+				var objectId = "mp7I5ONNYu"; 
+				var param = JSON.stringify({objectId}); 
+				var compare = '?where=';
+				var url = compare.concat(param);
+					$.ajax({
+					type: 'GET',
+					headers: {
+						'X-Parse-Application-Id': APP_ID,
+						'X-Parse-REST-API-Key': REST_API_KEY,
+						'Content-Type': "application/json"
+
+					},
+				url: BASE_URL+"1/classes/permission"+url, 
+					dataType: "json",
+					////cache: false,
+					error: function() {
+						//alert("No data found.");
+					},
+					success: function (data) {
+								var jstr = JSON.stringify(data);
+								var json = JSON.parse(jstr);
+								
+								for(var i=0; i< json.results.length; i++)
+								{
+									var objectId = json.results[i].objectId;
+									var usergroup = json.results[i].usergroup;
+									var map = json.results[i].map;
+									var notifications = json.results[i].notifications;
+									var dashboard = json.results[i].dashboard;
+									var devices = json.results[i].devices;
+									var reports = json.results[i].reports;
+									var settings = json.results[i].settings;
+								}						
+								document.getElementById("user_map").innerHTML = '<img src="img/'+map+'.png"/>';
+								document.getElementById("user_notifications").innerHTML = '<img src="img/'+notifications+'.png"/>';
+								document.getElementById("user_dashboard").innerHTML = '<img src="img/'+dashboard+'.png"/>';
+								document.getElementById("user_devices").innerHTML = '<img src="img/'+devices+'.png"/>';
+								document.getElementById("user_reports").innerHTML = '<img src="img/'+reports+'.png"/>';
+								document.getElementById("user_settings").innerHTML = '<img src="img/'+settings+'.png"/>';
+
+								localStorage.setItem("IDobject_user",objectId);
+					}
+				});
+				//=========================SUPERVISOR=========================
+				var objectId = "so9Zn6jqqf"; 
+				var param = JSON.stringify({objectId}); 
+				var compare = '?where=';
+				var url = compare.concat(param);
+					$.ajax({
+					type: 'GET',
+					headers: {
+						'X-Parse-Application-Id': APP_ID,
+						'X-Parse-REST-API-Key': REST_API_KEY,
+						'Content-Type': "application/json"
+
+					},
+				url: BASE_URL+"1/classes/permission"+url, 
+					dataType: "json",
+					////cache: false,
+					error: function() {
+						//alert("No data found.");
+					},
+					success: function (data) {
+								var jstr = JSON.stringify(data);
+								var json = JSON.parse(jstr);
+								
+								for(var i=0; i< json.results.length; i++)
+								{
+									var objectId = json.results[i].objectId;
+									var usergroup = json.results[i].usergroup;
+									var map = json.results[i].map;
+									var notifications = json.results[i].notifications;
+									var dashboard = json.results[i].dashboard;
+									var devices = json.results[i].devices;
+									var reports = json.results[i].reports;
+									var settings = json.results[i].settings;
+								}						
+								document.getElementById("supervisor_map").innerHTML = '<img src="img/'+map+'.png"/>';
+								document.getElementById("supervisor_notifications").innerHTML = '<img src="img/'+notifications+'.png"/>';
+								document.getElementById("supervisor_dashboard").innerHTML = '<img src="img/'+dashboard+'.png"/>';
+								document.getElementById("supervisor_devices").innerHTML = '<img src="img/'+devices+'.png"/>';
+								document.getElementById("supervisor_reports").innerHTML = '<img src="img/'+reports+'.png"/>';
+								document.getElementById("supervisor_settings").innerHTML = '<img src="img/'+settings+'.png"/>';
+
+								localStorage.setItem("IDobject_supervisor",objectId);
+					}
+				});
+		});
+
+		function putValues(){
+				setTimeout(function() {
+				var objectId = localStorage.getItem("IDobject_user");
+				var param = JSON.stringify({objectId}); 
+				var compare = '?where=';
+				var url = compare.concat(param);
+					$.ajax({
+					type: 'GET',
+					headers: {
+						'X-Parse-Application-Id': APP_ID,
+						'X-Parse-REST-API-Key': REST_API_KEY,
+						'Content-Type': "application/json"
+
+						},
+					url: BASE_URL+"1/classes/permission"+url, 
+					dataType: "json",
+					//cache: false,
+					error: function() {
+						//alert("No data found.");
+					},
+					success: function (data) {
+								var jstr = JSON.stringify(data);
+								var json = JSON.parse(jstr);
+								
+								for(var i=0; i< json.results.length; i++)
+								{
+									
+									var objectId = json.results[i].objectId;
+									var map1 = json.results[i].map;
+									var map2 = json.results[i].map_radio;
+									var notifications1 = json.results[i].notifications;
+									var notifications2 = json.results[i].notifications_radio;
+									var dashboard1 = json.results[i].dashboard;
+									var dashboard2 = json.results[i].dashboard_radio;
+									var devices1 = json.results[i].devices;
+									var devices2 = json.results[i].devices_radio;
+									var reports1 = json.results[i].reports;
+									var reports2 = json.results[i].reports_radio;
+									var settings1 = json.results[i].settings;
+									var settings2 = json.results[i].settings_radio;
+									
+								}	
+									$('#idToEdit_user1').val(objectId);
+									$('#idToEdit_user2').val(objectId);
+									$('#idToEdit_user3').val(objectId);
+									$('#idToEdit_user4').val(objectId);
+									$('#idToEdit_user5').val(objectId);
+									$('#idToEdit_user6').val(objectId);
+									
+									$('.user_map1').val(map1);
+									$('.user_map2').val(map2);
+									$('.user_notifications1').val(notifications1);
+									$('.user_notifications2').val(notifications2);
+									$('.user_dashboard1').val(dashboard1);
+									$('.user_dashboard2').val(dashboard2);
+									$('.user_devices1').val(devices1);
+									$('.user_devices2').val(devices2);
+									$('.user_reports1').val(reports1);
+									$('.user_reports2').val(reports2);
+									$('.user_settings1').val(settings1);
+									$('.user_settings2').val(settings2);
+									
+									document.getElementById("check_map_user").innerHTML = '<img src="img/'+map1+'.png"/>';
+									document.getElementById("check_notifications_user").innerHTML = '<img src="img/'+notifications1+'.png"/>';
+									document.getElementById("check_dashboard_user").innerHTML = '<img src="img/'+dashboard1+'.png"/>';
+									document.getElementById("check_devices_user").innerHTML = '<img src="img/'+devices1+'.png"/>';
+									document.getElementById("check_reports_user").innerHTML = '<img src="img/'+reports1+'.png"/>';
+									/* document.getElementById("check_settings_user").innerHTML = '<img src="img/'+settings1+'.png"/>'; */
+									
+									$('input[name="radio_user1"][value="' + map2 + '"]').prop('checked', true);
+									$('input[name="radio_user2"][value="' + notifications2 + '"]').prop('checked', true);
+									$('input[name="radio_user3"][value="' + dashboard2 + '"]').prop('checked', true);
+									$('input[name="radio_user4"][value="' + devices2 + '"]').prop('checked', true);
+									$('input[name="radio_user5"][value="' + reports2 + '"]').prop('checked', true);
+									$('input[name="radio_user5"][value="' + settings2 + '"]').prop('checked', true);
+
+								
+					}
+				});
+				}, 100);
+				
+				setTimeout(function() {
+				var objectId = localStorage.getItem("IDobject_supervisor");
+				var param = JSON.stringify({objectId}); 
+				var compare = '?where=';
+				var url = compare.concat(param);
+				$.ajax({
+				type: 'GET',
+				headers: {
+					'X-Parse-Application-Id': APP_ID,
+					'X-Parse-REST-API-Key': REST_API_KEY,
+					'Content-Type': "application/json"
+
+					},
+				url: BASE_URL+"1/classes/permission"+url,
+					dataType: "json",
+					//cache: false,
+					error: function() {
+						//alert("No data found.");
+					},
+					success: function (data) {
+								var jstr = JSON.stringify(data);
+								var json = JSON.parse(jstr);
+								
+								for(var i=0; i< json.results.length; i++)
+								{
+									var objectId = json.results[i].objectId;
+									var map1 = json.results[i].map;
+									var map2 = json.results[i].map_radio;
+									var notifications1 = json.results[i].notifications;
+									var notifications2 = json.results[i].notifications_radio;
+									var dashboard1 = json.results[i].dashboard;
+									var dashboard2 = json.results[i].dashboard_radio;
+									var devices1 = json.results[i].devices;
+									var devices2 = json.results[i].devices_radio;
+									var reports1 = json.results[i].reports;
+									var reports2 = json.results[i].reports_radio;
+									var settings1 = json.results[i].settings;
+									var settings2 = json.results[i].settings_radio;
+									
+								}	
+									$('#idToEdit_supervisor1').val(objectId);
+									$('#idToEdit_supervisor2').val(objectId);
+									$('#idToEdit_supervisor3').val(objectId);
+									$('#idToEdit_supervisor4').val(objectId);
+									$('#idToEdit_supervisor5').val(objectId);
+									$('#idToEdit_supervisor6').val(objectId);
+									
+									$('.supervisor_map1').val(map1);
+									$('.supervisor_map2').val(map2);
+									$('.supervisor_notifications1').val(notifications1);
+									$('.supervisor_notifications2').val(notifications2);
+									$('.supervisor_dashboard1').val(dashboard1);
+									$('.supervisor_dashboard2').val(dashboard2);
+									$('.supervisor_devices1').val(devices1);
+									$('.supervisor_devices2').val(devices2);
+									$('.supervisor_reports1').val(reports1);
+									$('.supervisor_reports2').val(reports2);
+									$('.supervisor_settings1').val(settings1);
+									$('.supervisor_settings2').val(settings2);
+									
+									document.getElementById("check_map_supervisor").innerHTML = '<img src="img/'+map1+'.png"/>';
+									document.getElementById("check_notifications_supervisor").innerHTML = '<img src="img/'+notifications1+'.png"/>';
+									document.getElementById("check_dashboard_supervisor").innerHTML = '<img src="img/'+dashboard1+'.png"/>';
+									document.getElementById("check_devices_supervisor").innerHTML = '<img src="img/'+devices1+'.png"/>';
+									document.getElementById("check_reports_supervisor").innerHTML = '<img src="img/'+reports1+'.png"/>';
+									/* document.getElementById("check_settings_supervisor").innerHTML = '<img src="img/'+settings1+'.png"/>'; */
+									
+									$('input[name="radio_spvr1"][value="' + map2 + '"]').prop('checked', true);
+									$('input[name="radio_spvr2"][value="' + notifications2 + '"]').prop('checked', true);
+									$('input[name="radio_spvr3"][value="' + dashboard2 + '"]').prop('checked', true);
+									$('input[name="radio_spvr4"][value="' + devices2 + '"]').prop('checked', true);
+									$('input[name="radio_spvr5"][value="' + reports2 + '"]').prop('checked', true);
+									$('input[name="radio_spvr6"][value="' + settings2 + '"]').prop('checked', true);
+
+								
+					}
+				});
+				}, 100);
+			}
+
+		//=========== map ====================
+		function map_user(){ 
+			if (document.getElementById('yes_radio_user1').checked == 1){ 
+			document.getElementById('textbox_map_user').value='block';
+			document.getElementById('choice_map_user').value='yes';
+			}else{ 
+			document.getElementById('textbox_map_user').value='none'; 
+			document.getElementById('choice_map_user').value='no'; 
+			
+			} 
+		}
+		function map_supervisor(){ 
+				if (document.getElementById('yes_radio_spvr1').checked == 1){ 
+				document.getElementById('textbox_map_supervisor').value='block';
+				document.getElementById('choice_map_supervisor').value='yes';
+				}else{ 
+				document.getElementById('textbox_map_supervisor').value='none'; 
+				document.getElementById('choice_map_supervisor').value='no'; 
+			
+			} 
+		}
+		//=========== notifications ====================
+		function notifications_user(){ 
+			if (document.getElementById('yes_radio_user2').checked == 1){ 
+			document.getElementById('textbox_notifications_user').value='block';
+			document.getElementById('choice_notifications_user').value='yes';
+			}else{ 
+			document.getElementById('textbox_notifications_user').value='none'; 
+			document.getElementById('choice_notifications_user').value='no'; 
+			
+			} 
+		}
+		function notifications_supervisor(){ 
+				if (document.getElementById('yes_radio_spvr2').checked == 1){ 
+				document.getElementById('textbox_notifications_supervisor').value='block';
+				document.getElementById('choice_notifications_supervisor').value='yes';
+				}else{ 
+				document.getElementById('textbox_notifications_supervisor').value='none'; 
+				document.getElementById('choice_notifications_supervisor').value='no'; 
+			
+			} 
+		}
+		//=========== dashboard ====================
+		function dashboard_user(){ 
+			if (document.getElementById('yes_radio_user3').checked == 1){ 
+			document.getElementById('textbox_dashboard_user').value='block';
+			document.getElementById('choice_dashboard_user').value='yes';
+			}else{ 
+			document.getElementById('textbox_dashboard_user').value='none'; 
+			document.getElementById('choice_dashboard_user').value='no'; 
+			
+			} 
+		}
+		function dashboard_supervisor(){ 
+				if (document.getElementById('yes_radio_spvr3').checked == 1){ 
+				document.getElementById('textbox_dashboard_supervisor').value='block';
+				document.getElementById('choice_dashboard_supervisor').value='yes';
+				}else{ 
+				document.getElementById('textbox_dashboard_supervisor').value='none'; 
+				document.getElementById('choice_dashboard_supervisor').value='no'; 
+			
+			} 
+		}
+		//=========== devices ====================
+		function devices_user(){ 
+			if (document.getElementById('yes_radio_user4').checked == 1){ 
+			document.getElementById('textbox_devices_user').value='block';
+			document.getElementById('choice_devices_user').value='yes';
+			}else{ 
+			document.getElementById('textbox_devices_user').value='none'; 
+			document.getElementById('choice_devices_user').value='no'; 
+			
+			} 
+		}
+		function devices_supervisor(){ 
+				if (document.getElementById('yes_radio_spvr4').checked == 1){ 
+				document.getElementById('textbox_devices_supervisor').value='block';
+				document.getElementById('choice_devices_supervisor').value='yes';
+				}else{ 
+				document.getElementById('textbox_devices_supervisor').value='none'; 
+				document.getElementById('choice_devices_supervisor').value='no'; 
+			
+			} 
+		}
+		//=========== reports ====================
+		function reports_user(){ 
+			if (document.getElementById('yes_radio_user5').checked == 1){ 
+			document.getElementById('textbox_reports_user').value='block';
+			document.getElementById('choice_reports_user').value='yes';
+			}else{ 
+			document.getElementById('textbox_reports_user').value='none'; 
+			document.getElementById('choice_reports_user').value='no'; 
+			
+			} 
+		}
+		function reports_supervisor(){ 
+				if (document.getElementById('yes_radio_spvr5').checked == 1){ 
+				document.getElementById('textbox_reports_supervisor').value='block';
+				document.getElementById('choice_reports_supervisor').value='yes';
+				}else{ 
+				document.getElementById('textbox_reports_supervisor').value='none'; 
+				document.getElementById('choice_reports_supervisor').value='no'; 
+			
+			} 
+		}
+		//=========== settings ====================
+		function settings_user(){ 
+			if (document.getElementById('yes_radio_user6').checked == 1){ 
+			document.getElementById('textbox_settings_user').value='block';
+			document.getElementById('choice_settings_user').value='yes';
+			}else{ 
+			document.getElementById('textbox_settings_user').value='none'; 
+			document.getElementById('choice_settings_user').value='no'; 
+			
+			} 
+		}
+		function settings_supervisor(){ 
+				if (document.getElementById('yes_radio_spvr6').checked == 1){ 
+				document.getElementById('textbox_settings_supervisor').value='block';
+				document.getElementById('choice_settings_supervisor').value='yes';
+				}else{ 
+				document.getElementById('textbox_settings_supervisor').value='none'; 
+				document.getElementById('choice_settings_supervisor').value='no'; 
+			
+			} 
+		}
+		//----------------- CLICK EDITS --------------------------------------------
+		function map_radio() {
+			var edit_user_map1 = $('.user_map1').val();
+			var edit_user_map2 = $('.user_map2').val();
+			var id_editobject_user_1 = $("#idToEdit_user1").val();
+
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.open("PUT", BASE_URL+"1/classes/permission/"+id_editobject_user_1, true);
+			xmlhttp.setRequestHeader("X-Parse-Application-Id",APP_ID);
+			xmlhttp.setRequestHeader("X-Parse-REST-API-Key",REST_API_KEY);
+			xmlhttp.setRequestHeader("X-Parse-Master-Key",MASTER_KEY);
+			xmlhttp.setRequestHeader("Content-Type", "application/json");
+
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4) {
+					var result = JSON.parse(xmlhttp.responseText);
+					if (result.objectId) {
+						//alert("Upload of Stories is successful");
+					}
+				}
+			}
+			
+			var data = JSON.stringify({map:edit_user_map1, map_radio:edit_user_map2});
+			xmlhttp.send(data);
+			
+			var edit_supervisor_map1 = $('.supervisor_map1').val();
+			var edit_supervisor_map2 = $('.supervisor_map2').val();
+			var id_editobject_supervisor1 = $("#idToEdit_supervisor1").val();
+
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.open("PUT", BASE_URL+"1/classes/permission/"+id_editobject_supervisor1, true);
+			xmlhttp.setRequestHeader("X-Parse-Application-Id",APP_ID);
+			xmlhttp.setRequestHeader("X-Parse-REST-API-Key",REST_API_KEY);
+			xmlhttp.setRequestHeader("X-Parse-Master-Key",MASTER_KEY);
+			xmlhttp.setRequestHeader("Content-Type", "application/json");
+
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4) {
+					var result = JSON.parse(xmlhttp.responseText);
+					if (result.objectId) {
+						//alert("Upload of Stories is successful");
+					}
+				}
+			}
+			
+			var data = JSON.stringify({map:edit_supervisor_map1, map_radio:edit_supervisor_map2});
+			xmlhttp.send(data);
+			
+			setInterval(function() {
+				window.location.href='permission.html';
+				}, 2000);
+		}
+
+		function notifications_radio() {
+			var edit_user_notifications1 = $('.user_notifications1').val();
+			var edit_user_notifications2 = $('.user_notifications2').val();
+			var id_editobject_user_2 = $("#idToEdit_user2").val();
+
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.open("PUT", BASE_URL+"1/classes/permission/"+id_editobject_user_2, true);
+			xmlhttp.setRequestHeader("X-Parse-Application-Id",APP_ID);
+			xmlhttp.setRequestHeader("X-Parse-REST-API-Key",REST_API_KEY);
+			xmlhttp.setRequestHeader("X-Parse-Master-Key",MASTER_KEY);
+			xmlhttp.setRequestHeader("Content-Type", "application/json");
+
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4) {
+					var result = JSON.parse(xmlhttp.responseText);
+					if (result.objectId) {
+						//alert("Upload of Stories is successful");
+					}
+				}
+			}
+			
+			var data = JSON.stringify({notifications:edit_user_notifications1, notifications_radio:edit_user_notifications2});
+			xmlhttp.send(data);
+			
+			var edit_supervisor_notifications1 = $('.supervisor_notifications1').val();
+			var edit_supervisor_notifications2 = $('.supervisor_notifications2').val();
+			var id_editobject_supervisor2 = $("#idToEdit_supervisor2").val();
+
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.open("PUT", BASE_URL+"1/classes/permission/"+id_editobject_supervisor2, true);
+			xmlhttp.setRequestHeader("X-Parse-Application-Id",APP_ID);
+			xmlhttp.setRequestHeader("X-Parse-REST-API-Key",REST_API_KEY);
+			xmlhttp.setRequestHeader("X-Parse-Master-Key",MASTER_KEY);
+			xmlhttp.setRequestHeader("Content-Type", "application/json");
+
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4) {
+					var result = JSON.parse(xmlhttp.responseText);
+					if (result.objectId) {
+						//alert("Upload of Stories is successful");
+					}
+				}
+			}
+			
+			var data = JSON.stringify({notifications:edit_supervisor_notifications1, notifications_radio:edit_supervisor_notifications2});
+			xmlhttp.send(data);
+			
+			setInterval(function() {
+				window.location.href='permission.html';
+				}, 2000);
+		}
+
+		function dashboard_radio() {
+			var edit_user_dashboard1 = $('.user_dashboard1').val();
+			var edit_user_dashboard2 = $('.user_dashboard2').val();
+			var id_editobject_user_3 = $("#idToEdit_user3").val();
+
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.open("PUT", BASE_URL+"1/classes/permission/"+id_editobject_user_3, true);
+			xmlhttp.setRequestHeader("X-Parse-Application-Id",APP_ID);
+			xmlhttp.setRequestHeader("X-Parse-REST-API-Key",REST_API_KEY);
+			xmlhttp.setRequestHeader("X-Parse-Master-Key",MASTER_KEY);
+			xmlhttp.setRequestHeader("Content-Type", "application/json");
+
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4) {
+					var result = JSON.parse(xmlhttp.responseText);
+					if (result.objectId) {
+						//alert("Upload of Stories is successful");
+					}
+				}
+			}
+			
+			var data = JSON.stringify({dashboard:edit_user_dashboard1, dashboard_radio:edit_user_dashboard2});
+			xmlhttp.send(data);
+			
+			var edit_supervisor_dashboard1 = $('.supervisor_dashboard1').val();
+			var edit_supervisor_dashboard2 = $('.supervisor_dashboard2').val();
+			var id_editobject_supervisor3 = $("#idToEdit_supervisor3").val();
+
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.open("PUT", BASE_URL+"1/classes/permission/"+id_editobject_supervisor3, true);
+			xmlhttp.setRequestHeader("X-Parse-Application-Id",APP_ID);
+			xmlhttp.setRequestHeader("X-Parse-REST-API-Key",REST_API_KEY);
+			xmlhttp.setRequestHeader("X-Parse-Master-Key",MASTER_KEY);
+			xmlhttp.setRequestHeader("Content-Type", "application/json");
+
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4) {
+					var result = JSON.parse(xmlhttp.responseText);
+					if (result.objectId) {
+						//alert("Upload of Stories is successful");
+					}
+				}
+			}
+			
+			var data = JSON.stringify({dashboard:edit_supervisor_dashboard1, dashboard_radio:edit_supervisor_dashboard2});
+			xmlhttp.send(data);
+			
+			setInterval(function() {
+				window.location.href='permission.html';
+				}, 2000);
+		}
+
+		function devices_radio() {
+			var edit_user_devices1 = $('.user_devices1').val();
+			var edit_user_devices2 = $('.user_devices2').val();
+			var id_editobject_user_4 = $("#idToEdit_user3").val();
+
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.open("PUT", BASE_URL+"1/classes/permission/"+id_editobject_user_4, true);
+			xmlhttp.setRequestHeader("X-Parse-Application-Id",APP_ID);
+			xmlhttp.setRequestHeader("X-Parse-REST-API-Key",REST_API_KEY);
+			xmlhttp.setRequestHeader("X-Parse-Master-Key",MASTER_KEY);
+			xmlhttp.setRequestHeader("Content-Type", "application/json");
+
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4) {
+					var result = JSON.parse(xmlhttp.responseText);
+					if (result.objectId) {
+						//alert("Upload of Stories is successful");
+					}
+				}
+			}
+			
+			var data = JSON.stringify({devices:edit_user_devices1, devices_radio:edit_user_devices2});
+			xmlhttp.send(data);
+			
+			var edit_supervisor_devices1 = $('.supervisor_devices1').val();
+			var edit_supervisor_devices2 = $('.supervisor_devices2').val();
+			var id_editobject_supervisor4 = $("#idToEdit_supervisor4").val();
+
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.open("PUT", BASE_URL+"1/classes/permission/"+id_editobject_supervisor4, true);
+			xmlhttp.setRequestHeader("X-Parse-Application-Id",APP_ID);
+			xmlhttp.setRequestHeader("X-Parse-REST-API-Key",REST_API_KEY);
+			xmlhttp.setRequestHeader("X-Parse-Master-Key",MASTER_KEY);
+			xmlhttp.setRequestHeader("Content-Type", "application/json");
+
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4) {
+					var result = JSON.parse(xmlhttp.responseText);
+					if (result.objectId) {
+						//alert("Upload of Stories is successful");
+					}
+				}
+			}
+			
+			var data = JSON.stringify({devices:edit_supervisor_devices1, devices_radio:edit_supervisor_devices2});
+			xmlhttp.send(data);
+			
+			setInterval(function() {
+				window.location.href='permission.html';
+				}, 2000);
+		}
+
+		function reports_radio() {
+			var edit_user_reports1 = $('.user_reports1').val();
+			var edit_user_reports2 = $('.user_reports2').val();
+			var id_editobject_user_5 = $("#idToEdit_user3").val();
+
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.open("PUT", BASE_URL+"1/classes/permission/"+id_editobject_user_5, true);
+			xmlhttp.setRequestHeader("X-Parse-Application-Id",APP_ID);
+			xmlhttp.setRequestHeader("X-Parse-REST-API-Key",REST_API_KEY);
+			xmlhttp.setRequestHeader("X-Parse-Master-Key",MASTER_KEY);
+			xmlhttp.setRequestHeader("Content-Type", "application/json");
+
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4) {
+					var result = JSON.parse(xmlhttp.responseText);
+					if (result.objectId) {
+						//alert("Upload of Stories is successful");
+					}
+				}
+			}
+			
+			var data = JSON.stringify({reports:edit_user_reports1, reports_radio:edit_user_reports2});
+			xmlhttp.send(data);
+			
+			var edit_supervisor_reports1 = $('.supervisor_reports1').val();
+			var edit_supervisor_reports2 = $('.supervisor_reports2').val();
+			var id_editobject_supervisor5 = $("#idToEdit_supervisor5").val();
+
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.open("PUT", BASE_URL+"1/classes/permission/"+id_editobject_supervisor5, true);
+			xmlhttp.setRequestHeader("X-Parse-Application-Id",APP_ID);
+			xmlhttp.setRequestHeader("X-Parse-REST-API-Key",REST_API_KEY);
+			xmlhttp.setRequestHeader("X-Parse-Master-Key",MASTER_KEY);
+			xmlhttp.setRequestHeader("Content-Type", "application/json");
+
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4) {
+					var result = JSON.parse(xmlhttp.responseText);
+					if (result.objectId) {
+						//alert("Upload of Stories is successful");
+					}
+				}
+			}
+			
+			var data = JSON.stringify({reports:edit_supervisor_reports1, reports_radio:edit_supervisor_reports2});
+			xmlhttp.send(data);
+			
+			setInterval(function() {
+				window.location.href='permission.html';
+				}, 2000);
+		}
+
+
+	//----------------- CLICK EDITS --------------------------------------------
+	</script>
+</head>
+
+<body id="page-top">
+    <div class="imgcenter">
+        <div class="loader"></div>
+    </div>
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#" style="background-color: #fff;">
+                <div class="sidebar-brand-icon"><!--  rotate-n-15 -->
+                    <!-- <i class="fas fa-laugh-wink"></i> -->
+					<img src="img/fame_logo2.png" class="fame_logo" style="margin: 5%;"/>
+                </div>
+                <div class="sidebar-brand-text mx-3">FAME </div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li id="map2" class="menu-item map nav-item">
+                <a class="nav-link" href="map.html">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                    <span class="tooltip_menu">Map</span>
+				</a>
+            </li>
+            <li id="notifications" class="menu-item notifications nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="tooltip_menu">Notifications</span>
+				</a>
+            </li>
+            <li id="dashboard" class="menu-item dashboard nav-item">
+                <a class="nav-link" href="dashboard.html">
+                    <i class="fa-solid fa-bars-progress"></i>
+                    <span class="tooltip_menu">Dashboard</span>
+				</a>
+            </li>
+            <li id="devices" class="menu-item devices nav-item">
+                <a class="nav-link" href="devices.html">
+                    <i class="fa-solid fa-satellite-dish"></i>
+                    <span class="tooltip_menu">Devices</span>
+				</a>
+            </li>
+            <li id="reports" class="menu-item reports nav-item">
+                <a class="nav-link" href="report1.html">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span class="tooltip_menu">Report</span>
+				</a>
+            </li>
+             <li id="settings" class="menu-item settings nav-item active">
+                <a class="nav-link" href="#">
+                    <i class="fa-solid fa-gear"></i>
+                    <span class="tooltip_menu">Settings</span>
+				</a>
+            </li>
+             <li class="menu-item nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fa-solid fa-circle-question"></i>
+                    <span class="tooltip_menu">Help</span>
+				</a>
+            </li>
+
+            <!-- Nav Item - User Information -->
+            <div style="position: relative; margin-top: auto; clear: both;">
+                <li class="nav-item dropdown no-arrow" style="border-bottom: none;">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div id="imgprofile" alt="avatar"></div>
+                        <!-- <img class="img-profile rounded-circle"
+                            src="img/undraw_profile.svg"> -->
+                    </a>
+                    <!-- Dropdown - User Information -->
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                        aria-labelledby="userDropdown" style="z-index: 1002;">
+                        <a class="dropdown-item" href="profile.html">
+                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Profile
+                        </a>
+                        <!-- <a class="dropdown-item" href="#">
+                            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Settings
+                        </a> -->
+                        <a class="dropdown-item" href="activitylog.html">
+                            <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Activity Log
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Logout
+                        </a>
+                    </div>
+                </li>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+                <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light topbar mb-4 static-top">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+
+                    <!-- Content Row -->
+                    <div class="row none_margin">
+
+                        <div class="col-lg-12 shadow none_padding">
+
+                            <!-- Overflow Hidden -->
+                            <div class="card">
+                                <div class="card-header py-3 box_header">
+                                    <h6 class="m-0 font-weight-bold text-primary">Permission</h6>
+                                </div>
+                                <div class="card-body" style="padding: 0 0 0 0;">
+									   
+									<div class="border rounded-5">    
+										<section class="w-100 p-4" style="background-color: #fff;">
+										  <div class="row">
+											<div class="col-lg-12">
+											  <div class="mb-4">
+												<div class="card-body">
+
+													<table id="permission_list" class="table" cellspacing="0" width="100%">
+													<tr>
+													<td style="text-align: center; width:15%;">User Group</td>
+													<td style="text-align: center; width:25%;">Admin</td>
+													<td style="text-align: center; width:25%;">User</td>
+													<td style="text-align: center; width:25%;">Supervisor</td>
+													<td style="text-align: center;">Action</td>
+													</tr>
+													<tr>
+													<td>Map</td>
+													<td style="text-align: center;">
+													<div id="admin_map"></div>
+													</td>
+													<td style="text-align: center;">
+													<div id="user_map"></div>
+													</td>
+													<td style="text-align: center;">
+													<div id="supervisor_map"></div>
+													</td>
+													<td style="width:100px;"><a class="btn btn-block btn-sm" data-toggle="modal" data-target="#map_modal" onclick="putValues()" style="width:100%">Edit</a></td>
+													</tr>
+
+													<tr>
+													<td>Notifications</td>
+													<td style="text-align: center;">
+													<div id="admin_notifications"></div>
+													</td>
+													<td style="text-align: center;">
+													<div id="user_notifications"></div>
+													</td>
+													<td style="text-align: center;">
+													<div id="supervisor_notifications"></div>
+													</td>
+													<td style="width:100px;"><a class="btn btn-block btn-sm" data-toggle="modal" data-target="#notifications_modal" onclick="putValues()" style="width:100%">Edit</a></td>
+													</tr>
+
+													<tr>
+													<td>Dashboard</td>
+													<td style="text-align: center;">
+													<div id="admin_dashboard"></div>
+													</td>
+													<td style="text-align: center;">
+													<div id="user_dashboard"></div>
+													</td>
+													<td style="text-align: center;">
+													<div id="supervisor_dashboard"></div>
+													</td>
+													<td style="width:100px;"><a class="btn btn-block btn-sm" data-toggle="modal" data-target="#dashboard_modal" onclick="putValues()" style="width:100%">Edit</a></td>
+													</tr>
+
+													<tr>
+													<td>Devices</td>
+													<td style="text-align: center;">
+													<div id="admin_devices"></div>
+													</td>
+													<td style="text-align: center;">
+													<div id="user_devices"></div>
+													</td>
+													<td style="text-align: center;">
+													<div id="supervisor_devices"></div>
+													</td>
+													<td style="width:100px;"><a class="btn btn-block btn-sm" data-toggle="modal" data-target="#devices_modal" onclick="putValues()" style="width:100%">Edit</a></td>
+													</tr>
+
+													<tr>
+													<td>Reports</td>
+													<td style="text-align: center;">
+													<div id="admin_reports"></div>
+													</td>
+													<td style="text-align: center;">
+													<div id="user_reports"></div>
+													</td>
+													<td style="text-align: center;">
+													<div id="supervisor_reports"></div>
+													</td>
+													<td style="width:100px;"><a class="btn btn-block btn-sm" data-toggle="modal" data-target="#reports_modal" onclick="putValues()" style="width:100%">Edit</a></td>
+													</tr>
+
+													<tr>
+													<td>Settings</td>
+													<td style="text-align: center;">
+													<div id="admin_settings"></div>
+													</td>
+													<td style="text-align: center;">
+													<div id="user_settings"></div>
+													</td>
+													<td style="text-align: center;">
+													<div id="supervisor_settings"></div>
+													</td></tr>
+													<!--<td style="width:100px;"><a class="btn btn-block btn-primary btn-sm" data-toggle="modal" data-target="#settings-row-modal" onclick="putValues()" style="width:100%">Edit</a></td>
+													</tr>-->
+													</table>
+
+
+												</div>
+											  </div>
+											</div>
+										  </div>
+
+										</section>
+										
+									  </div>
+
+								</div>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; FAME PH 2026</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+     
+     
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-default" id="logout" href="#">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- COMPOSE MESSAGE MODAL -->
+           
+    <!-- HERE FOR EDIT PERMISSION MAP -->
+    <div class="modal fade" id="map_modal" tabindex="-1" role="dialog" aria-labelledby="editmodal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h4 class="modal-title">Edit Map</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+            
+            </div>
+            <div class="box-body">
+
+            <div class="form-group">
+                <form action="" method="post">
+					<input type="hidden" id="deleteTesti"/>
+					<table style="width: 80%; text-align: center; margin: auto; margin-bottom: 15px; margin-top: 15px;"><tr>
+					<td>User</td>
+					<td>Supervisor</td>
+					</tr>
+					<tr>
+					<td style="text-align: center;">
+					<div id="check_map_user"></div>
+					<input type="radio" name="radio_user1" id="yes_radio_user1" onChange="map_user();" value="yes"> yes &nbsp;&nbsp;
+					<input type="radio" name="radio_user1" id="no_radio_user1" onChange="map_user();" value="no"> no <br/>
+					<input name="text" type="hidden" id="textbox_map_user" class="user_map1"> 
+					<input name="text" type="hidden" id="choice_map_user" class="user_map2"> 
+					<input type="hidden" id="idToEdit_user1"/>
+					</td>
+					<td style="text-align: center;">
+					<div id="check_map_supervisor"></div>
+					<input type="radio" name="radio_spvr1" id="yes_radio_spvr1" onChange="map_supervisor();" value="yes"> yes &nbsp;&nbsp;
+					<input type="radio" name="radio_spvr1" id="no_radio_spvr1" onChange="map_supervisor();" value="no"> no <br/>
+					<input name="text" type="hidden" id="textbox_map_supervisor" class="supervisor_map1"> 
+					<input name="text" type="hidden" id="choice_map_supervisor" class="supervisor_map2">
+					<input type="hidden" id="idToEdit_supervisor1"/>
+					</td>
+					</tr></table>
+
+                </form>
+            </div>
+
+            </div>
+
+            <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" onclick="map_radio()">Update</button>
+			
+            </div>
+        </div>
+        <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+    <!-- HERE FOR EDIT PERMISSION NOTIFICATIONS -->
+    <div class="modal fade" id="notifications_modal" tabindex="-1" role="dialog" aria-labelledby="editmodal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h4 class="modal-title">Edit Notifications</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+            
+            </div>
+            <div class="box-body">
+
+            <div class="form-group">
+                <form action="" method="post">
+					<input type="hidden" id="deleteTesti"/>
+					<table style="width: 80%; text-align: center; margin: auto; margin-bottom: 15px; margin-top: 15px;"><tr>
+					<td>User</td>
+					<td>Supervisor</td>
+					</tr>
+					<tr>
+					<td style="text-align: center;">
+					<div id="check_notifications_user"></div>
+					<input type="radio" name="radio_user2" id="yes_radio_user2" onChange="notifications_user();" value="yes"> yes &nbsp;&nbsp;
+					<input type="radio" name="radio_user2" id="no_radio_user2" onChange="notifications_user();" value="no"> no <br/>
+					<input name="text" type="hidden" id="textbox_notifications_user" class="user_notifications1"> 
+					<input name="text" type="hidden" id="choice_notifications_user" class="user_notifications2"> 
+					<input type="hidden" id="idToEdit_user2"/>
+					</td>
+					<td style="text-align: center;">
+					<div id="check_notifications_supervisor"></div>
+					<input type="radio" name="radio_spvr2" id="yes_radio_spvr2" onChange="notifications_supervisor();" value="yes"> yes &nbsp;&nbsp;
+					<input type="radio" name="radio_spvr2" id="no_radio_spvr2" onChange="notifications_supervisor();" value="no"> no <br/>
+					<input name="text" type="hidden" id="textbox_notifications_supervisor" class="supervisor_notifications1"> 
+					<input name="text" type="hidden" id="choice_notifications_supervisor" class="supervisor_notifications2">
+					<input type="hidden" id="idToEdit_supervisor2"/>
+					</td>
+					</tr></table>
+
+                </form>
+            </div>
+
+            </div>
+
+            <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" onclick="notifications_radio()">Update</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+	
+    <!-- HERE FOR EDIT PERMISSION DASHBOARD -->
+    <div class="modal fade" id="dashboard_modal" tabindex="-1" role="dialog" aria-labelledby="editmodal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h4 class="modal-title">Edit Dashboard</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+            
+            </div>
+            <div class="box-body">
+
+            <div class="form-group">
+                <form action="" method="post">
+					<input type="hidden" id="deleteTesti"/>
+					<table style="width: 80%; text-align: center; margin: auto; margin-bottom: 15px; margin-top: 15px;"><tr>
+					<td>User</td>
+					<td>Supervisor</td>
+					</tr>
+					<tr>
+					<td style="text-align: center;">
+					<div id="check_dashboard_user"></div>
+					<input type="radio" name="radio_user3" id="yes_radio_user3" onChange="dashboard_user();" value="yes"> yes &nbsp;&nbsp;
+					<input type="radio" name="radio_user3" id="no_radio_user3" onChange="dashboard_user();" value="no"> no <br/>
+					<input name="text" type="hidden" id="textbox_dashboard_user" class="user_dashboard1"> 
+					<input name="text" type="hidden" id="choice_dashboard_user" class="user_dashboard2"> 
+					<input type="hidden" id="idToEdit_user3"/>
+					</td>
+					<td style="text-align: center;">
+					<div id="check_dashboard_supervisor"></div>
+					<input type="radio" name="radio_spvr3" id="yes_radio_spvr3" onChange="dashboard_supervisor();" value="yes"> yes &nbsp;&nbsp;
+					<input type="radio" name="radio_spvr1" id="no_radio_spvr3" onChange="dashboard_supervisor();" value="no"> no <br/>
+					<input name="text" type="hidden" id="textbox_dashboard_supervisor" class="supervisor_dashboard1"> 
+					<input name="text" type="hidden" id="choice_dashboard_supervisor" class="supervisor_dashboard2">
+					<input type="hidden" id="idToEdit_supervisor3"/>
+					</td>
+					</tr></table>
+
+                </form>
+            </div>
+
+            </div>
+
+            <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" onclick="dashboard_radio()">Update</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+	
+    <!-- HERE FOR EDIT PERMISSION DEVICES -->
+    <div class="modal fade" id="devices_modal" tabindex="-1" role="dialog" aria-labelledby="editmodal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h4 class="modal-title">Edit Devices</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+            
+            </div>
+            <div class="box-body">
+
+            <div class="form-group">
+                <form action="" method="post">
+					<input type="hidden" id="deleteTesti"/>
+					<table style="width: 80%; text-align: center; margin: auto; margin-bottom: 15px; margin-top: 15px;"><tr>
+					<td>User</td>
+					<td>Supervisor</td>
+					</tr>
+					<tr>
+					<td style="text-align: center;">
+					<div id="check_devices_user"></div>
+					<input type="radio" name="radio_user4" id="yes_radio_user4" onChange="devices_user();" value="yes"> yes &nbsp;&nbsp;
+					<input type="radio" name="radio_user4" id="no_radio_user4" onChange="devices_user();" value="no"> no <br/>
+					<input name="text" type="hidden" id="textbox_devices_user" class="user_devices1"> 
+					<input name="text" type="hidden" id="choice_devices_user" class="user_devices2"> 
+					<input type="hidden" id="idToEdit_user4"/>
+					</td>
+					<td style="text-align: center;">
+					<div id="check_devices_supervisor"></div>
+					<input type="radio" name="radio_spvr4" id="yes_radio_spvr4" onChange="devices_supervisor();" value="yes"> yes &nbsp;&nbsp;
+					<input type="radio" name="radio_spvr4" id="no_radio_spvr4" onChange="devices_supervisor();" value="no"> no <br/>
+					<input name="text" type="hidden" id="textbox_devices_supervisor" class="supervisor_devices1"> 
+					<input name="text" type="hidden" id="choice_devices_supervisor" class="supervisor_devices2">
+					<input type="hidden" id="idToEdit_supervisor4"/>
+					</td>
+					</tr></table>
+
+                </form>
+            </div>
+
+            </div>
+
+            <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" onclick="devices_radio()">Update</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+	
+    <!-- HERE FOR EDIT PERMISSION REPORTS -->
+    <div class="modal fade" id="reports_modal" tabindex="-1" role="dialog" aria-labelledby="editmodal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h4 class="modal-title">Edit Reports</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+            
+            </div>
+            <div class="box-body">
+
+            <div class="form-group">
+                <form action="" method="post">
+					<input type="hidden" id="deleteTesti"/>
+					<table style="width: 80%; text-align: center; margin: auto; margin-bottom: 15px; margin-top: 15px;"><tr>
+					<td>User</td>
+					<td>Supervisor</td>
+					</tr>
+					<tr>
+					<td style="text-align: center;">
+					<div id="check_reports_user"></div>
+					<input type="radio" name="radio_user5" id="yes_radio_user5" onChange="reports_user();" value="yes"> yes &nbsp;&nbsp;
+					<input type="radio" name="radio_user5" id="no_radio_user5" onChange="reports_user();" value="no"> no <br/>
+					<input name="text" type="hidden" id="textbox_reports_user" class="user_reports1"> 
+					<input name="text" type="hidden" id="choice_reports_user" class="user_reports2"> 
+					<input type="hidden" id="idToEdit_user5"/>
+					</td>
+					<td style="text-align: center;">
+					<div id="check_reports_supervisor"></div>
+					<input type="radio" name="radio_spvr5" id="yes_radio_spvr5" onChange="reports_supervisor();" value="yes"> yes &nbsp;&nbsp;
+					<input type="radio" name="radio_spvr5" id="no_radio_spvr5" onChange="reports_supervisor();" value="no"> no <br/>
+					<input name="text" type="hidden" id="textbox_reports_supervisor" class="supervisor_reports1"> 
+					<input name="text" type="hidden" id="choice_reports_supervisor" class="supervisor_reports2">
+					<input type="hidden" id="idToEdit_supervisor5"/>
+					</td>
+					</tr></table>
+
+                </form>
+            </div>
+
+            </div>
+
+            <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" onclick="reports_radio()">Update</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+	
+			
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/datatables-demo.js"></script>
+	<script src="https://kit.fontawesome.com/74e07481c2.js" crossorigin="anonymous"></script>
+
+    <script src="js/fileinput.min.js"></script>
+   
+	<!-- Bootstrap 3.3.7 -->
+	<!-- <script src="dist/js/bootstrap.min.js"></script> -->
+	<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+	<script src="https://cdn.datatables.net/buttons/3.1.2/js/dataTables.buttons.js"></script>
+	<script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.dataTables.js"></script>
+	<script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.html5.min.js"></script>
+
+    <script>
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	$(document).ready(function(){
+	
+			
+			var checkedbox_map = localStorage.getItem("map");
+			var checkedbox_notifications = localStorage.getItem("notifications");
+			var checkedbox_dashboard = localStorage.getItem("dashboard");			
+			var checkedbox_devices = localStorage.getItem("devices");
+			var checkedbox_reports = localStorage.getItem("reports");
+			var checkedbox_settings = localStorage.getItem("settings");
+
+			
+		$(function() {
+
+				var get_emp = localStorage.getItem("regAuthor");
+			if (get_emp == "admin") {
+				document.getElementById("map2").style.display=checkedbox_map;
+				document.getElementById("notifications").style.display=checkedbox_notifications;
+				document.getElementById("dashboard").style.display=checkedbox_dashboard;
+				document.getElementById("devices").style.display=checkedbox_devices;
+				document.getElementById("reports").style.display=checkedbox_reports;
+				document.getElementById("settings").style.display=checkedbox_settings;
+				
+			} else if (get_emp == "supervisor"){
+				document.getElementById("map2").style.display=checkedbox_map;
+				document.getElementById("notifications").style.display=checkedbox_notifications;
+				document.getElementById("dashboard").style.display=checkedbox_dashboard;
+				document.getElementById("devices").style.display=checkedbox_devices;
+				document.getElementById("reports").style.display=checkedbox_reports;
+				document.getElementById("settings").style.display=checkedbox_settings;
+				
+			} else if (get_emp == "user"){
+				document.getElementById("map2").style.display=checkedbox_map;
+				document.getElementById("notifications").style.display=checkedbox_notifications;
+				document.getElementById("dashboard").style.display=checkedbox_dashboard;
+				document.getElementById("devices").style.display=checkedbox_devices;
+				document.getElementById("reports").style.display=checkedbox_reports;
+				document.getElementById("settings").style.display=checkedbox_settings;
+			} else {
+				window.location.href = "login.html";
+			}
+			});
+	});
+	</script>
+
+    <!-- load profile avatar -->
+    <script src="js/loadprofileavatar.js"></script>
+	<script src="js/logout.js"></script>
+</body>
+
+</html>

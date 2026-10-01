@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Edit Map</title>
+	<script src="vendor/jquery/jquery.min.js"></script>
+	<link rel="stylesheet" href="map/leaflet.css">
+	<script src="map/leaflet.js"></script>
+<script>
+			
+	$(document).ready(function(){
+		var forcereload = localStorage.getItem('forcereload');
+		if (forcereload == "YES") {
+		
+			localStorage.setItem('forcereload', "NO");
+			setTimeout(function(){ 
+				window.location.href = 'addmap.html';
+			}, 1000);
+		} else {
+		
+		}	
+	});
+	/*window.onload = function() {
+    if (!window.location.hash) {
+        window.location = window.location + '#loaded';
+        window.location.reload();
+    }
+}*/
+</script>
+
+  
+  
+		<style type="text/css">
+		 	html, body, #mapid{
+		 		height: 100%;
+		 		padding: 0;
+		 		margin: 0;
+		 	}
+
+			
+		</style>
+</head>
+<body>
+	<div id="mapid" style=""></div>
+
+<script>
+
+
+	var Map_lat = 14.072645; 
+	var Map_lng = 121.157227;
+	
+	var options = {
+			center: [Map_lat, Map_lng],
+			zoom: 8
+		}
+		
+		var mymap = L.map('mapid', options);
+		$('#add-modal').on('show.bs.modal', function(){
+		setTimeout(function() {
+		mymap.invalidateSize();
+		mymap._onResize(); 
+		}, 10);
+		});
+		L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: 'OSM'})
+		.addTo(mymap);
+
+		var myMarker = L.marker([Map_lat, Map_lng], {title: "MyPoint", alt: "The Big I", draggable: true})
+		.addTo(mymap)
+		.on('dragend', function() {
+			var coord = String(myMarker.getLatLng()).split(',');
+			console.log(coord);
+			var lat = coord[0].split('(');
+			console.log(lat);
+			var lng = coord[1].split(')');
+			console.log(lng);
+			myMarker.bindPopup("Moved to: " + lat[1] + ", " + lng[0] + ".");
+			localStorage.setItem("add_Latitude",lat[1]); 
+			localStorage.setItem("add_Longitude",lng[0]); 
+			
+			
+		});
+		
+		
+
+</script>
+</body>
+</html>

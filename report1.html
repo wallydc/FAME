@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Report</title>
+
+	<link href="https://api.mapbox.com/mapbox-assembly/v1.3.0/assembly.min.css" rel="stylesheet">
+	<script id="search-js" defer="" src="https://api.mapbox.com/search-js/v1.0.0-beta.25/web.js"></script>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+	<script src="js/jquery-1.11.2.js"></script>
+    <!-- Custom styles for this template -->
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+
+
+    <!-- Custom styles for this page -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="css/AdminLTE.min.css">
+        <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap5.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+	<!--link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/-->
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/3.1.2/css/buttons.dataTables.css"/>
+	<link rel="stylesheet" type="text/css" href="css/menu_tooltip.css"/>
+	
+     <!-- Draggable & Resizable Elements -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/grids.css" />
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+	
+    <script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/usertypeaccess.js"></script>
+	
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+      .btn {
+        cursor: pointer;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 6px;
+        background: #007cbf;
+        color: #fff;
+        font-size: 14px;
+      }
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .page-header {
+            text-align: center;
+            padding: 30px 0;
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .page-header h2 {
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .page-header .subtitle {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+        }
+        .summary-card {
+            border-radius: 12px;
+            padding: 25px 15px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .summary-card:hover {
+            transform: translateY(-3px);
+        }
+        .summary-card .value {
+            font-size: 27px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .summary-card .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+        .card-total { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .card-time { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
+        .card-avg { background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%); }
+        .card-unique { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .card-rate { background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%); }
+        
+        .filter-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .analysis-section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .analysis-section h5 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .analysis-section ul {
+            padding-left: 20px;
+            color: #555;
+        }
+        .analysis-section ul li {
+            margin-bottom: 8px;
+        }
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .dataTables_wrapper .dataTables_filter input {
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            padding: 6px 12px;
+        }
+        .dataTables_wrapper .dataTables_length select {
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            padding: 5px 10px;
+        }
+        table.dataTable thead th {
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%) !important;
+            color: white !important;
+            font-weight: 600;
+            border: none !important;
+        }
+        table.dataTable tbody tr:hover {
+            background-color: #f1f8ff !important;
+        }
+        .form-control, .form-select {
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        .btn-filter {
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 20px;
+        }
+        .btn-filter:hover {
+            background: linear-gradient(135deg, #357abd 0%, #2a6395 100%);
+            color: white;
+        }
+        .btn-reset {
+            background: #e9ecef;
+            color: #495057;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 20px;
+        }
+        .btn-reset:hover {
+            background: #dee2e6;
+        }
+        /* Float the buttons to the right so they sit beside search */
+        div.dt-buttons {
+            float: right !important;
+            margin-left: 10px !important;;
+        }
+
+        /* Keep search right-aligned (default, but enforce for alignment) */
+        .dataTables_wrapper .dataTables_filter {
+            float: right !important;;
+        }
+        .dashboard {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .dashboard-container {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            max-width: 100%;
+            margin: 0 0 25px 0;
+        }
+
+
+        .status-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 24px;
+            flex: 1;
+            min-width: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+
+        .status-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .status-label {
+            font-size: 14px;
+            color: #6b7280;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .status-count {
+            font-size: 32px;
+            font-weight: 700;
+            color: #111827;
+            line-height: 1;
+            min-height: 36px;
+        }
+
+        .status-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .status-icon svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        /* Loading state */
+        .loading .status-count {
+            color: #d1d5db;
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function(){
+            $.ajax({
+                type: 'GET',
+                headers: {
+                    'X-Parse-Application-Id': APP_ID,
+                    'X-Parse-REST-API-Key': REST_API_KEY,
+                    'Content-Type': "application/json"
+                }, 
+                url: BASE_URL+"1/classes/Devices", 
+                data: { order: 'createdAt' },
+                dataType: "json",
+                error: function() {
+                    console.log("No data found.");
+                },
+                success: function (data) {
+                    // Clear old options to avoid duplicates
+                    $(".select_name").empty();
+                    
+                    // Optional: add a default placeholder
+                    $(".select_name").append('<option value="" >All Names</option>');
+                    
+                    for(var i = 0; i < data.results.length; i++) {
+                        let name = data.results[i].Name;
+                        $(".select_name").append('<option value="' + name + '">' + name + '</option>');
+                    }
+                }
+            });	
+        });
+    </script>
+
+</head>
+
+<body id="page-top" class="bg-gray-100 font-sans antialiased pb-16">
+    <div class="imgcenter">
+        <div class="loader"></div>
+    </div>
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#" style="background-color: #fff;">
+                <div class="sidebar-brand-icon"><!--  rotate-n-15 -->
+                    <!-- <i class="fas fa-laugh-wink"></i> -->
+					<img src="img/fame_logo2.png" class="fame_logo" style="margin: 5%;"/>
+                </div>
+                <div class="sidebar-brand-text mx-3">FAME </div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li id="map2" class="menu-item map nav-item">
+                <a class="nav-link" href="map.html">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                    <span class="tooltip_menu">Map</span>
+				</a>
+            </li>
+            <li id="notifications" class="menu-item notifications nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="tooltip_menu">Notifications</span>
+				</a>
+            </li>
+            <li id="dashboard" class="menu-item dashboard nav-item">
+                <a class="nav-link" href="dashboard.html">
+                    <i class="fa-solid fa-bars-progress"></i>
+                    <span class="tooltip_menu">Dashboard</span>
+				</a>
+            </li>
+            <li id="devices" class="menu-item devices nav-item">
+                <a class="nav-link" href="devices.html">
+                    <i class="fa-solid fa-satellite-dish"></i>
+                    <span class="tooltip_menu">Devices</span>
+				</a>
+            </li>
+            <li id="reports" class="menu-item reports nav-item active">
+                <a class="nav-link" href="#">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span class="tooltip_menu">Report</span>
+				</a>
+            </li>
+             <li id="settings" class="menu-item settings nav-item">
+                <a class="nav-link" href="permission.html">
+                    <i class="fa-solid fa-gear"></i>
+                    <span class="tooltip_menu">Settings</span>
+				</a>
+            </li>
+             <li class="menu-item nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fa-solid fa-circle-question"></i>
+                    <span class="tooltip_menu">Help</span>
+				</a>
+            </li>
+
+            <!-- Nav Item - User Information -->
+            <div style="position: relative; margin-top: auto; clear: both;">
+                <li class="nav-item dropdown no-arrow" style="border-bottom: none;">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div id="imgprofile" alt="avatar"></div>
+                        <!-- <img class="img-profile rounded-circle"
+                            src="img/undraw_profile.svg"> -->
+                    </a>
+                    <!-- Dropdown - User Information -->
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                        aria-labelledby="userDropdown" style="z-index: 1002;">
+                        <a class="dropdown-item" href="profile.html">
+                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Profile
+                        </a>
+                        <!-- <a class="dropdown-item" href="#">
+                            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Settings
+                        </a> -->
+                        <a class="dropdown-item" href="activitylog.html">
+                            <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Activity Log
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Logout
+                        </a>
+                    </div>
+                </li>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+        
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top">
+
+
+                </nav>
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <!-- Page Heading -->
+					
+                    <h1 class="h3 mb-2 text-gray-800">Report</h1>
+
+                    <div class="main-container">
+    <div class="dashboard-container" id="dashboard">
+        <!-- Pending Card -->
+        <div class="status-card status-pending" data-status="Pending">
+            <div class="status-info">
+                <div class="status-label">Pending</div>
+                <div class="status-count">-</div>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                <!-- Outer Ring -->
+                <circle cx="12" cy="12" r="9.5" fill="none" stroke="#5DA3DF" stroke-width="2.5"/>
+                
+                <!-- Inner Three Dots -->
+                <circle cx="7.5" cy="12" r="1.5" fill="#1D4B7A"/>
+                <circle cx="12" cy="12" r="1.5" fill="#1D4B7A"/>
+            <circle cx="16.5" cy="12" r="1.5" fill="#1D4B7A"/>
+            </svg>
+
+
+        </div>
+
+        <!-- Online Card -->
+        <div class="status-card status-online" data-status="Online">
+            <div class="status-info">
+                <div class="status-label">Online</div>
+                <div class="status-count">-</div>
+                <div class="error-message" style="display:none;"></div>
+            </div>
+            <div class="status-icon">
+                <!-- Green WiFi Icon -->
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 12.55C6.2 11.45 8.5 9.75 12 9.75C15.5 9.75 17.8 11.45 19 12.55" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M8.5 16.15C9.4 15.35 10.7 14.55 12 14.55C13.3 14.55 14.6 15.35 15.5 16.15" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 20H12.01" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Offline Card -->
+        <div class="status-card status-offline" data-status="Offline">
+            <div class="status-info">
+                <div class="status-label">Offline</div>
+                <div class="status-count">-</div>
+                <div class="error-message" style="display:none;"></div>
+            </div>
+            <div class="status-icon">
+                <!-- Grey WiFi Off Icon -->
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 12.55C6.2 11.45 8.5 9.75 12 9.75C15.5 9.75 17.8 11.45 19 12.55" stroke="#9ca3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M8.5 16.15C9.4 15.35 10.7 14.55 12 14.55C13.3 14.55 14.6 15.35 15.5 16.15" stroke="#9ca3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 20H12.01" stroke="#9ca3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="2" y1="2" x2="22" y2="22" stroke="#9ca3af" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Unknown Card -->
+        <div class="status-card status-unknown" data-status="Unknown">
+            <div class="status-info">
+                <div class="status-label">Unknow</div>
+                <div class="status-count">-</div>
+                <div class="error-message" style="display:none;"></div>
+            </div>
+            <div class="status-icon">
+                <!-- Orange User Question Icon -->
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="8" r="4" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M4 20C4 16.6863 7.58172 14 12 14C16.4183 14 20 16.6863 20 20" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+                        <!-- Header -->
+                        <div class="page-header">
+                            <h2><i class="fas fa-satellite-dish me-2"></i>GPS Tracking Report</h2>
+                            <div class="subtitle">Data Extracted from Tracking | <b><span id="headerName"></span></b> | Group <span id="headerGroup">123</span></div>
+                        </div>
+
+                        <!-- Summary Cards -->
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-2 col-sm-4 col-6">
+                                <div class="summary-card card-total">
+                                    <div class="value" id="totalRecords">0</div>
+                                    <div class="label">Total Records</div>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-6">
+                                <div class="summary-card card-time">
+                                    <div class="value" id="timeSpan">--</div>
+                                    <div class="label">Time Span</div>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-6">
+                                <div class="summary-card card-avg">
+                                    <div class="value" id="avgInterval">0s</div>
+                                    <div class="label">Avg Interval</div>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-6">
+                                <div class="summary-card card-unique">
+                                    <div class="value" id="uniqueTimestamps">0</div>
+                                    <div class="label">Unique Timestamps</div>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-6">
+                                <div class="summary-card card-rate">
+                                    <div class="value" id="recordsPerMin">0</div>
+                                    <div class="label">Records / Minute</div>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-6">
+                                <div class="summary-card" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">
+                                    <div class="value" id="uniqueNames">0</div>
+                                    <div class="label">Unique Names</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Filters -->
+                        <div class="filter-section">
+                            <div class="row align-items-end g-3">
+                                <div class="col-md-3 col-sm-6">
+                                    <label class="form-label fw-semibold"><i class="fas fa-user me-1"></i>Select Name</label>
+                                    <select id="nameFilter" class="form-select select_name">
+                                        <option value="">All Names</option>
+                                        
+                                    </select>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <label class="form-label fw-semibold"><i class="fas fa-calendar-alt me-1"></i>Start Date</label>
+                                    <input type="date" id="startDate" class="form-control">
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <label class="form-label fw-semibold"><i class="fas fa-calendar-alt me-1"></i>End Date</label>
+                                    <input type="date" id="endDate" class="form-control">
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <button id="applyFilter" class="btn btn-filter me-2"><i class="fas fa-filter me-1"></i>Apply Filter</button>
+                                    <button id="resetFilter" class="btn btn-reset"><i class="fas fa-undo me-1"></i>Reset</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Timestamp Analysis -->
+                        <div class="analysis-section">
+                            <h5><i class="fas fa-chart-line me-2"></i>Timestamp Analysis</h5>
+                            <ul id="analysisList">
+                                <li>Loading analysis...</li>
+                            </ul>
+                        </div>
+
+                        <!-- DataTable -->
+                        <div class="table-container">
+                            <table id="gpsTable" class="table table-striped table-bordered" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Name</th>
+                                        <th>Group</th>
+                                        <th>Timestamp</th>
+                                        <th>Latitude</th>
+                                        <th>Longitude</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+					
+
+
+
+                </div>
+                <!-- /.container-fluid -->
+
+
+            </div>
+            
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; FAME PH 2026</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-default" id="logout" href="#">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+	<!-----------TIMEE AGO Js------------->
+	<script src="js/timeago.js"></script>
+	<script src="js/moment.min.js"></script>
+	
+    <script src="https://kit.fontawesome.com/74e07481c2.js" crossorigin="anonymous"></script>
+
+    <!-- load profile avatar -->
+    <script src="js/loadprofileavatar.js"></script>
+	<script src="js/logout.js"></script>
+	
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+
+    <!-- DataTables Buttons Extension -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+
+    <!-- JSZip is required for CSV/Excel export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script>
+     //////////////////////////////DATA ONLINE /////////////////////////////////////
+    $(document).ready(function() {
+        // 1. Helper function to create the AJAX requests cleanly
+        function getStatusData(statusName) {
+            var param = JSON.stringify({"Status": statusName});
+            return $.ajax({   
+                type: 'GET',
+                headers: {
+                    'X-Parse-Application-Id': "qIZJSomGlIEJLGzBLIZQQDHCTPSSNMLgMUd4VlRA",
+                    'X-Parse-REST-API-Key': "v7nVylPk8VeGBph6994YZMY6ONNVd4VTAMGTRmMH",
+                    'Content-Type': "application/json"
+                }, 
+                // FIXED: Removed semicolon before + param, added encodeURIComponent
+                url: "https://pg-app-m8z2b4l7sm6v21liysy9fe27j8bf3f.scalabl.cloud/1/classes/Devices?where=" + encodeURIComponent(param),   
+                data: { order: '-createdAt', limit: 1000 },
+                dataType: "json"
+            });
+        }
+
+        // 2. Helper function to sum up the totals from the response
+        function calculateTotal(data) {
+            var sum = 0;
+            if (data && data.results) {
+                for (var i = 0; i < data.results.length; i++) {
+                    sum += parseFloat(data.results[i].count) || 0;
+                }
+            }
+            return sum;
+        }
+
+        // 3. Update a single card with fetched data
+        function updateCard($card, statusName) {
+            var $count = $card.find('.status-count');
+            var $error = $card.find('.error-message');
+            
+            //$card.addClass('loading');
+            if ($error.length) $error.hide().text('');
+
+            getStatusData(statusName)
+                .done(function(response) {
+                    var total = calculateTotal(response);
+                    $count.text(total);
+                })
+                .fail(function(xhr, status, error) {
+                    console.error('Failed to load ' + statusName + ':', error);
+                    $count.text('!');
+                    if ($error.length) $error.text('Failed').show();
+                })
+                //.always(function() {
+                //    $card.removeClass('loading');
+                //});
+        }
+
+        // 4. Initialize - fetch data for each card on the page
+        $('.status-card').each(function() {
+            var statusName = $(this).data('status');
+            if (statusName) {
+                updateCard($(this), statusName);
+            }
+        });
+    });
+     
+    //////////////////////////////DATATABLE ////////////////////////////////////////    
+    $(document).ready(function() {
+        loadprofileavatar();
+        let table;
+        let allData = [];
+
+        // Initialize DataTable with AJAX
+        table = $('#gpsTable').DataTable({
+            ajax: {
+                url: 'data/data.json',
+                dataSrc: 'results',
+                dataFilter: function(data) {
+                    let json = JSON.parse(data);
+                    allData = json.results || [];
+                    return data;
+                }
+            },
+            columns: [
+                { data: 'Id' },
+                { data: 'Name' },
+                { data: 'Group' },
+                { data: 'Timestamp' },
+                { data: 'Latitude' },
+                { data: 'Longitude' }
+            ],
+
+             // --------- ADD THESE TWO OPTIONS ---------
+            dom: 'lBfrtip',  // B before f = button sits to the right of search
+
+            buttons: [
+                {
+                    extend: 'csvHtml5',
+                    text: '<i class="fas fa-file-csv me-1"></i> Export CSV',
+                    className: 'btn btn-success btn-sm',
+                    title: 'GPS_Data_Export',
+                    exportOptions: {
+                        columns: ':visible',
+                        modifier: {
+                            search: 'applied',  // exports only filtered rows
+                            order: 'applied'
+                        }
+                    }
+                }
+            ],
+            pageLength: 10,
+            lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, 'All']],
+            order: [[3, 'asc']],
+            language: {
+                search: '<i class="fas fa-search me-1"></i>Search:',
+                lengthMenu: 'Show _MENU_ entries'
+            },
+            initComplete: function() {
+                updateSummary(allData);
+            }
+        });
+
+        // Custom filter function for date range and name
+        $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
+            let nameFilter = $('#nameFilter').val();
+            let startDate = $('#startDate').val();
+            let endDate = $('#endDate').val();
+            
+            let rowName = data[1];
+            let rowTimestamp = data[3];
+            let rowDate = rowTimestamp ? rowTimestamp.split('T')[0] : '';
+            
+            // Name filter
+            if (nameFilter && rowName !== nameFilter) {
+                return false;
+            }
+            
+            // Date range filter
+            if (startDate && rowDate < startDate) {
+                return false;
+            }
+            if (endDate && rowDate > endDate) {
+                return false;
+            }
+            
+            return true;
+        });
+
+        // Apply filter button
+        $('#applyFilter').on('click', function() {
+            table.draw();
+            updateSummaryFromFiltered();
+        });
+
+        // Reset button
+        $('#resetFilter').on('click', function() {
+            $('#nameFilter').val('');
+            $('#startDate').val('');
+            $('#endDate').val('');
+            table.draw();
+            updateSummary(allData);
+        });
+
+        // Also update on dropdown change
+        $('#nameFilter').on('change', function() {
+            table.draw();
+            updateSummaryFromFiltered();
+        });
+
+        // Update summary cards from all data
+        function updateSummary(data) {
+            if (!data || data.length === 0) {
+                resetSummary();
+                return;
+            }
+
+            $('#totalRecords').text(data.length);
+            
+            // Parse timestamps
+            let timestamps = data.map(d => new Date(d.Timestamp)).filter(d => !isNaN(d));
+            timestamps.sort((a, b) => a - b);
+            
+            // Time span
+            if (timestamps.length >= 2) {
+                let spanMs = timestamps[timestamps.length - 1] - timestamps[0];
+                let spanHr = Math.floor(spanMs / 3600000);
+                let spanMin = Math.floor((spanMs % 3600000) / 60000);
+                let spanSec = Math.floor((spanMs % 60000) / 1000);
+                $('#timeSpan').text(spanHr + 'h ' + spanMin + 'm ' + spanSec + 's');
+            } else {
+                $('#timeSpan').text('--');
+            }
+            
+            // Avg interval
+            if (timestamps.length >= 2) {
+                let totalDiff = 0;
+                for (let i = 1; i < timestamps.length; i++) {
+                    totalDiff += (timestamps[i] - timestamps[i-1]);
+                }
+                let avgSec = (totalDiff / (timestamps.length - 1) / 1000).toFixed(1);
+                $('#avgInterval').text(avgSec + 's');
+            } else {
+                $('#avgInterval').text('0s');
+            }
+            
+            // Unique timestamps (by minute)
+            let minuteBlocks = new Set();
+            timestamps.forEach(t => {
+                let h = t.getHours().toString().padStart(2, '0');
+                let m = t.getMinutes().toString().padStart(2, '0');
+                minuteBlocks.add(h + ':' + m);
+            });
+            $('#uniqueTimestamps').text(minuteBlocks.size);
+            
+            // Records per minute
+            if (timestamps.length >= 2) {
+                let spanMs = timestamps[timestamps.length - 1] - timestamps[0];
+                let spanMin = spanMs / 60000;
+                let rpm = spanMin > 0 ? (data.length / spanMin).toFixed(0) : data.length;
+                $('#recordsPerMin').text(rpm);
+            } else {
+                $('#recordsPerMin').text(data.length);
+            }
+            
+            // Unique names
+            let names = new Set(data.map(d => d.Name));
+            $('#uniqueNames').text(names.size);
+            
+            // Update header
+            let firstName = data[0]?.Name || 'Rajah Reyes';
+            let firstGroup = data[0]?.Group || '123';
+            $('#headerName').text(firstName);
+            $('#headerGroup').text(firstGroup);
+            
+            // Update analysis text
+            updateAnalysis(data, timestamps, minuteBlocks);
+        }
+
+        // Update summary from filtered rows
+        function updateSummaryFromFiltered() {
+            let filteredData = [];
+            table.rows({ search: 'applied' }).every(function() {
+                filteredData.push(this.data());
+            });
+            updateSummary(filteredData);
+        }
+
+        function resetSummary() {
+            $('#totalRecords').text('0');
+            $('#timeSpan').text('0');
+            $('#avgInterval').text('0s');
+            $('#uniqueTimestamps').text('0');
+            $('#recordsPerMin').text('0');
+            $('#uniqueNames').text('0');
+            $('#analysisList').html('<li>No data available.</li>');
+        }
+
+        function updateAnalysis(data, timestamps, minuteBlocks) {
+            if (!data || data.length === 0) {
+                $('#analysisList').html('<li>No data available.</li>');
+                return;
+            }
+            
+            timestamps.sort((a, b) => a - b);
+            let firstTime = timestamps[0];
+            let lastTime = timestamps[timestamps.length - 1];
+            
+            let firstTimeStr = firstTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+            let lastTimeStr = lastTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+            let dateStr = firstTime.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+            
+            let spanMs = lastTime - firstTime;
+            let spanMin = Math.round(spanMs / 60000);
+            
+            // Count records per minute block
+            let blockCounts = {};
+            timestamps.forEach(t => {
+                let h = t.getHours().toString().padStart(2, '0');
+                let m = t.getMinutes().toString().padStart(2, '0');
+                let key = h + ':' + m;
+                blockCounts[key] = (blockCounts[key] || 0) + 1;
+            });
+            
+            let maxBlock = '';
+            let maxCount = 0;
+            for (let key in blockCounts) {
+                if (blockCounts[key] > maxCount) {
+                    maxCount = blockCounts[key];
+                    maxBlock = key;
+                }
+            }
+            
+            let sortedBlocks = Object.keys(blockCounts).sort();
+            
+            // Avg interval
+            let totalDiff = 0;
+            for (let i = 1; i < timestamps.length; i++) {
+                totalDiff += (timestamps[i] - timestamps[i-1]);
+            }
+            let avgSec = (totalDiff / (timestamps.length - 1) / 1000).toFixed(1);
+            
+            let html = `
+                <li>Data was recorded between <strong>${firstTimeStr}</strong> and <strong>${lastTimeStr}</strong> on ${dateStr}.</li>
+                <li>The records span approximately <strong>${spanMin} minutes</strong> of tracking time.</li>
+                <li>Most timestamps are grouped into <strong>${minuteBlocks.size} unique minute-blocks</strong>: ${sortedBlocks.join(', ')}.</li>
+                <li>The <strong>${maxBlock}</strong> block has the highest concentration with <strong>${maxCount} records</strong>.</li>
+                <li>Average recording interval is approximately <strong>${avgSec} seconds</strong> between consecutive data points.</li>
+            `;
+            $('#analysisList').html(html);
+        }
+    });
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	$(document).ready(function(){
+	
+			
+			var checkedbox_map = localStorage.getItem("map");
+			var checkedbox_notifications = localStorage.getItem("notifications");
+			var checkedbox_dashboard = localStorage.getItem("dashboard");			
+			var checkedbox_devices = localStorage.getItem("devices");
+			var checkedbox_reports = localStorage.getItem("reports");
+			var checkedbox_settings = localStorage.getItem("settings");
+
+			
+		$(function() {
+
+				var get_emp = localStorage.getItem("regAuthor");
+			if (get_emp == "admin") {
+				document.getElementById("map2").style.display=checkedbox_map;
+				document.getElementById("notifications").style.display=checkedbox_notifications;
+				document.getElementById("dashboard").style.display=checkedbox_dashboard;
+				document.getElementById("devices").style.display=checkedbox_devices;
+				document.getElementById("reports").style.display=checkedbox_reports;
+				document.getElementById("settings").style.display=checkedbox_settings;
+				
+			} else if (get_emp == "supervisor"){
+				document.getElementById("map2").style.display=checkedbox_map;
+				document.getElementById("notifications").style.display=checkedbox_notifications;
+				document.getElementById("dashboard").style.display=checkedbox_dashboard;
+				document.getElementById("devices").style.display=checkedbox_devices;
+				document.getElementById("reports").style.display=checkedbox_reports;
+				document.getElementById("settings").style.display=checkedbox_settings;
+				
+			} else if (get_emp == "user"){
+				document.getElementById("map2").style.display=checkedbox_map;
+				document.getElementById("notifications").style.display=checkedbox_notifications;
+				document.getElementById("dashboard").style.display=checkedbox_dashboard;
+				document.getElementById("devices").style.display=checkedbox_devices;
+				document.getElementById("reports").style.display=checkedbox_reports;
+				document.getElementById("settings").style.display=checkedbox_settings;
+			} else {
+				window.location.href = "login.html";
+			}
+			});
+	});
+	</script>
+
+</body>
+
+</html>

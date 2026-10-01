@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Mapbox Tracker UI</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="css/menu_tooltip.css"/>
+	<script type="text/javascript" src="js/main.js"></script>
+
+    <style>
+        body { margin: 0; padding: 0; font-family: 'Nunito', sans-serif; }
+        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+
+        #main-control {
+            position: absolute;
+            bottom: 30px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 5px; /* Space between the square button and the pill */
+            z-index: 1000;
+        }
+
+        #layer-controls {
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgb(234 244 247 / 70%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+        }
+
+        #map-controls {
+            background-color: rgb(234 244 247 / 70%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden; 
+            max-width: 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+        }
+
+        #map-controls.divexpanded {
+            max-width: 60%;
+            opacity: 1;
+            visibility: visible;
+            padding: 2px 15px;
+            overflow: visible;
+        }
+
+        .btn-layer {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn_tooltip {
+            background: none;
+            border: none;
+            color: #5c89c7;
+            cursor: pointer;
+            font-size: 19px;
+            padding: 10px;
+            position: relative;
+            transition: color 0.2s;
+        }
+
+        .btn_tooltip:hover, .btn_tooltip.active {
+            color: #080f5d;
+        }
+
+        .layer-toggle-container {
+            background-color: rgba(234, 244, 247, 0.9);
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            box-sizing: border-box;
+            transition: background 0.3s;
+        }
+        
+        .layer-toggle-container:hover { background-color: #fff; }
+        .layer-toggle-container i { color: #080f5d; font-size: 20px; }
+
+        #map-controls {
+            left: 15px !important;
+        }
+        
+        .layer-btn, .divcontainer {
+            color: #5c89c7;
+            padding: 10px;
+            height: 45px;
+            width: 45px;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            font-size: 19px;
+            font-weight: bold;
+            border-radius: 10px;
+        }
+
+        .layers-btn {
+            width: 45px;
+            text-align: center;
+            padding: 0 8px;
+        }
+        
+        .layer-btn.active, .layers-btn.active {
+            color: #080f5d;
+        }
+        .layer-btn:hover, .layers-btn:hover {
+            color: #080f5d;
+        }
+        
+        .divcontainer {
+            position: absolute;
+            z-index: -1;
+            bottom: 25px;
+            left: 75px;
+            background-color: rgb(234 244 247 / 70%);
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+        
+        .divexpanded {
+            z-index: 1000;
+            left: 125px;
+            width: 300px;
+            background-color: rgb(234 244 247 / 70%);
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+        
+        .tooltip {
+            position: absolute;
+            bottom: 100%; 
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #080f5d;
+            color: #ffffff;
+            padding: 8px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out;
+            z-index: 2000;
+        }
+
+        .tooltip::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 5px;
+            border-style: solid;
+            border-color: #333 transparent transparent transparent;
+        }
+
+        /* Show Tooltip on Hover */
+        .btn_tooltip:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 480px) {
+            #main-control { bottom: 10px; left: 10px; }
+            /* #map-controls { gap: 5px; padding: 5px 10px; } */
+        }
+    </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<div id="main-control">
+    <div id="layer-controls">
+        <button class="layer-btn" id="btnlayer">
+            <i class="fa-solid fa-layer-group"></i>
+        </button>
+    </div>
+
+    <div id="map-controls">
+        <div class="btn-layer">
+            <button onclick="changeStyle('mapbox://styles/mapbox/streets-v11')" class="btn_tooltip active" id="default_btn">
+                <span class="tooltip">Default</span>
+                <i class="fa-solid fa-road"></i>
+            </button>
+            <button onclick="changeStyle('mapbox://styles/mapbox/satellite-v9')" class="btn_tooltip" id="satellite_btn">
+                <span class="tooltip">Satellite</span>
+                <i class="fa-solid fa-satellite"></i>
+            </button>
+            <button onclick="changeStyle('mapbox://styles/mapbox/outdoors-v11')" class="btn_tooltip" id="terrain_btn">
+                <span class="tooltip">Terrain</span>
+                <i class="fa-solid fa-globe"></i>
+            </button>
+            <button onclick="changeStyle('mapbox://styles/mapbox/satellite-streets-v11')" class="btn_tooltip" id="hybrid_btn">
+                <span class="tooltip">Hybrid</span>
+                <i class="fa-solid fa-map-location-dot"></i>
+            </button>
+            <button onclick="changeStyle('mapbox://styles/mapbox/dark-v10')" class="btn_tooltip" id="dark_btn">
+                <span class="tooltip">Dark</span>
+                <i class="fa-solid fa-moon"></i>
+            </button>
+            <button onclick="changeStyle('mapbox://styles/mapbox/light-v10')" class="btn_tooltip" id="light_btn">
+                <span class="tooltip">Light</span>
+                <i class="fa-solid fa-sun"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    mapboxgl.accessToken = ACCESS_TOKEN;
+
+    const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v12',
+        center: [122.3464996, 12.8567958],
+        zoom: 9
+    });
+
+    // Add Zoom and Geolocation to top-right
+    map.addControl(new mapboxgl.NavigationControl({
+        showCompass: false // This hides the compass/pitch icon
+    }), 'top-right');
+    
+    const geolocate = new mapboxgl.GeolocateControl({
+        positionOptions: { enableHighAccuracy: true },
+        trackUserLocation: true,
+        showUserHeading: true
+    });
+    map.addControl(geolocate, 'top-right');
+
+    // Save to sessionStorage
+    geolocate.on('geolocate', (e) => {
+        sessionStorage.setItem('add_Latitude', e.coords.latitude);
+        sessionStorage.setItem('add_Longitude', e.coords.longitude);
+    });
+
+    map.on('load', () => geolocate.trigger());
+
+    // Toggle logic
+    document.getElementById("btnlayer").addEventListener("click", function () {
+        this.classList.toggle("active");
+        document.getElementById("map-controls").classList.toggle("divexpanded");
+    });
+
+    // Style change logic
+    function changeStyle(styleUrl) {
+        map.setStyle(styleUrl);
+        
+        // Remove active class from all buttons
+        document.querySelectorAll('.btn_tooltip').forEach(btn => btn.classList.remove('active'));
+        
+        // Add active class to the button that was clicked
+        if (window.event) {
+            window.event.currentTarget.classList.add('active');
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+{
+  "results": [
+    { "Id": "20260718003", "Name": "Casper Lumanlan", "Group": "321", "Timestamp": "2026-04-27T07:30:08", "Latitude": "12.322885", "Longitude": "120.966612" },
+    { "Id": "20260718003", "Name": "Casper Lumanlan", "Group": "321", "Timestamp": "2026-04-27T07:32:09", "Latitude": "12.322886", "Longitude": "120.966616" },
+    { "Id": "20260718003", "Name": "Casper Lumanlan", "Group": "321", "Timestamp": "2026-04-27T07:34:10", "Latitude": "12.322887", "Longitude": "120.966622" },
+    { "Id": "20260718003", "Name": "Casper Lumanlan", "Group": "321", "Timestamp": "2026-04-27T07:35:11", "Latitude": "12.322888", "Longitude": "120.966624" },
+    { "Id": "20260718001", "Name": "Rajah Reyes", "Group": "234", "Timestamp": "2026-07-18T10:18:00", "Latitude": "12.69354", "Longitude": "120.862864" },
+    { "Id": "20260718001", "Name": "Rajah Reyes", "Group": "234", "Timestamp": "2026-07-18T10:18:12", "Latitude": "12.69355", "Longitude": "120.862865" },
+    { "Id": "20260718001", "Name": "Rajah Reyes", "Group": "234", "Timestamp": "2026-07-18T10:18:25", "Latitude": "12.69356", "Longitude": "120.862866" },
+    { "Id": "20260718001", "Name": "Rajah Reyes", "Group": "234", "Timestamp": "2026-07-18T10:18:38", "Latitude": "12.69357", "Longitude": "120.862867" },
+    { "Id": "20260718001", "Name": "Rajah Reyes", "Group": "234", "Timestamp": "2026-07-18T10:18:51", "Latitude": "12.69358", "Longitude": "120.862868" },
+    { "Id": "20260718001", "Name": "Rajah Reyes", "Group": "234", "Timestamp": "2026-07-18T10:19:05", "Latitude": "12.69359", "Longitude": "120.862869" },
+    { "Id": "20260718001", "Name": "Rajah Reyes", "Group": "234", "Timestamp": "2026-07-18T10:19:18", "Latitude": "12.69361", "Longitude": "120.862870" },
+    { "Id": "20260718001", "Name": "Rajah Reyes", "Group": "234", "Timestamp": "2026-07-18T10:19:30", "Latitude": "12.69361", "Longitude": "120.862871" },
+    { "Id": "20260718001", "Name": "Rajah Reyes", "Group": "234", "Timestamp": "2026-07-18T10:19:42", "Latitude": "12.69362", "Longitude": "120.862872" },
+    { "Id": "20260718001", "Name": "Rajah Reyes", "Group": "234", "Timestamp": "2026-07-18T10:19:55", "Latitude": "12.69363", "Longitude": "120.862873" },
+    { "Id": "20260718002", "Name": "Rajah Reyes", "Group": "234", "Timestamp": "2026-07-18T10:20:08", "Latitude": "12.69364", "Longitude": "120.862874" },
+    { "Id": "20260718002", "Name": "Rajah Reyes", "Group": "234", "Timestamp": "2026-07-18T10:20:20", "Latitude": "12.69365", "Longitude": "120.862875" },
+    { "Id": "20260718002", "Name": "Rajah Reyes", "Group": "234", "Timestamp": "2026-07-18T10:20:33", "Latitude": "12.69366", "Longitude": "120.862876" },
+    { "Id": "20260718002", "Name": "Rajah Reyes", "Group": "234", "Timestamp": "2026-07-18T10:20:46", "Latitude": "12.69367", "Longitude": "120.862877" },
+    { "Id": "20260718002", "Name": "Rajah Reyes", "Group": "234", "Timestamp": "2026-07-18T10:20:59", "Latitude": "12.69368", "Longitude": "120.862878" },
+    { "Id": "20260718002", "Name": "Rajah Reyes", "Group": "234", "Timestamp": "2026-07-18T10:27:21", "Latitude": "12.69369", "Longitude": "120.862879" },
+    {
+    "Id": "20260718006",
+    "Name": "Juan Dela Cruz",
+    "Group": "123",
+    "Timestamp": "2026-05-12T08:01:08",
+    "Latitude": "12.322885",
+    "Longitude": "120.966612"
+  },
+  {
+    "Id": "20260718006",
+    "Name": "Juan Dela Cruz",
+    "Group": "123",
+    "Timestamp": "2026-05-12T08:01:08",
+    "Latitude": "12.322885",
+    "Longitude": "120.966612"
+  },
+  {
+    "Id": "20260718006",
+    "Name": "Juan Dela Cruz",
+    "Group": "123",
+    "Timestamp": "2026-05-12T08:01:08",
+    "Latitude": "12.322885",
+    "Longitude": "120.966612"
+  },
+  {
+    "Id": "20260718006",
+    "Name": "Juan Dela Cruz",
+    "Group": "123",
+    "Timestamp": "2026-05-12T08:01:08",
+    "Latitude": "12.322885",
+    "Longitude": "120.966612"
+  },
+  {
+    "Id": "20260718006",
+    "Name": "Juan Dela Cruz",
+    "Group": "123",
+    "Timestamp": "2026-05-12T08:01:08",
+    "Latitude": "12.322885",
+    "Longitude": "120.966612"
+  },
+  {
+    "Id": "20260718006",
+    "Name": "Juan Dela Cruz",
+    "Group": "123",
+    "Timestamp": "2026-05-12T08:01:08",
+    "Latitude": "12.322885",
+    "Longitude": "120.966612"
+  },
+  {
+    "Id": "20260718006",
+    "Name": "Juan Dela Cruz",
+    "Group": "123",
+    "Timestamp": "2026-05-12T08:01:08",
+    "Latitude": "12.322885",
+    "Longitude": "120.966612"
+  }
+  ]
+}

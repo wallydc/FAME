@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Map</title>
+    
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+  
+    <script src='https://api.mapbox.com/mapbox-gl-js/v3.14.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v3.14.0/mapbox-gl.css' rel="stylesheet">
+    
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.3/mapbox-gl-draw.js'></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl-draw/1.3.0/mapbox-gl-draw.css" rel="stylesheet">
+    
+    <!-- <script src="https://unpkg.com/mapbox-gl-draw-circle@1.1.2"></script> -->
+
+	<link href="https://api.mapbox.com/mapbox-assembly/v1.13.0/assembly.min.css" rel="stylesheet">
+	<script id="search-js" defer="" src="https://api.mapbox.com/search-js/v1.0.0-beta.25/web.js"></script>
+    
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+    
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
+
+    <!-- <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script> -->
+
+	<script src="js/74e07481c2.js" crossorigin="anonymous"></script>
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+	  <link rel="stylesheet" href="css/AdminLTE.min.css">
+	<!--link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/-->
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/3.1.2/css/buttons.dataTables.css"/>
+	<link rel="stylesheet" type="text/css" href="css/menu_tooltip.css"/>
+
+	<script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/usertypeaccess.js"></script>
+    
+	<style>
+	body { margin: 0; padding: 0; }
+	#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+	.left_map {
+		padding-left: 0px !important ;
+		padding-right: 0px !important ;
+	}
+	.topover {
+		z-index: 1;
+	}
+	.mapbar {
+		position: absolute;
+		top: 40px;
+		right: 0%;
+		z-index: 8;
+	}
+	ul {
+	  list-style-type: none;
+	  margin: 0;
+	  padding: 0;
+	}
+      .btn {
+        cursor: pointer;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 6px;
+        background: #007cbf;
+        color: #fff;
+        font-size: 14px;
+      }
+    .btn.btn-file>input[type='file'] {
+        position: relative;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        font-size: unset;
+        text-align: right;
+        opacity: unset;
+        filter: alpha(opacity = 0);
+        outline: none;
+        background: none;
+        cursor: inherit;
+        display: block;
+    }
+    .btn-primary {
+        background-color: unset;
+        border-color: unset;
+    }
+    .btn-primary:hover {
+        color: #000000;
+        background-color: unset;
+        border-color: unset;
+    }
+    .btn:not(:disabled):not(.disabled) {
+        border: none;
+    }
+    
+	.photo {
+		border-radius: 40px;
+		width:35px;
+		height:35px;
+	}
+	.Online {
+		width: 12px;
+		height: 12px;
+		background: #f15d24;
+		border-radius: 12px;
+		float: left;
+		margin: 5px 6px 0 0;
+	}
+	.Offline {
+		width: 12px;
+		height: 12px;
+		background: #c0ccd9;
+		border-radius: 12px;
+		float: left;
+		margin: 5px 6px 0 0;
+	}
+	.Unknown {
+		width: 12px;
+		height: 12px;
+		background: #f9b049;
+		border-radius: 12px;
+		float: left;
+		margin: 5px 6px 0 0;
+	}
+	.line_Online {
+		border: solid 2px #f15d24;
+	}
+	.line_Offline {
+		border: solid 2px #c0ccd9;
+	}
+	.line_Unknown {
+		border: solid 2px #f9b049;
+	}
+    
+	.user_name {
+		float: left;
+		padding: 8px 6px 0px 6px;
+	}
+	.user_online {
+		float: left;
+		margin: 13px 6px 0px 6px;
+	}
+
+    @media (min-width: 768px) {
+
+    }
+    
+    @media (max-width: 992px) {
+        
+        .container2 {
+            top: 115px;
+            width: 85%;
+            margin-left: 2%;
+            margin-right: 2%;
+        }
+
+        #findnames {
+            top: 0;
+        }
+
+        .searchbox {
+            padding: 0 15px;
+        }
+
+        .forgeofenceControls, .forrouteControls {
+            top: -50px !important;
+        }
+    }
+
+    @media (min-width: 993px) {
+
+        #findnames {
+            top: 0;
+            width: 100%;
+        }
+
+        .container2 {
+            width: 58%;
+        }
+
+        .searchbox {
+            padding: 0 15px;
+        }
+
+        .forgeofenceControls, .forrouteControls {
+            top: -50px !important;
+        }
+    }
+
+    @media (max-width: 1200px) {
+        
+    }
+
+
+    @media only screen and (max-width: 480px) {
+        #layer-controls {
+            bottom: 65px !important;
+        }
+        
+        #map-controls {
+            bottom: 115px !important;
+        }
+
+        #loc-controls {
+            bottom: 270px !important;
+            right: 15px !important;
+        }
+        #zoom-controls {
+            bottom: 175px !important;
+            right: 15px !important;
+        }
+        #main-control {
+            bottom: 110px !important;
+        }
+        #forInput {
+            top: 0 !important;
+            width: 100% !important;
+            left: auto;
+            margin: 0 auto;
+        }
+    }
+
+    @media only screen and (max-width: 768px) {
+        .forgeofenceControls, .forrouteControls {
+            top: -50px !important;
+        }
+        
+        .hidename {
+            display: none;
+        }
+            
+        .searchbox {
+            position: relative;
+            top: -40px;
+            display: flex;
+            margin: 0 auto;
+            z-index: 20;
+            justify-content: center;
+        }
+
+        .suggestions {
+            top: 95px;
+        }
+
+        .hoveffect:hover + .hidename {
+            display: block;
+            color: red;
+        }
+        
+        .container2 {
+            top: 20px;
+            position: relative;
+            margin-left: 8%;
+            margin-right: 8%;
+        }
+        
+        #findnames {
+            display: -webkit-box;
+            width: 92% !important;
+            overflow: hidden;
+            position: relative;
+            padding: 0 2%;
+            margin: 0 auto;
+            top: 50px;
+        }
+
+        #mapcontrols {
+            width: 325px !important;
+        }
+
+        .atitle {
+            display: none;
+        }
+        
+        #main-control {
+            position: absolute;
+            bottom: 0;
+        }
+
+        #map-controls {
+            left: 15px !important;
+        }
+
+        #layer-controls {
+            left: 15px !important;
+        }
+    }
+
+    @media only screen and (max-width: 1080px) {
+
+    }
+
+    @media only screen and (max-width: 1180px) {
+
+        #map-controls {
+            height: 205px;
+            width: 45px;
+            left: 75px;
+            bottom: 73px;
+        }
+
+        .btn-layer {
+            display: flex;
+            margin: 5px 0;
+            align-items: center;
+            flex-direction: column;
+        }
+
+    }
+
+    #controlbar {
+        width: 100%;
+        clear: both;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    .controlbar {
+        position: fixed;
+        z-index: 998;
+        height: 100px;
+        width: 100%;
+        bottom: 20px;
+    }
+
+    #mapcontrols {
+        width: 450px;
+        display: flex;
+        margin: 0 auto;
+    }
+
+    .mapcontrols {
+        padding: 0 25px;
+        background-color: #f9fafc;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        position: relative;
+        margin: 0 auto;
+    }
+
+    .topline {
+        background-color: #082238;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        height: 7px;
+        width: 45px;
+        display: none;
+        margin: 0 auto;
+        top: -22px;
+        position: relative;
+    }
+
+    .li-ctrl {
+        float: left;
+        text-align: center;
+        margin: 2% 2%;
+        display: inline-flex;
+        width: 20%;
+    }
+
+    .li-ctrl a {
+        display: block;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    .li-ctrl a:hover:not(.active)  {
+        color: #2d358d;
+    }
+
+    .activecontrol {
+        color: #2d358d;
+    }
+
+    .active {
+        display: block;
+    }
+
+    .a-link {
+        color: #5c89c7;
+    }
+
+    .atitle {
+        color: #082238;
+    }
+        
+    .marker {
+        background-size: cover;
+        width: 18px;
+        height: 32px;
+        cursor: pointer;
+    }
+
+    #Online {
+        background-image: url('img/marker_1.png');
+    }
+    #Unknown {
+        background-image: url('img/marker_2.png');
+    }
+    #Offline {
+        background-image: url('img/marker_3.png');
+    }
+
+    .mapboxgl-popup-content {
+        border-radius: 8px;
+    }
+
+    .mapboxgl-popup-close-button {
+        margin: 5px;
+        font-size: 2.5em;
+        color: #d73a49;
+    }
+
+    .info {
+        font-size: 1.5em;
+    }
+    
+    #layer-controls {
+        position: absolute;
+        bottom: 25px;
+        left: 75px;
+        z-index: 998;
+        display: flex;
+        flex-direction: column;
+        background-color: rgb(234 244 247 / 70%);
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+    #loc-controls {
+        position: absolute;
+        bottom: 125px;
+        right: 15px;
+        z-index: 1001;
+        display: flex;
+        flex-direction: column;
+        background-color: rgb(234 244 247 / 70%);
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+    #zoom-controls {
+        position: absolute;
+        bottom: 25px;
+        right: 15px;
+        z-index: 998;
+        display: flex;
+        flex-direction: column;
+        background-color: rgb(234 244 247 / 70%);
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+    .zoom-btn, .layer-btn, .divcontainer {
+        color: #5c89c7;
+        padding: 10px;
+        height: 45px;
+        width: 45px;
+        text-align: center;
+        border: none;
+        cursor: pointer;
+        font-size: 19px;
+        font-weight: bold;
+    }
+
+    .layers-btn {
+        width: 45px;
+        text-align: center;
+        padding: 0 8px;
+    }
+    
+    .layer-btn.active, .layers-btn.active {
+        color: #080f5d;
+    }
+    .layer-btn:hover, .layers-btn:hover, .zoom-btn:hover {
+        color: #080f5d;
+    }
+    
+    .btn-layer {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .divcontainer {
+        position: absolute;
+        z-index: -1;
+        bottom: 25px;
+        left: 75px;
+        background-color: rgb(234 244 247 / 70%);
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+    .divexpanded {
+        z-index: 1000;
+        left: 125px;
+        width: 300px;
+        background-color: rgb(234 244 247 / 70%);
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    /* Button Styling */
+    .btn_tooltip {
+        position: relative;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    /* Tooltip Styling */
+    .tooltip {
+        position: absolute;
+        bottom: 130%; /* Position above the button */
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #080f5d;
+        color: #ffffff;
+        padding: 8px 10px;
+        border-radius: 5px;
+        font-size: 14px;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    /* Tooltip Arrow */
+    .tooltip::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 5px;
+        border-style: solid;
+        border-color: #333 transparent transparent transparent;
+    }
+
+    /* Show Tooltip on Hover */
+    .btn_tooltip:hover .tooltip {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .geofenceControls {
+        display: inline !important;
+    }
+
+    .forgeofenceControls, .forrouteControls {
+        position: absolute;
+        width: auto;
+        background: #f9fafc;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        display: none;
+        align-items: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .menu {
+        display: flex;
+        flex-direction: column;
+        background: #333;
+        padding: 10px;
+        border-radius: 8px;
+    }
+
+    .disabled-icon {
+        opacity: 0.3;
+        pointer-events: none;
+    }
+    
+    .enabled-icon {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    /* ----- */
+    .scroll-wrapper {
+        display: flex;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+        gap: 15px;
+        padding: 0 35px;
+        justify-content: space-evenly;
+    }
+
+    .card2 {
+        min-width: auto;
+        height: 50px;
+        background-color: #f0f0f0;
+        border-radius: 10px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .arrow-btn {
+        position: absolute;
+        top: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        z-index: 10;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .arrow-btn.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+    #leftBtn {
+        left: 0;
+    }
+    #rightBtn {
+        right: 0;
+    }
+
+    .arrow-left {
+        left: 10px;
+    }
+
+    .arrow-right {
+        right: 10px;
+    }
+    
+	.gp_box {
+        float: left;
+        background: white;
+        border-radius: 35px;
+        gap: 10px;
+        padding: 15px 0px;
+        font-size: 100%;
+	}
+    
+
+    /* Update your existing search-container styles */
+    .search-container {
+        position: absolute;
+        top: 32px;
+        display: flex;
+        align-items: center;
+        background: #f4f7fb;
+        border: 10px solid #ffffff; /* Refined border */
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        padding: 8px 12px;
+        width: 350px;
+        z-index: 2;
+        box-sizing: border-box; /* Ensures padding doesn't break width */
+    }
+
+    /* Ensure icons don't squash the input */
+    .search-container i {
+        color: #666;
+        font-size: 14px;
+        margin-left: 8px; /* Space between input and icons */
+    }
+
+    /* Position suggestions exactly below the search box */
+    .suggestions {
+        position: absolute;
+        top: 85px; /* Adjust based on your header height */
+        width: 350px;
+        /* ... keep your existing suggestion styles ... */
+        background: white;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        padding-top: 8px;
+        max-height: 320px;
+        overflow-y: auto;
+        z-index: 20;
+    }
+
+    /* Hover effect for the dropdown icon */
+    .dropdown-btn:hover {
+        color: #000;
+    }
+
+    /* The base state of the arrow */
+    .dropdown-btn {
+        transition: transform 0.3s ease; /* Smooth animation */
+        cursor: pointer;
+        margin-left: 5px;
+    }
+
+    /* The state when the dropdown is open */
+    .dropdown-btn.rotate {
+        transform: rotate(180deg);
+    }
+
+    .search-container input {
+      border: none;
+      outline: none;
+      flex: 1;
+      font-size: 14px;
+    }
+
+    .search-container i {
+      margin-right: 8px;
+      color: #555;
+    }
+
+    .clear-btn {
+      display: none;
+      cursor: pointer;
+      color: #888;
+    }
+
+    .suggestion {
+      padding:10px 12px;
+      border-bottom:1px solid #eee;
+      cursor:pointer;
+      display:flex;
+      justify-content: space-between;
+      align-items: stretch;
+      gap:10px;
+    }
+    .suggestion:last-child { border-bottom:none; }
+    .suggestion:hover { background:#f5f7fa; }
+    .meta { color:#666; font-size:12px; }
+
+    .suggestions div {
+      cursor: pointer;
+    }
+
+    .suggestions div:hover {
+      background: #f2f2f2;
+    }
+
+    .popup-close-btn {
+        font-size: 2.5em;
+        color: #d73a49;
+
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background: #ffffff;
+        border: none;
+        border-radius: 50%;
+        width: 22px;
+        height: 22px;
+        line-height: 20px;
+        text-align: center;
+        cursor: pointer;
+        z-index: 1;
+    }
+
+      html {
+        height: 100%;
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .btn.ghost {
+        background: transparent;
+        border: 1px solid #ddd;
+        color: #333;
+      }
+
+      /* Modal */
+      .track_modal-backdrop {
+        position: relative;
+        display: none;
+        justify-content: center;
+        z-index: 1005;
+        width: 100%;
+        top: 20%;
+      }
+      .track_modal {
+        width: 440px;
+        max-width: 94%;
+        background: #fff;
+        border-radius: 10px;
+        padding: 12px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      }
+      .track_modal h3 {
+        margin: 0 0 8px;
+      }
+      .search-row {
+        display: flex;
+        gap: 8px;
+      }
+      .search-row input {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+      }
+      .track_suggestions {
+        margin-top: 10px;
+        max-height: 220px;
+        overflow: auto;
+        border-radius: 6px;
+        border: 1px solid #f0f0f0;
+      }
+      .track_suggestion-item {
+        padding: 10px;
+        border-bottom: 1px solid #f6f6f6;
+        cursor: pointer;
+      }
+      .track_suggestion-item:last-child {
+        border-bottom: none;
+      }
+      .track_suggestion-item:hover {
+        background: #f5faff;
+      }
+
+      /* Popup detail buttons */
+      .popup-actions {
+        display: flex;
+        gap: 8px;
+        margin-top: 8px;
+      }
+      .toast {
+        position: fixed;
+        right: 12px;
+        bottom: 12px;
+        background: #111;
+        color: #fff;
+        padding: 8px 12px;
+        border-radius: 8px;
+        z-index: 10;
+        display: none;
+      }
+      .muted {
+        color: #666;
+        font-size: 13px;
+      }
+
+      .loc_suggestions {
+        padding: 1em;
+        overflow-y: auto;
+        max-height: 150px;
+      }
+      
+      @media (max-width: 480px) {
+        .track_modal {
+          width: 92%;
+        }
+      }
+
+    .mapbox-gl-draw_vertex,
+    .mapbox-gl-draw_midpoint,
+    .mapbox-gl-draw_point,
+    .mapbox-gl-draw_polygon-and-line-vertex-inactive {
+        display: none !important;
+    }
+    
+	</style>
+	<script>
+	$(document).ready(function() {
+        
+        loadprofileavatar();
+
+    });
+    </script>
+</head>
+
+<body id="page-top">
+    <div class="imgcenter">
+        <div class="loader"></div>
+    </div>
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#" style="background-color: #fff;">
+                <div class="sidebar-brand-icon"><!--  rotate-n-15 -->
+                    <!-- <i class="fas fa-laugh-wink"></i> -->
+					<img src="img/fame_logo2.png" class="fame_logo" style="margin: 5%;"/>
+                </div>
+                <div class="sidebar-brand-text mx-3">FAME </div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li id="map2" class="menu-item map nav-item active">
+                <a class="nav-link" href="#">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                    <span class="tooltip_menu">Map</span>
+				</a>
+            </li>
+            <li id="notifications" class="menu-item notifications nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="tooltip_menu">Notifications</span>
+				</a>
+            </li>
+            <li id="dashboard" class="menu-item dashboard nav-item">
+                <a class="nav-link" href="dashboard.html">
+                    <i class="fa-solid fa-bars-progress"></i>
+                    <span class="tooltip_menu">Dashboard</span>
+				</a>
+            </li>
+            <li id="devices" class="menu-item devices nav-item">
+                <a class="nav-link" href="devices.html">
+                    <i class="fa-solid fa-satellite-dish"></i>
+                    <span class="tooltip_menu">Devices</span>
+				</a>
+            </li>
+            <li id="reports" class="menu-item reports nav-item">
+                <a class="nav-link" href="report1.html">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span class="tooltip_menu">Report</span>
+				</a>
+            </li>
+             <li id="settings" class="menu-item settings nav-item">
+                <a class="nav-link" href="permission.html">
+                    <i class="fa-solid fa-gear"></i>
+                    <span class="tooltip_menu">Settings</span>
+				</a>
+            </li>
+             <li class="menu-item nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fa-solid fa-circle-question"></i>
+                    <span class="tooltip_menu">Help</span>
+				</a>
+            </li>
+
+            <!-- Nav Item - User Information -->
+            <div style="position: relative; margin-top: auto; clear: both;">
+                <li class="nav-item dropdown no-arrow" style="border-bottom: none;">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div id="imgprofile" alt="avatar"></div>
+                        <!-- <img class="img-profile rounded-circle"
+                            src="img/undraw_profile.svg"> -->
+                    </a>
+                    <!-- Dropdown - User Information -->
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                        aria-labelledby="userDropdown" style="z-index: 1002;">
+                        <a class="dropdown-item" href="profile.html">
+                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Profile
+                        </a>
+                        <!-- <a class="dropdown-item" href="#">
+                            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Settings
+                        </a> -->
+                        <a class="dropdown-item" href="activitylog.html">
+                            <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Activity Log
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Logout
+                        </a>
+                    </div>
+                </li>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+                <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light topbar mb-4 static-top">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3" style="z-index: 100;">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+
+                </nav>
+                <!-- End of Topbar -->
+
+
+    <!-- Search Box -->
+    <div class="searchbox">
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search..." style="background-color: #f4f7fb;">
+            <i class="fa fa-times clear-btn" id="clear-btn"></i>
+            <i class="fa fa-search"></i>
+            <i class="fa fa-chevron-down dropdown-btn" id="dropdown-btn" style="cursor:pointer; margin-left: 5px;"></i>
+        </div>
+        <div class="suggestions" id="suggestions"></div>
+    </div>
+
+                <!-- this is for cards with left and right arrows Content -->
+                <!-- <div class="container2 mapbar">
+
+                    <button id="leftBtn" class="arrow-btn arrow-left hidden" onclick="scrollGoLeft()"><i class="fa fa-angle-left"></i></button>
+				    <div id="findnames" class="mapbar scroll-wrapper"></div>
+                    <button id="rightBtn" class="arrow-btn arrow-right" onclick="scrollGoRight()"><i class="fa fa-angle-right"></i></button>
+                </div> -->
+
+    <!-- Modal -->
+    <div id="modalBackdrop" class="track_modal-backdrop" role="dialog" aria-modal="true">
+      <div class="track_modal">
+        <h3>Select Transportation</h3>
+        <div class="search-row">
+          <input id="vesselSearch" placeholder="Search by name or id" />
+          <button id="closeModal" class="btn ghost">Close</button>
+        </div>
+        <div id="track_suggestions" class="track_suggestions" tabindex="0"></div>
+        <div class="muted" style="margin-top: 8px; font-size: 13px">
+          Tip: start typing to filter. Click any item to draw its path on the
+          map.
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="groupModal" class="track_modal-backdrop" role="dialog" aria-modal="true">
+      <div class="track_modal">
+        <h3>Select Group</h3>
+        <div class="search-row">
+          <input id="groupSearch" placeholder="Search by group" />
+          <button id="closeLocModal" class="btn ghost">Close</button>
+        </div>
+        <div id="listContainer" class="loc_suggestions" tabindex="0"></div>
+        <div class="muted" style="margin-top: 8px; font-size: 13px">
+          Tip: start typing to filter. Click any group item.
+        </div>
+      </div>
+    </div>
+
+				<div id="controlbar">
+				    <div class="controlbar">
+                        
+                        <div id="forInput" style="position: relative; display: flex;justify-content: space-around;">
+                            <div class="forgeofenceControls">
+                                
+                                <button id="btnCircle" onclick="enableDrawCircle()" class="btn_tooltip layers-btn">
+                                    <span class="tooltip">Draw Circle</span>
+                                    <i id="iconCircle" class="fa-solid fa-circle" style="padding: 5px;"></i>
+                                </button>
+                                <button id="btnPolygon" onclick="enableDraw()" class="btn_tooltip layers-btn"><span class="tooltip">Draw Polygon</span><i id="iconPoly" class="fa-solid fa-draw-polygon" style="padding: 5px;"></i></button>
+                                <button id="btnTrash" onclick="checkStatus()" class="btn_tooltip layers-btn"><span class="tooltip">Delete</span><i class="fa-solid fa-trash" style="padding: 5px;"></i></button>
+                                <button id="btnResetPoly" onclick="resetDraw()" class="btn_tooltip layers-btn"><span class="tooltip">Reset</span><i id="iconPolyreset" class="fa-solid fa-arrows-rotate" style="padding: 5px;"></i></button>
+                                <button id="btnSavePoly" onclick="handleAction()" class="btn_tooltip layers-btn"><span class="tooltip">Save JSON</span><i id="editpolyIcon" class="fa-solid fa-floppy-disk" style="padding: 5px;"></i></button>
+                                <button id="btnLoad" onclick="drawloadMode()" class="btn_tooltip layers-btn"><span class="tooltip">Load JSON</span><i class="fa-solid fa-file-code" style="padding: 5px;"></i></button>
+
+                            </div>
+                            <div class="forrouteControls">
+
+                                <button id="btnLine" onclick="enableLine()" class="btn_tooltip layers-btn"><span class="tooltip">Draw Line</span><i id="iconLine" class="fa-solid fa-up-right-and-down-left-from-center"></i></button>
+                                <button id="btnTrash" onclick="checkStatus()" class="btn_tooltip layers-btn"><span class="tooltip">Delete</span><i class="fa-solid fa-trash" style="padding: 5px;"></i></button>
+                                <button id="btnResetLine" onclick="resetDraw()" class="btn_tooltip layers-btn"><span class="tooltip">Reset</span><i id="iconLinereset" class="fa-solid fa-arrows-rotate" style="padding: 5px;"></i></button>
+                                <button id="btnSaveLine" onclick="handleAction()" class="btn_tooltip layers-btn"><span class="tooltip">Save JSON</span><i id="editlineIcon" class="fa-solid fa-floppy-disk" style="padding: 5px;"></i></button>
+                                <button id="btnLoad" onclick="drawloadMode()" class="btn_tooltip layers-btn"><span class="tooltip">Load JSON</span><i class="fa-solid fa-file-code" style="padding: 5px;"></i></button>
+
+                            
+                            </div>
+                        </div>
+
+                        <div id="mapcontrols">
+                            <div class="mapcontrols">
+
+                                <ul id="itemList">
+                                    <li id="location" class="li-ctrl">
+                                        <a class="a-link" href="#"><!--  active -->
+                                            <div id="loc" class="topline"></div>
+                                            <i class="fa-solid fa-location-dot fa-lg"></i>
+                                            <span class="atitle">Location</span>
+                                        </a>                           
+                                    </li>
+                                    <li id="track" class="li-ctrl">
+                                        <a class="a-link" href="#">
+                                            <div id="trk" class="topline"></div>
+                                            <i class="fa-solid fa-ship fa-lg"></i>
+                                            <span class="atitle">Track</span>
+                                        </a>
+                                    </li>
+                                    <li id="route" class="li-ctrl">
+                                        <a class="a-link" href="#">
+                                            <div id="rte" class="topline"></div>
+                                            <i class="fa-solid fa-route fa-lg"></i>
+                                            <span class="atitle">Route</span>
+                                        </a>
+                                    </li>
+                                    <li id="geofence" class="li-ctrl">
+                                        <a class="a-link" href="#">
+                                            <div id="geo" class="topline"></div>
+                                            <i class="fa-solid fa-street-view fa-lg"></i>
+                                            <span class="atitle">Geofence</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-fluid left_map">
+                    <div id="map"></div>
+                    <div id="main-control">
+                        <div id="map-controls" class="divcontainer">
+                            <div class="btn-layer">
+
+                                <button onclick="changeStyle('mapbox://styles/mapbox/streets-v11')" class="btn_tooltip layers-btn" id="default_btn" value=""><span class="tooltip">Default</span><i class="fa-solid fa-road" style="padding: 5px;"></i></button>
+                                <button onclick="changeStyle('mapbox://styles/mapbox/satellite-v9')" class="btn_tooltip layers-btn" id="satellite_btn" value=""><span class="tooltip">Satellite</span><i class="fa-solid fa-satellite" style="padding: 5px;"></i></button>
+                                <button onclick="changeStyle('mapbox://styles/mapbox/outdoors-v11')" class="btn_tooltip layers-btn" id="terrain_btn" value=""><span class="tooltip">Terrain</span><i class="fa-solid fa-globe" style="padding: 5px;"></i></button>
+                                <button onclick="changeStyle('mapbox://styles/mapbox/satellite-streets-v11')" class="btn_tooltip layers-btn" id="hybrid_btn" value=""><span class="tooltip">Hybrid</span><i class="fa-solid fa-map-location" style="padding: 5px;"></i></button>
+                                <button onclick="changeStyle('mapbox://styles/mapbox/dark-v10')" class="btn_tooltip layers-btn" id="dark_btn" value=""><span class="tooltip">Dark Mode</span><i class="fa-solid fa-moon" style="padding: 5px;"></i></button>
+                                <button onclick="changeStyle('mapbox://styles/mapbox/light-v10')" class="btn_tooltip layers-btn" id="light_btn" value=""><span class="tooltip">Light Mode</span><i class="fa-solid fa-sun" style="padding: 5px;"></i></button>
+                            
+                            </div>
+                        </div>
+                        <div id="layer-controls">
+                            <button class="layer-btn" id="btnlayer"><i class="fa-solid fa-layer-group"></i></button>
+                        </div>                        
+                    </div>
+
+                    <div id="loc-controls">
+                        <button class="zoom-btn" onclick="showLocation()"><i class="fa-solid fa-location-crosshairs"></i></button>
+                    </div>
+                    <div id="zoom-controls">
+                        <button class="zoom-btn" id="zoom-in"><i class="fa-solid fa-plus"></i></button>
+                        <hr style="margin-top: 0; margin-bottom: 0; border: 0; border-top: 1px solid rgba(0, 0, 0, 0.1);">
+                        <button class="zoom-btn" id="zoom-out"><i class="fa-solid fa-minus"></i></button>
+                    </div>
+                
+
+                </div>
+
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; FAME PH 2026</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button 122.3464996, 12.8567958-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    
+    
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-default" id="logout" href="#">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="toast" class="toast"></div>
+
+    <!--  -->
+
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+
+
+    <!-- Page level custom scripts -->
+    <!-- <script src="js/demo/datatables-demo.js"></script> -->
+
+    <script src="js/fileinput.min.js"></script>
+   
+	<!-- Bootstrap 3.3.7 -->
+	<!-- <script src="dist/js/bootstrap.min.js"></script> -->
+	
+
+
+    <script src="js/customcircle.js"></script>
+
+    <!-- load map controls -->
+    <!-- <script src="js/mapcontrol.js"></script> -->
+     <script type="module" src="js/mapcontrol.js"></script>
+
+    <script>
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	$(document).ready(function(){
+	
+			
+			var checkedbox_map = localStorage.getItem("map");
+			var checkedbox_notifications = localStorage.getItem("notifications");
+			var checkedbox_dashboard = localStorage.getItem("dashboard");			
+			var checkedbox_devices = localStorage.getItem("devices");
+			var checkedbox_reports = localStorage.getItem("reports");
+			var checkedbox_settings = localStorage.getItem("settings");
+
+			
+		$(function() {
+
+				var get_emp = localStorage.getItem("regAuthor");
+			if (get_emp == "admin") {
+				document.getElementById("map2").style.display=checkedbox_map;
+				document.getElementById("notifications").style.display=checkedbox_notifications;
+				document.getElementById("dashboard").style.display=checkedbox_dashboard;
+				document.getElementById("devices").style.display=checkedbox_devices;
+				document.getElementById("reports").style.display=checkedbox_reports;
+				document.getElementById("settings").style.display=checkedbox_settings;
+				
+			} else if (get_emp == "supervisor"){
+				document.getElementById("map2").style.display=checkedbox_map;
+				document.getElementById("notifications").style.display=checkedbox_notifications;
+				document.getElementById("dashboard").style.display=checkedbox_dashboard;
+				document.getElementById("devices").style.display=checkedbox_devices;
+				document.getElementById("reports").style.display=checkedbox_reports;
+				document.getElementById("settings").style.display=checkedbox_settings;
+				
+			} else if (get_emp == "user"){
+				document.getElementById("map2").style.display=checkedbox_map;
+				document.getElementById("notifications").style.display=checkedbox_notifications;
+				document.getElementById("dashboard").style.display=checkedbox_dashboard;
+				document.getElementById("devices").style.display=checkedbox_devices;
+				document.getElementById("reports").style.display=checkedbox_reports;
+				document.getElementById("settings").style.display=checkedbox_settings;
+
+				document.getElementById("mapcontrols").style.display = "none";
+			} else {
+				window.location.href = "login.html";
+			}
+			});
+	});
+	</script>
+
+    <!-- load profile avatar -->
+    <script src="js/loadprofileavatar.js"></script>
+	<script src="js/logout.js"></script>
+</body>
+
+</html>

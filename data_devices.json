@@ -1,0 +1,35 @@
+{
+	"data": [
+{"Temperature":"35","Humidity":"62%","Pressure":"14.5","Timestamp":"2024-10-11 11:28:23"},
+{"Temperature":"36","Humidity":"70%","Pressure":"14.6","Timestamp":"2024-10-11 10:46:25"},
+{"Temperature":"35","Humidity":"64%","Pressure":"14.5","Timestamp":"2024-10-11 10:14:47"},
+{"Temperature":"36","Humidity":"60%","Pressure":"14.4","Timestamp":"2024-10-11 09:59:53"},
+{"Temperature":"38","Humidity":"67%","Pressure":"14.5","Timestamp":"2024-10-11 09:59:44"},
+{"Temperature":"35","Humidity":"78%","Pressure":"14.6","Timestamp":"2024-10-11 09:38:01"},
+{"Temperature":"37","Humidity":"84%","Pressure":"14.7","Timestamp":"2024-10-11 09:17:20"},
+{"Temperature":"36","Humidity":"83%","Pressure":"14.5","Timestamp":"2024-10-11 08:47:00"},
+{"Temperature":"36","Humidity":"77%","Pressure":"14.6","Timestamp":"2024-10-11 08:22:43"},
+{"Temperature":"35","Humidity":"76%","Pressure":"14.4","Timestamp":"2024-10-11 07:50:12"},
+{"Temperature":"34","Humidity":"71%","Pressure":"14.5","Timestamp":"2024-10-11 07:31:46"},
+{"Temperature":"35","Humidity":"88%","Pressure":"14.9","Timestamp":"2024-10-11 07:16:03"},
+{"Temperature":"36","Humidity":"77%","Pressure":"14.5","Timestamp":"2024-10-11 07:01:12"},
+{"Temperature":"33","Humidity":"67%","Pressure":"14.6","Timestamp":"2024-10-11 06:41:56"},
+{"Temperature":"35","Humidity":"60%","Pressure":"14.7","Timestamp":"2024-10-11 06:27:42"},
+{"Temperature":"35","Humidity":"80%","Pressure":"14.4","Timestamp":"2024-10-11 06:04:23"},
+{"Temperature":"33","Humidity":"72%","Pressure":"14.4","Timestamp":"2024-10-11 05:59:31"},
+{"Temperature":"33","Humidity":"64%","Pressure":"14.4","Timestamp":"2024-10-11 05:59:31"},
+{"Temperature":"34","Humidity":"74%","Pressure":"14.5","Timestamp":"2024-10-11 05:33:47"},
+{"Temperature":"36","Humidity":"74%","Pressure":"14.6","Timestamp":"2024-10-11 05:15:25"},
+{"Temperature":"34","Humidity":"64%","Pressure":"14.6","Timestamp":"2024-10-11 04:55:22"},
+{"Temperature":"32","Humidity":"65%","Pressure":"14.7","Timestamp":"2024-10-11 04:35:58"},
+{"Temperature":"33","Humidity":"55%","Pressure":"14.4","Timestamp":"2024-10-11 04:20:11"},
+{"Temperature":"28","Humidity":"50%","Pressure":"14.5","Timestamp":"2024-10-11 04:05:02"},
+{"Temperature":"26","Humidity":"78%","Pressure":"14.7","Timestamp":"2024-10-11 03:47:38"},
+{"Temperature":"26","Humidity":"53%","Pressure":"14.4","Timestamp":"2024-10-11 03:47:57"},
+{"Temperature":"26","Humidity":"66%","Pressure":"14.7","Timestamp":"2024-10-11 03:21:37"},
+{"Temperature":"27","Humidity":"52%","Pressure":"14.3","Timestamp":"2024-10-11 03:00:13"},
+{"Temperature":"29","Humidity":"76%","Pressure":"14.8","Timestamp":"2024-10-11 03:14:43"},
+{"Temperature":"31","Humidity":"73%","Pressure":"14.7","Timestamp":"2024-10-11 03:28:27"}
+
+]
+}

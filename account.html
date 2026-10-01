@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>FAME - Account</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        * {
+             box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #f1f1f1;
+        }
+        
+        /* #regForm {
+            background-color: #ffffff;
+            margin: 100px auto;
+            font-family: Raleway;
+            padding: 40px;
+            width: 70%;
+            min-width: 300px;
+        } */
+        
+        h1 {
+            text-align: center;  
+        }
+        
+        input {
+            padding: 10px;
+            width: 100%;
+            font-size: 17px;
+            font-family: Raleway;
+            border: 1px solid #aaaaaa;
+        }
+        
+        /* Mark input boxes that gets an error on validation: */
+        input.invalid {
+            background-color: #ffdddd;
+        }
+        
+        /* Hide all steps by default: */
+        .tab {
+            display: none;
+        }
+        
+        button {
+            background-color: #006bfe;
+            color: #ffffff;
+            border: solid;
+            padding: 10px 20px;
+            font-size: 17px;
+            font-family: Raleway;
+            cursor: pointer;
+            border-color: #5c89c7;
+            border-style: solid;
+            border-radius: 7px;
+            border-width: revert;
+        }
+        
+        button:hover {
+            opacity: 0.8;
+        }
+        
+        #prevBtn {
+            background-color: #ffffff;
+            color: #5c89c7;
+        }
+        
+        /* Make circles that indicate the steps of the form: */
+        .step {
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbbbbb;
+            border: none;  
+            border-radius: 50%;
+            display: inline-block;
+            opacity: 0.5;
+        }
+        
+        .step.active {
+            opacity: 1;
+        }
+        
+        /* Mark the steps that are finished and valid: */
+        .step.finish {
+          background-color: #2d358d;
+        }
+        
+        #saveBtn {
+          display: none;
+          float: right;
+          margin: 0 0 0 3px;
+        }
+        
+        /* ----------------- */
+        
+        .password-container{
+          /* width: 400px; */
+          position: relative;
+        }
+        .password-container input[type="password"],
+        .password-container input[type="text"]{
+          width: 100%;
+          padding: 12px 36px 12px 12px;
+          box-sizing: border-box;
+        }
+        .fa-eye{
+          position: absolute;
+          top: 28%;
+          right: 4%;
+          cursor: pointer;
+          color: lightgray;
+        }
+        
+        #savedetails {
+            display: none;
+        }
+
+        @media only screen and (min-width: 575px) {
+            #recovernumber {
+                max-width: 75%; min-width: 70%;
+            }
+            #prevBtn, #nextBtn {
+                max-width: 50%; min-width: 50%; float: right;
+            }
+        }
+    </style>
+    
+    <script type="text/javascript" src="./js/jquery.js"></script>
+</head>
+
+<body><!--  class="bg-gradient-primary" -->
+
+    <div class="container">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h3 text-gray-900 mb-4" style="font-weight: bold; text-align: left;">Welcome <span id="fName"></span>!</h1>
+                            </div>
+                            <form class="user" id="regForm">
+
+                                Please take a moment to verify your account details before proceeding.
+                                This would help us confirm your identity and secure your account.
+                                  <!-- Circles which indicates the steps of the form: -->
+                                  <div style="text-align:left;margin:40px 0;">
+                                    <span class="step"></span>
+                                    <span class="step"></span>
+                                  </div>
+                                <!-- One "tab" for each step in the form: -->
+                                <div class="tab">
+                                    <div class="form-group row">
+                                        <div class="col-sm-12 mb-3 mb-sm-0">
+                                        <h4 class="h5 text-gray-900 mb-4" style="font-weight: bold; text-align: left; margin-bottom: 1rem !important;">Business details</h4>
+                                            <label style="font-size: 12px;">Business name</label>
+                                            <input oninput="this.className = ''" class="form-control form-control-user" name="businessname" type="text" id="businessname" placeholder="">
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <label style="font-size: 12px;">Business address</label>
+                                            <input oninput="this.className = ''" class="form-control form-control-user" name="businessadd" type="text" id="businessadd" placeholder="">
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <label style="font-size: 12px;">Business contact number</label>
+                                            <input oninput="this.className = ''" class="form-control form-control-user" name="businesscontact" type="text" id="businesscontact" placeholder="">
+                                        </div>
+                                        <!-- <div class="form-group">
+                                            <div class="custom-control custom-checkbox small">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck">
+                                                <label class="custom-control-label" for="customCheck">Remember
+                                                    Me</label>
+                                            </div>
+                                        </div> -->
+                                        <div class="col-sm-12">
+                                            <div class="custom-control custom-checkbox small">
+                                                <input name="businesstc" type="checkbox"  class="custom-control-input" id="customCheck">
+                                                <label class="custom-control-label" for="customCheck" id="labelCheck">I agree to the <span style="color: #006bfe;" id="labelCheck2">Terms and Conditions</span></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="tab">
+                                    <div class="form-group row">
+                                        <div class="col-sm-12 mb-3 mb-sm-0">
+                                            <h4 class="h5 text-gray-900 mb-4" style="font-weight: bold; text-align: left; margin-bottom: 1rem !important;">Login details</h4>
+
+                                                <label style="font-size: 12px;">Your recovery number</label><br>
+                                                <select aria-label="Default select example" disabled="disabled" class="col-sm-3" style="height: 47px;">
+                                                    <option value="+63" selected="">+63</option>
+                                                </select>
+                                                <input oninput="this.className = ''" class="form-control form-control-user" id="recovernumber" name="recovernum" class="col-sm-9" onkeypress='return event.charCode >= 48 && event.charCode <= 57' style="float: right;">
+                                        </div>
+
+                                        <div class="col-sm-12">
+                                            <label style="font-size: 12px;">Set new password</label>
+                                            <div class="form-group">
+                                                <input oninput="this.className = ''" class="form-control form-control-user" type="email" id="emailpassreset" aria-describedby="emailHelp" placeholder="Enter Email Address..." disabled>
+                                            </div>
+                                        </div>
+
+                                        <!-- <div class="col-sm-12">
+                                            <label style="font-size: 12px;">Set new password</label>
+                                            <div class="password-container">
+                                                <input oninput="this.className = ''" type="password" id="setpassword">
+                                                <i class="fa-solid fa-eye" id="seteye"></i>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12">
+                                            <label style="font-size: 12px;">Re-type new password</label>&nbsp;&nbsp;<i class="fa-solid fa-circle-question" style="color: lightgray;"></i></label>
+                                            <div class="password-container">
+                                                <input oninput="this.className = ''" type="password" id="retypepassword">
+                                                <i class="fa-solid fa-eye" id="retypeeye"></i>
+                                            </div>
+                                        </div> -->
+
+                                    </div>
+
+                                </div>
+
+                                
+                                <div style="overflow:auto;">
+                                    <span id="savedetails">Updating Account details...</span>
+                                  <div>
+                                    <button type="button" id="saveBtn" class="btn btn-primary btn-user btn-block" onclick="save()">Submit</button>
+                                    <button type="button" id="nextBtn" class="btn btn-primary btn-user btn-block" onclick="nextPrev(1)">Proceed</button>
+                                    <button type="button" id="prevBtn" class="btn btn-primary btn-user btn-block" onclick="nextPrev(-1)">Back</button>
+                                  </div>
+                                </div>
+
+                            </form>
+                            <hr>
+                            <!-- <div class="text-center">
+                                <a class="small" href="forgot-password.html">Forgot Password?</a>
+                            </div>
+                            <div class="text-center">
+                                <a class="small" href="login.html">Already have an account? Login!</a>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="text/javascript" src="./js/multistep.js"></script>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Devices - Tables</title>
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+
+    <!-- Custom styles for this template -->
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+	  <link rel="stylesheet" href="css/AdminLTE.min.css">
+	<!--link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/-->
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/3.1.2/css/buttons.dataTables.css"/>
+
+	<script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/usertypeaccess.js"></script>
+	<script src="js/jquery-1.11.2.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<style>
+        body {
+            font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-weight: 400;
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+        .box_device {
+            text-align: center;
+            width: 100%;
+        }
+        .btn.btn-file>input[type='file'] {
+            position: relative;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: unset;
+            text-align: right;
+            opacity: unset;
+            filter: alpha(opacity = 0);
+            outline: none;
+            background: none;
+            cursor: inherit;
+            display: block;
+        }
+        .btn-primary {
+            background-color: unset;
+            border-color: unset;
+        }
+        .btn-primary:hover {
+            color: #000000;
+            background-color: unset;
+            border-color: unset;
+        }
+        .btn:not(:disabled):not(.disabled) {
+            color: #8f919f;
+            border: none;
+        }
+
+        th {
+            background-color: #eaf1f7 !important;
+            border-style: none !important;
+        }
+        
+        .dt-length {
+            float : left;
+        }
+
+        .dt-search {
+            float : right;
+        }
+
+       .dt-info {
+            float : left;
+        }
+
+        .dt-paging {
+            float : right;
+        }
+
+        div.dt-container.dt-empty-footer .dt-scroll-body {
+            border-bottom: 1px solid rgb(244 244 244);
+        }
+        .table-bordered {
+            border: 0px solid #f4f4f4;
+        }
+        .table-bordered th, .table-bordered td {
+            border: 0px solid #e3e6f0;
+        }
+		.Online {
+			width: 12px;
+			height: 12px;
+			background: #f15d24;
+			border-radius: 12px;
+			float: left;
+			margin: 5px 6px 0 0;
+		}
+		.Offline {
+			width: 12px;
+			height: 12px;
+			background: #c0ccd9;
+			border-radius: 12px;
+			float: left;
+			margin: 5px 6px 0 0;
+		}
+		.Unknown {
+			width: 12px;
+			height: 12px;
+			background: #f9b049;
+			border-radius: 12px;
+			float: left;
+			margin: 5px 6px 0 0;
+		}
+		.icon_phone {
+			color: #32e115;
+		}
+
+		table.dataTable tbody td {
+		  vertical-align: middle !important;
+		}
+
+        .dt-search {
+            position: relative;
+            z-index: auto;
+            top: -100px;
+            right: 20px;
+            /* float: right; */
+        }
+        .dt-search-0 {
+            position: fixed;
+            right: 255px;
+            padding: 5px;
+        }
+        /* #dt-search-0 {
+            position: fixed;
+        } */
+
+        .dataTables_filter {
+            display: none;
+        }
+        .dt-scroll-head {
+            background-color: #eaf1f7;
+            overflow: hidden;
+            position: absolute !important;
+            border: 0px;
+            width: 100%;
+            /* height: 100%; */
+            z-index: 1;
+        }
+        .dt-scroll-body {
+            position: relative;
+            overflow: auto;
+            width: 100%;
+            padding: 5% 1% 0;
+        }
+        @media (min-width: 576px) {
+            .dt-scroll-body {
+                padding: 2% 1% 0;
+            }
+        }
+
+        /* FOR LOADER */
+        .loader {
+            border: 5px solid #f3f3f300;
+            border-radius: 50%;
+            border-top: 5px solid #2d358d;
+            width: 50px;
+            height: 50px;
+            -webkit-animation: spin .8s linear infinite; /* Safari */
+            animation: spin .8s linear infinite;
+        }
+
+        /* Safari */
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .imgcenter {
+            display: none;
+            margin: 0 auto;
+            position: absolute;
+            z-index: 100000;
+            width: 100%;
+            top: 50%;
+        }
+
+        .loader {
+            margin: auto;
+        }
+	</style>
+
+
+</head>
+
+            <div style="width: 100%">
+                <canvas id="myPieChart"></canvas>
+            </div>
+		
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/datatables-demo.js"></script>
+	<script src="https://kit.fontawesome.com/74e07481c2.js" crossorigin="anonymous"></script>
+
+        <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-bar-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+    
+    <script src="js/fileinput.min.js"></script>
+   
+	<!-- Bootstrap 3.3.7 -->
+	<!-- <script src="dist/js/bootstrap.min.js"></script> -->
+	<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+	<script src="https://cdn.datatables.net/buttons/3.1.2/js/dataTables.buttons.js"></script>
+	<script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.dataTables.js"></script>
+	<script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.html5.min.js"></script>
+
+    <!-- load profile avatar -->
+    <script src="js/loadprofileavatar.js"></script>
+</body>
+
+</html>

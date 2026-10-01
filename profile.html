@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Profile</title>
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+
+    <!-- Custom styles for this template -->
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+	  <link rel="stylesheet" href="css/AdminLTE.min.css">
+	<!--link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/-->
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/3.1.2/css/buttons.dataTables.css"/>
+	<link rel="stylesheet" type="text/css" href="css/menu_tooltip.css"/>
+
+	<script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/usertypeaccess.js"></script>
+
+	<style>
+        .box_device {
+            text-align: center;
+            width: 100%;
+        }
+
+      .btn {
+        cursor: pointer;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 6px;
+        background: #007cbf;
+        color: #fff;
+        font-size: 14px;
+      }
+      .btn2 {
+        background: none;
+        color: #000;
+        font-size: 14px;
+      }
+        .btn.btn-file>input[type='file'] {
+            position: relative;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: unset;
+            text-align: right;
+            opacity: unset;
+            filter: alpha(opacity = 0);
+            outline: none;
+            background: none;
+            cursor: inherit;
+            display: block;
+        }
+        .btn-primary {
+            background-color: unset;
+            border-color: unset;
+        }
+        .btn-primary:hover {
+            color: #000000;
+            background-color: unset;
+            border-color: unset;
+        }
+    .btn:not(:disabled):not(.disabled) {
+        border: none;
+    }
+
+        th {
+            background-color: #eaf1f7 !important;
+            border-style: none !important;
+        }
+        
+        .dt-length {
+            float : left;
+        }
+
+        .dt-search {
+            float : right;
+        }
+
+       .dt-info {
+            float : left;
+        }
+
+        .dt-paging {
+            float : right;
+        }
+
+        div.dt-container.dt-empty-footer .dt-scroll-body {
+            border-bottom: 1px solid rgb(244 244 244);
+        }
+        .table-bordered {
+            border: 0px solid #f4f4f4;
+        }
+        .table-bordered th, .table-bordered td {
+            border: 0px solid #e3e6f0;
+        }
+
+        .dt-search {
+            position: relative;
+            z-index: auto;
+            top: -100px;
+            right: 20px;
+            /* float: right; */
+        }
+        .dt-search-0 {
+            position: fixed;
+            right: 255px;
+            padding: 5px;
+        }
+        /* #dt-search-0 {
+            position: fixed;
+        } */
+
+        .dataTables_filter {
+            display: none;
+        }
+        .dt-scroll-head {
+            background-color: #eaf1f7;
+            overflow: hidden;
+            position: absolute !important;
+            border: 0px;
+            width: 100%;
+            /* height: 100%; */
+            z-index: 1;
+        }
+        .dt-scroll-body {
+            position: relative;
+            overflow: auto;
+            width: 100%;
+            padding: 5% 1% 0;
+        }
+        @media (min-width: 576px) {
+            .dt-scroll-body {
+                padding: 2% 1% 0;
+            }
+        }
+
+        /* FOR LOADER */
+        .loader {
+            border: 5px solid #f3f3f300;
+            border-radius: 50%;
+            border-top: 5px solid #2d358d;
+            width: 50px;
+            height: 50px;
+            -webkit-animation: spin .8s linear infinite; /* Safari */
+            animation: spin .8s linear infinite;
+        }
+
+        /* Safari */
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .imgcenter {
+            display: none;
+            margin: 0 auto;
+            position: absolute;
+            z-index: 100000;
+            width: 100%;
+            top: 50%;
+        }
+
+        .loader {
+            margin: auto;
+        }
+		.box_profile {
+			padding-left: 24px;
+		}
+		.text-center {
+			text-align: center !important;
+			margin: 20px;
+		}
+		.box_radius {
+			border-radius: 15px;
+			background: #dce3e7;
+		}
+		.photo {
+			width: 150px;
+			border: #a9a3a3 solid;
+		}
+		.box_header {
+			background-color: #eaf1f7;
+		}
+		.none_padding {
+			padding: 0;
+		}
+		.none_margin {
+			margin: 0;
+		}
+        .sidebar-dark .nav-item.active .nav-link {
+            padding: 1rem 1rem !important;
+        }
+    
+    </style>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+            getdata();
+            loadprofileavatar();
+        // =============================================================== 
+
+        let file_photo;
+            
+            $('.fileselect_edit').bind("change", function(e) {
+                let files = e.target.files || e.dataTransfer.files;
+                
+                file_photo = files[0];
+                
+            });
+
+
+        // =============================================================== 
+
+        // Checking the file uploaded here
+
+        let uploadField = document.getElementById("fileselect_edit");
+        uploadField.onchange = function() {
+            
+            if(this.files[0].size > 500000){
+
+                alert("File Size Limit is 500kb!");
+                // sessionStorage.setItem("getimagePic","https://m8z2b4l7sm6v21liysy9fe27j8bf3f.files-sashido.cloud/4169b367ffbf89b5d13f627ef3688575_profile_default.jpg");
+                this.value = "";
+
+            } else {
+
+                let ext = this.value.match(/\.(.+)$/)[1];
+                switch(ext) {
+
+                    case 'jpg':
+                    case 'jpeg':
+                    case 'JPG':
+                    case 'JPEG':
+                    // case 'png':
+                    // case 'PNG':
+
+                    break;
+                    default:
+
+                    alert('Please select valid picture format only. Ex: .jpeg, .jpg');
+                    this.value='';
+                }
+
+                /* let fileType = file_photo['type'];
+                let validImageTypes = ['image/jpg', 'image/jpeg'];
+                if (!validImageTypes.includes(fileType)) {
+                    // invalid file type code goes here.
+                    alert("File type jpeg only!");
+                    $('#fileselect_edit').val('');
+
+                } */
+            }
+            
+        };
+
+        function upload_profilepic() {
+
+            let serverUrl = BASE_URL+"1/files/" + file_photo.name;
+            
+            $.ajax({
+                type: "POST",
+                beforeSend: function(request) {
+                    request.setRequestHeader("X-Parse-Application-Id", APP_ID);
+                    // request.setRequestHeader("X-Parse-REST-API-Key", REST_API_KEY);
+                    request.setRequestHeader("X-Parse-Master-Key", MASTER_KEY);
+                    request.setRequestHeader("Content-Type", file_photo.type);
+                },
+                url: serverUrl,
+                data: file_photo,
+                processData: false,
+                contentType: false,
+                dataType: 'json',
+                success: function(data) {
+                    
+                    // let classUrl = BASE_URL+"1/classes/ProfilePic"
+
+                    if(data) {
+
+                        let profileid = localStorage.getItem('UserObjectId');
+                        let fileName_edit = "" + data.url;
+                        sessionStorage.setItem("getimagePic", fileName_edit);
+
+                        const imgdetails = ({name: "profilepic", url: fileName_edit, __type: "File"});
+                        console.log(imgdetails);
+                        const getimg = fileName_edit.substring(fileName_edit.lastIndexOf("/")+1);
+                        console.log(getimg);
+
+
+                        var xmlhttp = new XMLHttpRequest();
+                        xmlhttp.open("PUT", BASE_URL+"1/users/"+profileid, true);
+                        xmlhttp.setRequestHeader("X-Parse-Application-Id",APP_ID);
+                        // xmlhttp.setRequestHeader("X-Parse-REST-API-Key",REST_API_KEY);
+                        xmlhttp.setRequestHeader("X-Parse-Master-Key",MASTER_KEY);
+                        xmlhttp.setRequestHeader("Content-Type", "application/json");
+
+                        xmlhttp.onreadystatechange = function() {
+                            if (xmlhttp.readyState == 4) {
+                                var result = JSON.parse(xmlhttp.responseText);
+                                
+                            }
+                        }
+
+                        var data = JSON.stringify({uploadedprofile : fileName_edit });
+                        xmlhttp.send(data);
+
+
+                        $.ajax({
+                            type: "POST",
+                            headers: {
+                            "X-Parse-Application-Id": APP_ID,
+                            "X-Parse-Master-Key": MASTER_KEY,
+                            "Content-Type": "image/jpeg",
+                            },
+                            url: BASE_URL+"1/classes/ProfilePic",
+                            data: JSON.stringify({ image: {name: getimg, url: fileName_edit, __type: "File"}}),
+                            // data: JSON.stringify({ name: "An Image", image: getimg, picture: imgdetails}),
+
+                            dataType: "json",
+                            error: function (data) {
+                                
+                            },
+                            success: function (data) {
+                                console.log("Your file successfully uploaded.");
+                                
+                            },
+                        });
+
+                        
+                    } else {
+                        //Data is null
+                        console.log("Data IS NULL");
+                    }
+                },
+                error: function(data) {
+                    var obj = jQuery.parseJSON(data);
+                    alert(obj.error);
+                }
+            });
+            
+        }
+
+            $( "#btnupdate" ).click(function() {
+                console.log( "Handler for .click() called." );
+                update_profile();
+            });
+
+            $( "#btnrefresh" ).click(function() {
+                console.log( "refresh" );
+                getdata();
+            });
+		});
+
+
+        function update_profile() {
+            let profileid = localStorage.getItem('UserObjectId');
+            let fullname = $('#edit_fullname').val();
+            let phone = $('#edit_phone').val();
+            let mobile = $('#edit_mobile').val();
+            let address = $('#edit_address').val();
+
+            //-----MY CONDITION HERE
+            if ($.trim(fullname) != "" || $.trim(fullname).length != 0) {
+            if ($.trim(phone) != "" || $.trim(phone).length != 0) {
+            if ($.trim(mobile) != "" || $.trim(mobile).length != 0) {
+            if ($.trim(address) != "" || $.trim(address).length != 0) {
+                if ( document.getElementById("fileselect_edit").files.length != 0 ){
+                    console.log("there files selected");
+                    upload_profilepic();
+                }
+                
+                $.ajax({
+                    url: BASE_URL+"1/users/"+profileid,
+                    headers: {
+                    "X-Parse-Application-Id": APP_ID,
+                    "X-Parse-Master-Key": MASTER_KEY,
+                    "Content-Type": "application/json",
+                    },
+                    type: 'PUT',
+                    dataType: 'json',
+                    data: JSON.stringify({ "fullname": fullname, "BusinessContact": phone, "RecoverNumber": mobile, "BusinessAddress": address }),
+                    success: function(data, status, jqXHR){
+                    },
+                    error: function(jqXHR, status, errorThrown){
+                    }
+                })
+                
+                getdata();
+                saveactivitylog();
+            
+            } else { alert("Kindly fill your address"); }
+            } else { alert("Kindly fill your mobile"); }
+            } else { alert("Kindly fill your phone"); }
+            } else { alert("Kindly fill your fullname"); }
+
+
+        }
+
+        function saveactivitylog() {
+
+            let getuser = localStorage.getItem('myemail');
+
+            $.ajax({
+                type: "POST", 
+                headers: {
+                "X-Parse-Application-Id": APP_ID,
+                "X-Parse-Master-Key": MASTER_KEY,
+                "Content-Type": "image/jpeg",
+                },
+                url: BASE_URL+"1/classes/Activitylog",
+                data: JSON.stringify({ user: getuser, action: "Updating Profile"}),
+
+                dataType: "json",
+                error: function (data) {
+                    
+                },
+                success: function (data) {
+                    console.log("Save Activity Log");
+                    
+                },
+            });
+
+        }
+
+        function getdata() {
+
+            let profileid = localStorage.getItem('UserObjectId');
+            let param = JSON.stringify({"objectId":profileid});
+            let compare = '?where=';
+            let url = compare.concat(param);
+
+            $.ajax({
+                type: 'GET',
+                headers: {
+                    'X-Parse-Application-Id': APP_ID,
+                    'X-Parse-REST-API-Key': REST_API_KEY,
+                    'Content-Type': "application/json"
+                }, 
+                url: BASE_URL+"1/users/"+url, 
+                data: '{"results":[{}]}',
+                data: {order: 'createdAt'},
+                dataType: "json",
+                error: function() {
+                    //alert("No data found.");
+                },
+
+                success: function (data) {
+
+                    let jstr = JSON.stringify(data);
+                    let json = JSON.parse(jstr);
+                    
+                    for(var i=0; i< json.results.length; i++) {
+                        
+                        let objectId = json.results[i].objectId;
+                        let profilepic = json.results[i].uploadedprofile;
+                        let fullname = json.results[i].fullname;
+                        let email = json.results[i].Email;
+                        let phone = json.results[i].BusinessContact;
+                        let mobile = json.results[i].RecoverNumber;
+                        let address = json.results[i].BusinessAddress;
+                        let usertype = json.results[i].usergroup;
+
+                        let myfullname = fullname.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+                        let myusertype = usertype.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+                        
+                        document.getElementById("profileimg").innerHTML = '<input type="image" src="'+profilepic+'" class="rounded-circle img-fluid photo" disabled>';
+                        
+                        $('.fullname').text(myfullname);
+                        $('#usertype').text(myusertype);
+                        $('address').text(address);
+                        $('#email').text(email);
+                        $('#phone').text(phone);
+                        $('#mobile').text(mobile);
+                        $('.address').text(address);
+
+                        $('#edit_fullname').val(fullname);
+                        // $('#edit_email').val(email);
+                        $('#edit_phone').val(phone);
+                        $('#edit_mobile').val(mobile);
+                        $('#edit_address').val(address);
+                        $("#selusertype option[value='"+usertype+"']").prop('selected', true);
+                        // $('option[value=' + usertype + ']').attr('selected',true);
+                        
+                    }
+                    
+                }
+            });	
+        }
+
+    </script>
+</head>
+
+<body id="page-top">
+    <div class="imgcenter">
+        <div class="loader"></div>
+    </div>
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#" style="background-color: #fff;">
+                <div class="sidebar-brand-icon"><!--  rotate-n-15 -->
+                    <!-- <i class="fas fa-laugh-wink"></i> -->
+					<img src="img/fame_logo2.png" class="fame_logo" style="margin: 5%;"/>
+                </div>
+                <div class="sidebar-brand-text mx-3">FAME </div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li id="map2" class="menu-item map nav-item">
+                <a class="nav-link" href="map.html">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                    <span class="tooltip_menu">Map</span>
+				</a>
+            </li>
+            <li id="notifications" class="menu-item notifications nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="tooltip_menu">Notifications</span>
+				</a>
+            </li>
+            <li id="dashboard" class="menu-item dashboard nav-item">
+                <a class="nav-link" href="dashboard.html">
+                    <i class="fa-solid fa-bars-progress"></i>
+                    <span class="tooltip_menu">Dashboard</span>
+				</a>
+            </li>
+            <li id="devices" class="menu-item devices nav-item">
+                <a class="nav-link" href="devices.html">
+                    <i class="fa-solid fa-satellite-dish"></i>
+                    <span class="tooltip_menu">Devices</span>
+				</a>
+            </li>
+            <li id="reports" class="menu-item reports nav-item">
+                <a class="nav-link" href="report1.html">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span class="tooltip_menu">Report</span>
+				</a>
+            </li>
+             <li id="settings" class="menu-item settings nav-item">
+                <a class="nav-link" href="permission.html">
+                    <i class="fa-solid fa-gear"></i>
+                    <span class="tooltip_menu">Settings</span>
+				</a>
+            </li>
+             <li class="menu-item nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fa-solid fa-circle-question"></i>
+                    <span class="tooltip_menu">Help</span>
+				</a>
+            </li>
+
+            <!-- Nav Item - User Information -->
+            <div style="position: relative; margin-top: auto; clear: both;">
+                <li class="nav-item dropdown no-arrow active" style="border-bottom: none;">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div id="imgprofile" alt="avatar"></div>
+                        
+                        <!-- <img class="img-profile rounded-circle"
+                            src="img/undraw_profile.svg"> -->
+                    </a>
+                    <!-- Dropdown - User Information -->
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                        aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Profile
+                        </a>
+                        <!-- <a class="dropdown-item" href="#">
+                            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Settings
+                        </a> -->
+                        <a class="dropdown-item" href="activitylog.html">
+                            <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Activity Log
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Logout
+                        </a>
+                    </div>
+                </li>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+                <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light topbar mb-4 static-top">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+
+                    <!-- Content Row -->
+                    <div class="row none_margin">
+
+                        <div class="col-lg-12 shadow none_padding">
+
+                            <div class="card">
+                                <div class="card-header py-3 box_header">
+                                    <h6 class="m-0 font-weight-bold text-primary">Profile</h6>
+                                </div>
+                                <div class="card-body" style="padding: 0 0 0 0;">
+                                    <div class="border rounded-5">    
+										<section class="w-100 p-4" style="background-color: #fff;">
+										  <div class="row">
+											<div class="col-lg-4">
+											  <div class="card mb-4 box_radius">
+												<div class="card-body text-center">
+												  <!-- <img id="profileimg" alt="avatar" class="rounded-circle img-fluid photo"> src="profile_images/profile_default.jpg"  -->
+                                                  <div id="profileimg" alt="profil image"></div>
+												  <h5 class="my-3"><!-- John Dela Cruz --><span class="fullname"></span></h5>
+												  <p class="text-muted mb-1"><!-- Administration --><span id="usertype"></span></p>
+												  <p class="text-muted mb-4"><!-- Makati City --><span class="address"></span></p>
+												</div>
+											  </div>
+											</div>
+											<div class="col-lg-8">
+											  <div class="card mb-4 box_radius">
+												<div class="card-body">
+												  <div class="row" style="margin-top: 20px;">
+													<div class="col-sm-3 box_profile">
+													  <p class="mb-0">Full Name</p>
+													</div>
+													<div class="col-sm-9 box_profile">
+													  <p class="text-muted mb-0"><!-- John Dela Cruz --><span class="fullname"></span></p>
+													</div>
+												  </div>
+												  <hr>
+												  <div class="row">
+													<div class="col-sm-3 box_profile">
+													  <p class="mb-0">Email</p>
+													</div>
+													<div class="col-sm-9 box_profile">
+													  <p class="text-muted mb-0"><!-- example@example.com --><span id="email"></span></p>
+													</div>
+												  </div>
+												  <hr>
+												  <div class="row">
+													<div class="col-sm-3 box_profile">
+													  <p class="mb-0">Phone</p>
+													</div>
+													<div class="col-sm-9 box_profile">
+													  <p class="text-muted mb-0"><!-- (097) 234-5678 --><span id="phone"></span></p>
+													</div>
+												  </div>
+												  <hr>
+												  <div class="row">
+													<div class="col-sm-3 box_profile">
+													  <p class="mb-0">Mobile</p>
+													</div>
+													<div class="col-sm-9 box_profile">
+													  <p class="text-muted mb-0"><!-- (098) 765-4321 --><span id="mobile"></span></p>
+													</div>
+												  </div>
+												  <hr>
+												  <div class="row">
+													<div class="col-sm-3 box_profile">
+													  <p class="mb-0">Address</p>
+													</div>
+													<div class="col-sm-9 box_profile">
+													  <p class="text-muted mb-0"><!-- Makati City --><span class="address"></span></p>
+													</div>
+												  </div>
+												</div>
+											  </div>
+											</div>
+										  </div>
+
+										</section>
+										
+										<div class="p-4 border-top mobile-hidden" style="text-align: center; background-color: #fff;">										  
+											<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal_edit" style="border: none; background-color: #ffffff; color: #006bfe; font-weight: bolder;">
+													Edit Profile
+											</button>
+										</div>
+										
+										
+									  </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; FAME PH 2026</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-default" id="logout" href="#">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HERE FOR EDIT DEVICE -->
+    <div class="modal fade" id="modal_edit" tabindex="-1" role="dialog" aria-labelledby="editmodal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h4 class="modal-title">Edit Profile</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+            
+            </div>
+            <div class="box-body">
+
+                
+            <div class="form-group">
+                <input type="file" name="fileselect_edit" id="fileselect_edit" class="form-control btn btn2 btn-block btn-default fileselect_edit fileselect_edit2" accept="image/jpg, image/jpeg" />
+            </div>
+
+                <!-- <div class="form-group">
+                    <label>Image Preview: </label>
+                    <div id="pic_preview">
+                    </div>
+                  </div> -->
+  
+            <!-- <div class="form-group">
+                <label for="update_uploaded_image">Photo</label>
+                <div class="kv-avatar">
+                    <div class="">
+                        <form action="upload2.php" method="post" enctype="multipart/form-data">
+                        <input id="update_uploaded_image" class="add_productimage" name="update_uploaded_image" type="file" accept="image/jpg" value="Choose File">
+                        <input type="submit" value="Upload Image" id="upload_images2" name="submit" style="display:none">
+                    </form>
+                    </div>
+                    <br/>
+                    <div class="box_reminder">
+                        <b><span style="color:red">Reminders :</span></b> Please before uploading the image name it same with Identifier and make it sure in jpg format with dimension 512x512
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="form-group">
+                <label for="fullname">Full Name</label>
+                <input type="text" class="form-control" id="edit_fullname" name="Full Name" placeholder="Full Name" autocomplete="off"/>
+            </div>
+
+            <!-- <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" id="edit_email" name="Email" placeholder="Enter Email" autocomplete="off" />
+            </div> -->
+
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="text" class="form-control" id="edit_phone" name="Phone" placeholder="Enter Phone" autocomplete="off"/>
+            </div>
+			           
+            <div class="form-group">
+                <label for="mobile">Mobile</label>
+                <input type="text" class="form-control" id="edit_mobile" name="Mobile" placeholder="Enter Mobile" autocomplete="off"/>
+            </div>
+            
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" class="form-control" id="edit_address" name="Address" placeholder="Enter Address" autocomplete="off"/>
+            </div>
+
+            <div class="form-group">
+                <label for="address">User Type</label>
+              <select id="selusertype" class="form-control">
+                  <option value="superadmin">Superadmin</option>
+                  <option value="admin">Admin</option>
+                  <option value="user">User</option>
+              </select>
+
+            </div>
+            
+            </div>
+
+            <div class="modal-footer">
+            <!-- <button type="button" id="btnrefresh" class="btn btn-default pull-left">Refresh</button> -->
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            <button type="button" id="btnupdate" class="btn btn-default" data-dismiss="modal">Update</button>
+            <!-- <button type="button" class="btn btn-default" onclick="deleteprofile()">Delete</button> -->
+            </div>
+        </div>
+        <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+	
+	<!-- remove brand modal --> 
+	<div class="modal fade" id="modal_delete" tabindex="-1" role="dialog" aria-labelledby="deletemodal" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+		  <h4 class="modal-title">Remove Device</h4>
+			 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+			
+		  </div>
+
+		  <form role="form" action="products/remove" method="post" id="removeForm">
+			<div class="modal-body">
+			  <p>Do you really want to remove <span class="get_row"></span>?</p> 
+			</div>
+			<div class="modal-footer">
+			  <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+			  <button type="submit" class="btn btn-default" data-dismiss="modal" onclick="delete_row()">Yes</button>
+			</div>
+		  </form>
+
+
+		</div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+    
+
+	<script type="text/javascript">
+        
+        function deleteprofile() {
+            
+            // alert("Profile deleted");
+            // curl -X DELETE \
+            // -H "X-Parse-Application-Id: ${APPLICATION_ID}" \
+            // -H "X-Parse-Master-Key: ${MASTER_KEY}" \
+            // https://YOUR.PARSE-SERVER.HERE/parse/files/...profile.png
+            
+            // https://m8z2b4l7sm6v21liysy9fe27j8bf3f.files-sashido.cloud/a061abe92d20b62ed1016a5960f88e2b_profile_default.jpg
+
+            const deleteimg = sessionStorage.getItem("getimagePic");
+            console.log(deleteimg);
+            // let deleteimg = "https://pg-app-1-eu-m8z2b4l7sm6v21liysy9fe27j8bf3f.s3-eu-west-1.amazonaws.com/8e42892000dafd5a2865a149dca6ae9d_profile_default.jpg";
+            const geturl = deleteimg.substring(deleteimg.lastIndexOf("/")+1);
+            console.log(geturl);
+            const oldURL = BASE_URL+"1/files/";
+            // const newURL = "https://m8z2b4l7sm6v21liysy9fe27j8bf3f.files-sashido.cloud/a061abe92d20b62ed1016a5960f88e2b_profile_default.jpg";
+            // const oldURL = "http://m8z2b4l7sm6v21liysy9fe27j8bf3f.files-sashido.cloud/";
+            const newURL = oldURL.concat(geturl);
+
+            $.ajax({
+                type: 'DELETE',
+                headers: {
+                    'X-Parse-Application-Id': APP_ID,
+                    // 'X-Parse-REST-API-Key': REST_API_KEY,
+                    'X-Parse-Master-Key': MASTER_KEY
+                },
+                url: newURL, 
+                dataType: "json",
+                error: function(data) {
+                alert(data);
+                },
+                success: function (data) {
+                    alert("Profile deleted", data)
+                }
+            });
+
+
+        }
+    </script>
+
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/datatables-demo.js"></script>
+	<script src="https://kit.fontawesome.com/74e07481c2.js" crossorigin="anonymous"></script>
+
+    <script src="js/fileinput.min.js"></script>
+   
+	<!-- Bootstrap 3.3.7 -->
+	<!-- <script src="dist/js/bootstrap.min.js"></script> -->
+	<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+	<script src="https://cdn.datatables.net/buttons/3.1.2/js/dataTables.buttons.js"></script>
+	<script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.dataTables.js"></script>
+	<script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.html5.min.js"></script>
+
+    <script>
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	$(document).ready(function(){
+	
+			
+			var checkedbox_map = localStorage.getItem("map");
+			var checkedbox_notifications = localStorage.getItem("notifications");
+			var checkedbox_dashboard = localStorage.getItem("dashboard");			
+			var checkedbox_devices = localStorage.getItem("devices");
+			var checkedbox_reports = localStorage.getItem("reports");
+			var checkedbox_settings = localStorage.getItem("settings");
+
+			
+		$(function() {
+
+				var get_emp = localStorage.getItem("regAuthor");
+			if (get_emp == "admin") {
+				document.getElementById("map2").style.display=checkedbox_map;
+				document.getElementById("notifications").style.display=checkedbox_notifications;
+				document.getElementById("dashboard").style.display=checkedbox_dashboard;
+				document.getElementById("devices").style.display=checkedbox_devices;
+				document.getElementById("reports").style.display=checkedbox_reports;
+				document.getElementById("settings").style.display=checkedbox_settings;
+				
+			} else if (get_emp == "supervisor"){
+				document.getElementById("map2").style.display=checkedbox_map;
+				document.getElementById("notifications").style.display=checkedbox_notifications;
+				document.getElementById("dashboard").style.display=checkedbox_dashboard;
+				document.getElementById("devices").style.display=checkedbox_devices;
+				document.getElementById("reports").style.display=checkedbox_reports;
+				document.getElementById("settings").style.display=checkedbox_settings;
+				
+			} else if (get_emp == "user"){
+				document.getElementById("map2").style.display=checkedbox_map;
+				document.getElementById("notifications").style.display=checkedbox_notifications;
+				document.getElementById("dashboard").style.display=checkedbox_dashboard;
+				document.getElementById("devices").style.display=checkedbox_devices;
+				document.getElementById("reports").style.display=checkedbox_reports;
+				document.getElementById("settings").style.display=checkedbox_settings;
+			} else {
+				window.location.href = "login.html";
+			}
+			});
+	});
+	</script>
+
+    <!-- load profile avatar -->
+    <script src="js/loadprofileavatar.js"></script>
+	<script src="js/logout.js"></script>
+</body>
+
+</html>

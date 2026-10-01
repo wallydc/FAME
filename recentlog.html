@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Dashboard</title>
+
+	<link href="https://api.mapbox.com/mapbox-assembly/v1.3.0/assembly.min.css" rel="stylesheet">
+	<script id="search-js" defer="" src="https://api.mapbox.com/search-js/v1.0.0-beta.25/web.js"></script>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+	<script src="js/jquery-1.11.2.js"></script>
+    <!-- Custom styles for this template -->
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+
+    <!-------------drag and drop ---------------->
+    <script src="js/3.4.js"></script>
+    <script src="js/lucide.min.js"></script>
+    <link href="css/dragdrop.css" rel="stylesheet">
+    <!------------------------------------------->
+
+    <!-- Custom styles for this page -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+	  <link rel="stylesheet" href="css/AdminLTE.min.css">
+	<!--link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/-->
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/3.1.2/css/buttons.dataTables.css"/>
+	<link rel="stylesheet" type="text/css" href="css/menu_tooltip.css"/>
+	
+	<script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/usertypeaccess.js"></script>
+	
+	<style>
+		#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+		.box_bottom {
+			padding-left: 0px !important ;
+			height: 248px !important ;
+		}
+		.left_map {
+			padding-left: 0px !important ;
+		}
+		.mapview {
+			height: 340px;
+		}
+		.top_box {
+			position: relative;
+			top: 41px;
+		}
+		.top_box2 {
+			position: relative;
+			top: 56px;
+		}
+		.cardheight{
+			height: 140px;
+		}
+        .box_device {
+            text-align: center;
+            width: 100%;
+        }
+        .btn.btn-file>input[type='file'] {
+            position: relative;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: unset;
+            text-align: right;
+            opacity: unset;
+            filter: alpha(opacity = 0);
+            outline: none;
+            background: none;
+            cursor: inherit;
+            display: block;
+        }
+        .btn-primary {
+            background-color: unset;
+            border-color: unset;
+        }
+        .btn-primary:hover {
+            color: #000000;
+            background-color: unset;
+            border-color: unset;
+        }
+        .btn:not(:disabled):not(.disabled) {
+            color: #8f919f;
+            border: none;
+        }
+
+        th {
+            background-color: #eaf1f7 !important;
+            border-style: none !important;
+        }
+        
+        .dt-length {
+            float : left;
+        }
+
+        .dt-search {
+            float : right;
+        }
+
+       .dt-info {
+            float : left;
+        }
+
+        .dt-paging {
+            float : right;
+        }
+
+        div.dt-container.dt-empty-footer .dt-scroll-body {
+            border-bottom: 1px solid rgb(244 244 244);
+        }
+        .table-bordered {
+            border: 0px solid #f4f4f4;
+        }
+        .table-bordered th, .table-bordered td {
+            border: 0px solid #e3e6f0;
+        }
+		.Online {
+			width: 12px;
+			height: 12px;
+			background: #f15d24;
+			border-radius: 12px;
+			float: left;
+			margin: 5px 6px 0 0;
+		}
+		.Offline {
+			width: 12px;
+			height: 12px;
+			background: #c0ccd9;
+			border-radius: 12px;
+			float: left;
+			margin: 5px 6px 0 0;
+		}
+		.Unknown {
+			width: 12px;
+			height: 12px;
+			background: #f9b049;
+			border-radius: 12px;
+			float: left;
+			margin: 5px 6px 0 0;
+		}
+		.icon_phone {
+			color: #32e115;
+		}
+
+		table.dataTable tbody td {
+		  vertical-align: middle !important;
+		}
+
+        .dt-search {
+            position: relative;
+            z-index: auto;
+            top: -100px;
+            right: 20px;
+            /* float: right; */
+        }
+        .dt-search-0 {
+            position: fixed;
+            right: 255px;
+            padding: 5px;
+        }
+        /* #dt-search-0 {
+            position: fixed;
+        } */
+
+        .dataTables_filter {
+            display: none;
+        }
+        .dt-scroll-head {
+            background-color: #eaf1f7;
+            overflow: hidden;
+            position: absolute !important;
+            border: 0px;
+            width: 100%;
+            /* height: 100%; */
+            z-index: 1;
+        }
+        .dt-scroll-body {
+            position: relative;
+            overflow: auto;
+            width: 100%;
+            padding: 5% 1% 0;
+        }
+        @media (min-width: 576px) {
+            .dt-scroll-body {
+                padding: 2% 1% 0;
+            }
+        }
+
+        /* FOR LOADER */
+        .loader {
+            border: 5px solid #f3f3f300;
+            border-radius: 50%;
+            border-top: 5px solid #2d358d;
+            width: 50px;
+            height: 50px;
+            -webkit-animation: spin .8s linear infinite; /* Safari */
+            animation: spin .8s linear infinite;
+        }
+
+        /* Safari */
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .imgcenter {
+            display: none;
+            margin: 0 auto;
+            position: absolute;
+            z-index: 100000;
+            width: 100%;
+            top: 50%;
+        }
+
+        .loader {
+            margin: auto;
+        }
+		#marker_1 {
+			background-image: url('img/marker_1.png');
+			background-size: cover;
+			width: 18px;
+			height: 32px;
+			cursor: pointer;
+		}
+		#marker_2 {
+			background-image: url('img/marker_2.png');
+			background-size: cover;
+			width: 18px;
+			height: 32px;
+			cursor: pointer;
+		}
+		#marker_3 {
+			background-image: url('img/marker_1.png');
+			background-size: cover;
+			width: 18px;
+			height: 32px;
+			cursor: pointer;
+		}
+		.map_height {
+			height: 320px !important;
+		}
+		.temperature_height {
+			height: 278px !important;
+		}
+		div.dt-container div.dt-layout-row {
+		margin: -0.20em 0 !important;
+		}
+		div.dt-paging {
+			display: none !important;
+		}
+		.iframe-bottom {
+            position: relative;
+            width: 100%;
+            padding-bottom: 100%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+        }
+		.iframe-bottom iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 65.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+        }
+	
+
+        .iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+		
+		.iframe-container_map {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56%;
+            height: 0;
+            overflow: hidden;
+        }
+		.iframe-container_map iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+		
+		.recent-box {
+			height: 700px;
+			margin-top: 12px;
+		}
+		.head_dashboard {
+			margin-bottom: 2.5rem !important;
+		}
+		.bottom_box {
+			height: 336px;
+		}
+		.datetxt {
+			text-align: center;
+			font-size: 11px;
+			color: #949494;
+			width: 28%;
+		}
+		.smalltext {
+			color: #949494;
+			font-size: 10px;
+
+		}
+		.scrollable {
+		  position: relative;
+		  margin: 0;
+		}
+		.scroll2 {
+		  width: 100%;
+		  height: 695px;
+		  overflow-y: scroll;
+		}
+		.scroll2::-webkit-scrollbar {
+		  width: .4em; 
+		}
+		.scroll2::-webkit-scrollbar,
+		.scroll2::-webkit-scrollbar-thumb {
+		  overflow:visible;
+		  border-radius: 4px;
+		}
+		.scroll2::-webkit-scrollbar-thumb {
+		  background: rgba(0,0,0,.2); 
+		}
+			</style>
+
+	<script type="text/javascript">
+        $(document).ready(function() {
+        
+        loadprofileavatar();
+
+	
+		$.ajax({	
+		 type: 'GET',
+		 headers: {
+			'X-Parse-Application-Id': "qIZJSomGlIEJLGzBLIZQQDHCTPSSNMLgMUd4VlRA",
+			'X-Parse-REST-API-Key': "v7nVylPk8VeGBph6994YZMY6ONNVd4VTAMGTRmMH",
+			'Content-Type': "application/json"
+		 }, 
+		url: "https://pg-app-m8z2b4l7sm6v21liysy9fe27j8bf3f.scalabl.cloud/1/classes/Recentactivity",  
+		data: '{"results":[{}]}',
+			data: {order: '-createdAt', limit: 20},
+			dataType: "json",
+			error: function() {
+				//alert("No data found.");
+			},		
+			success: function (data) {
+				var jstr = JSON.stringify(data);
+				var json = JSON.parse(jstr);
+				for(var i=0; i< json.results.length; i++)
+				{
+					var objectId = json.results[i].objectId;
+
+					var recentfullname = json.results[i].recentfullname
+					var recentnewuser = json.results[i].recentnewuser
+					var recentnewadd = json.results[i].recentnewadd
+					var recentnewregister = json.results[i].recentnewregister
+					var recentdate = json.results[i].recentdate
+					var recenttime = json.results[i].recenttime
+					var recentaddimg = json.results[i].recentaddimg
+					
+				$('<tr id="' + objectId + '"><td class="datetxt">' + recentdate + '</td><td class="smalltext"></td></tr><tr><td rowspan="2" style="text-align: center; width: 22%;"><img src="img/' + recentaddimg + '" style="width:45px; height:45px" /></td><td><b>'+ recentnewadd+ '</b></td></tr><tr><td class="smalltext">'+recentfullname+' '+recentnewregister+'<br/><time class="timeago">' + recenttime +'</time></td></tr><tr><td colspan="2"><hr></td>').appendTo("#newrecent"); 	
+						
+				var dateAux;
+				$(".timeago").each(function(i,item){
+				dateAux = moment($(item).html(),'DD-MM-YYYY hh:mm:ss');
+				$(item).attr('datetime',dateAux.toISOString());
+				})  
+				$("time.timeago").timeago();
+				
+				}
+			}
+			
+			
+		});	
+	//var x = function () {
+		//$('#myPieChart').load(window.location.pathname).fadeIn(1500);
+		//$('myPieChart').fadeIn(1500);
+	  //setTimeout(x,5000);
+	//}
+	//x();
+
+		});
+
+
+    </script>
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+
+                  
+                        
+                        <table id="newrecent" style="width:100%"></table>
+                        
+         
+
+
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+	<!-----------TIMEE AGO Js------------->
+	<script src="js/timeago.js"></script>
+	<script src="js/moment.min.js"></script>
+
+    <!-- load profile avatar -->
+    <script src="js/loadprofileavatar.js"></script>
+
+	</script>
+
+</body>
+
+</html>

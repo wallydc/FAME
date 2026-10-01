@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Activity Log</title>
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+
+    <!-- Custom styles for this template -->
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+	  <link rel="stylesheet" href="css/AdminLTE.min.css">
+	<!--link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/-->
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/3.1.2/css/buttons.dataTables.css"/>
+	<link rel="stylesheet" type="text/css" href="css/menu_tooltip.css"/>
+
+	<script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/usertypeaccess.js"></script>
+
+	<style>
+        .box_device {
+            text-align: center;
+            width: 100%;
+        }
+        
+      .btn {
+        cursor: pointer;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 6px;
+        background: #007cbf;
+        color: #fff;
+        font-size: 14px;
+      }
+        .btn.btn-file>input[type='file'] {
+            position: relative;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: unset;
+            text-align: right;
+            opacity: unset;
+            filter: alpha(opacity = 0);
+            outline: none;
+            background: none;
+            cursor: inherit;
+            display: block;
+        }
+        .btn-primary {
+            background-color: unset;
+            border-color: unset;
+        }
+        .btn-primary:hover {
+            color: #000000;
+            background-color: unset;
+            border-color: unset;
+        }
+    .btn:not(:disabled):not(.disabled) {
+        border: none;
+    }
+
+        th {
+            background-color: #eaf1f7 !important;
+            border-style: none !important;
+        }
+        
+        .dt-length {
+            float : left;
+        }
+
+        .dt-search {
+            float : right;
+        }
+
+       .dt-info {
+            float : left;
+        }
+
+        .dt-paging {
+            float : right;
+        }
+
+        div.dt-container.dt-empty-footer .dt-scroll-body {
+            border-bottom: 1px solid rgb(244 244 244);
+        }
+        .table-bordered {
+            border: 0px solid #f4f4f4;
+        }
+        .table-bordered th, .table-bordered td {
+            border: 0px solid #e3e6f0;
+        }
+
+        .dt-search {
+            position: relative;
+            z-index: auto;
+            top: -100px;
+            right: 20px;
+            /* float: right; */
+        }
+        .dt-search-0 {
+            position: fixed;
+            right: 255px;
+            padding: 5px;
+        }
+        /* #dt-search-0 {
+            position: fixed;
+        } */
+
+        .dataTables_filter {
+            display: none;
+        }
+        .dt-scroll-head {
+            background-color: #eaf1f7;
+            overflow: hidden;
+            position: absolute !important;
+            border: 0px;
+            width: 100%;
+            /* height: 100%; */
+            z-index: 1;
+        }
+        .dt-scroll-body {
+            position: relative;
+            overflow: auto;
+            width: 100%;
+            padding: 5% 1% 0;
+        }
+        @media (min-width: 576px) {
+            .dt-scroll-body {
+                padding: 2% 1% 0;
+            }
+        }
+
+        /* FOR LOADER */
+        .loader {
+            border: 5px solid #f3f3f300;
+            border-radius: 50%;
+            border-top: 5px solid #2d358d;
+            width: 50px;
+            height: 50px;
+            -webkit-animation: spin .8s linear infinite; /* Safari */
+            animation: spin .8s linear infinite;
+        }
+
+        /* Safari */
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .imgcenter {
+            display: none;
+            margin: 0 auto;
+            position: absolute;
+            z-index: 100000;
+            width: 100%;
+            top: 50%;
+        }
+
+        .loader {
+            margin: auto;
+        }
+		.box_profile {
+			padding-left: 24px;
+		}
+		.text-center {
+			text-align: center !important;
+			margin: 20px;
+		}
+		.box_radius {
+			border-radius: 15px;
+			background: #dce3e7;
+		}
+		.photo {
+			width: 150px;
+			border: #a9a3a3 solid;
+		}
+		.box_header {
+			background-color: #eaf1f7;
+		}
+		.none_padding {
+			padding: 0;
+		}
+		.none_margin {
+			margin: 0;
+		}
+		.table_th {
+			width:5%;
+			text-align:center;
+		}
+		tr td {
+			border: #f4f4f4 solid 1px;
+		}
+        .sidebar-dark .nav-item.active .nav-link {
+            padding: 1rem 1rem !important;
+        }
+    
+	</style>
+<script>
+		$(document).ready(function() {
+            loadprofileavatar();
+
+            sessionStorage.setItem( 'getID', '');
+        // $("#device_list").dataTable().fnDestroy();
+
+			var devices = $('#activitylog_list').DataTable( {
+				
+				 
+                "language": {
+                    searchPlaceholder: "Search",
+                    search: "Filter:",
+				},
+                "iDisplayLength": -1,
+                "aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+                "processing": false,
+                "scrollX": true,
+                dom: 'l<"toolbar">Bfrtip',
+                "scrollCollapse": true,
+                "paging":         false,
+
+                "bPaginate": false,
+                "bLengthChange": false,
+                "bFilter": true,
+                "bInfo": false,
+                "bAutoWidth": true,
+
+                fixedColumns:   {
+                    left: 1
+                },
+                buttons: [        ],
+                buttons: [        ], 
+                // initComplete: function(){
+                //     $("div.toolbar").html('<a class="button-33" data-toggle="modal" data-target="#myAddModal"><i class="ri-file-add-fill" style="font-size:15px;"></i> Add</a>');           
+                // },
+
+                "ajax": {
+                    "url": "data_activitylog.php",
+                    "dataSrc": "results",
+                },
+
+
+				"order": [[ 2, "desc" ]],
+				
+				"columns": [
+					
+					//{ "data": "Photo", defaultContent: '' },
+					{ "data": "user", defaultContent: '' },
+					{ "data": "action", defaultContent: '' },
+
+                    
+                    {"data": "createdAt", type:"date", render: function (data) {
+                        let date = new Date(data);
+                        let month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
+                        
+                        let getlocaltime = date.toLocaleString([], {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                        });
+
+                        return month[date.getMonth()] + " " + String("0" + date.getDate()).slice(-2) + ", " + date.getFullYear() + "<br>" + getlocaltime;
+                    }},
+				]
+			} );
+		});
+
+
+
+</script>
+</head>
+
+<body id="page-top">
+    <div class="imgcenter">
+        <div class="loader"></div>
+    </div>
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#" style="background-color: #fff;">
+                <div class="sidebar-brand-icon"><!--  rotate-n-15 -->
+                    <!-- <i class="fas fa-laugh-wink"></i> -->
+					<img src="img/fame_logo2.png" class="fame_logo" style="margin: 5%;"/>
+                </div>
+                <div class="sidebar-brand-text mx-3">FAME </div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li id="map2" class="menu-item map nav-item">
+                <a class="nav-link" href="map.html">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                    <span class="tooltip_menu">Map</span>
+				</a>
+            </li>
+            <li id="notifications" class="menu-item notifications nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="tooltip_menu">Notifications</span>
+				</a>
+            </li>
+            <li id="dashboard" class="menu-item dashboard nav-item">
+                <a class="nav-link" href="dashboard.html">
+                    <i class="fa-solid fa-bars-progress"></i>
+                    <span class="tooltip_menu">Dashboard</span>
+				</a>
+            </li>
+            <li id="devices" class="menu-item devices nav-item">
+                <a class="nav-link" href="devices.html">
+                    <i class="fa-solid fa-satellite-dish"></i>
+                    <span class="tooltip_menu">Devices</span>
+				</a>
+            </li>
+            <li id="reports" class="menu-item reports nav-item">
+                <a class="nav-link" href="report1.html">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span class="tooltip_menu">Report</span>
+				</a>
+            </li>
+             <li id="settings" class="menu-item settings nav-item">
+                <a class="nav-link" href="permission.html">
+                    <i class="fa-solid fa-gear"></i>
+                    <span class="tooltip_menu">Settings</span>
+				</a>
+            </li>
+             <li class="menu-item nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fa-solid fa-circle-question"></i>
+                    <span class="tooltip_menu">Help</span>
+				</a>
+            </li>
+
+            <!-- Nav Item - User Information -->
+            <div style="position: relative; margin-top: auto; clear: both;">
+                <li class="nav-item dropdown no-arrow active" style="border-bottom: none;">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div id="imgprofile" alt="avatar"></div>
+                        <!-- <img class="img-profile rounded-circle"
+                            src="img/undraw_profile.svg"> -->
+                    </a>
+                    <!-- Dropdown - User Information -->
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                        aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="profile.html">
+                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Profile
+                        </a>
+                        <!-- <a class="dropdown-item" href="#">
+                            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Settings
+                        </a> -->
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Activity Log
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Logout
+                        </a>
+                    </div>
+                </li>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+                <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light topbar mb-4 static-top">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+					<p class="mb-4"></p>
+                    <h1 class="h3 mb-2 text-gray-800">Activity Log</h1>
+
+                    <!-- DataTales Example -->
+                    <div class=""><!-- card shadow mb-4 -->
+                        <div class="card-body card shadow">
+                            <div class="table-responsive">
+							<table id="activitylog_list" class="table table-bordered" style="font-weight: bold;">
+									<thead>
+										<tr>
+											<th>User</th>
+											<th>Actions</th>
+											<th>Date & Time</th>										
+										</tr>
+									</thead>
+							</table>
+
+                           </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; FAME PH 2026</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+     
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-default" id="logout" href="#">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/datatables-demo.js"></script>
+	<script src="https://kit.fontawesome.com/74e07481c2.js" crossorigin="anonymous"></script>
+
+    <script src="js/fileinput.min.js"></script>
+   
+	<!-- Bootstrap 3.3.7 -->
+	<!-- <script src="dist/js/bootstrap.min.js"></script> -->
+	<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+	<script src="https://cdn.datatables.net/buttons/3.1.2/js/dataTables.buttons.js"></script>
+	<script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.dataTables.js"></script>
+	<script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.html5.min.js"></script>
+
+    <script>
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	$(document).ready(function(){
+	
+			
+			var checkedbox_map = localStorage.getItem("map");
+			var checkedbox_notifications = localStorage.getItem("notifications");
+			var checkedbox_dashboard = localStorage.getItem("dashboard");			
+			var checkedbox_devices = localStorage.getItem("devices");
+			var checkedbox_reports = localStorage.getItem("reports");
+			var checkedbox_settings = localStorage.getItem("settings");
+
+			
+		$(function() {
+
+				var get_emp = localStorage.getItem("regAuthor");
+			if (get_emp == "admin") {
+				document.getElementById("map2").style.display=checkedbox_map;
+				document.getElementById("notifications").style.display=checkedbox_notifications;
+				document.getElementById("dashboard").style.display=checkedbox_dashboard;
+				document.getElementById("devices").style.display=checkedbox_devices;
+				document.getElementById("reports").style.display=checkedbox_reports;
+				document.getElementById("settings").style.display=checkedbox_settings;
+				
+			} else if (get_emp == "supervisor"){
+				document.getElementById("map2").style.display=checkedbox_map;
+				document.getElementById("notifications").style.display=checkedbox_notifications;
+				document.getElementById("dashboard").style.display=checkedbox_dashboard;
+				document.getElementById("devices").style.display=checkedbox_devices;
+				document.getElementById("reports").style.display=checkedbox_reports;
+				document.getElementById("settings").style.display=checkedbox_settings;
+				
+			} else if (get_emp == "user"){
+				document.getElementById("map2").style.display=checkedbox_map;
+				document.getElementById("notifications").style.display=checkedbox_notifications;
+				document.getElementById("dashboard").style.display=checkedbox_dashboard;
+				document.getElementById("devices").style.display=checkedbox_devices;
+				document.getElementById("reports").style.display=checkedbox_reports;
+				document.getElementById("settings").style.display=checkedbox_settings;
+			} else {
+				window.location.href = "login.html";
+			}
+			});
+	});
+	</script>
+
+    <!-- load profile avatar -->
+    <script src="js/loadprofileavatar.js"></script>
+	<script src="js/logout.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Devices</title>
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+	<script src="js/jquery-1.11.2.js"></script>
+    <!-- Custom styles for this template -->
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+	  <link rel="stylesheet" href="css/AdminLTE.min.css">
+	<!--link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/-->
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/3.1.2/css/buttons.dataTables.css"/>
+	<link rel="stylesheet" type="text/css" href="css/menu_tooltip.css"/>
+	
+	<script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/usertypeaccess.js"></script>
+	 <script src="js/jquery-1.11.2.js"></script>
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+
+  
+	<style>
+        .box_device {
+            text-align: center;
+            width: 100%;
+        }
+
+      .btn {
+        cursor: pointer;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 6px;
+        background: #007cbf;
+        color: #fff;
+        font-size: 14px;
+      }
+        .btn.btn-file>input[type='file'] {
+            position: relative;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: unset;
+            text-align: right;
+            opacity: unset;
+            filter: alpha(opacity = 0);
+            outline: none;
+            background: none;
+            cursor: inherit;
+            display: block;
+        }
+        .btn-primary {
+            background-color: unset;
+            border-color: unset;
+        }
+        .btn-primary:hover {
+            color: #000000;
+            background-color: unset;
+            border-color: unset;
+        }
+    .btn:not(:disabled):not(.disabled) {
+        border: none;
+    }
+
+        th {
+            background-color: #eaf1f7 !important;
+            border-style: none !important;
+        }
+        
+        .dt-length {
+            float : left;
+        }
+
+        .dt-search {
+            float : right;
+        }
+
+       .dt-info {
+            float : left;
+        }
+
+        .dt-paging {
+            float : right;
+        }
+
+        div.dt-container.dt-empty-footer .dt-scroll-body {
+            border-bottom: 1px solid rgb(244 244 244);
+        }
+        .table-bordered {
+            border: 0px solid #f4f4f4;
+        }
+        .table-bordered th, .table-bordered td {
+            border: 0px solid #e3e6f0;
+        }
+		.Online {
+			width: 12px;
+			height: 12px;
+			background: #f15d24;
+			border-radius: 12px;
+			float: left;
+			margin: 5px 6px 0 0;
+		}
+		.Offline {
+			width: 12px;
+			height: 12px;
+			background: #c0ccd9;
+			border-radius: 12px;
+			float: left;
+			margin: 5px 6px 0 0;
+		}
+		.Unknown {
+			width: 12px;
+			height: 12px;
+			background: #f9b049;
+			border-radius: 12px;
+			float: left;
+			margin: 5px 6px 0 0;
+		}
+		.icon_phone {
+			color: #32e115;
+		}
+
+		table.dataTable tbody td {
+		  vertical-align: middle !important;
+		}
+
+        .dt-search {
+            position: relative;
+            z-index: auto;
+            top: -100px;
+            right: 20px;
+            /* float: right; */
+        }
+        .dt-search-0 {
+            position: fixed;
+            right: 255px;
+            padding: 5px;
+        }
+        /* #dt-search-0 {
+            position: fixed;
+        } */
+
+        .dataTables_filter {
+            display: none;
+        }
+        .dt-scroll-head {
+            background-color: #eaf1f7;
+            overflow: hidden;
+            position: absolute !important;
+            border: 0px;
+            width: 100%;
+            /* height: 100%; */
+            z-index: 1;
+        }
+        .dt-scroll-body {
+            position: relative;
+            overflow: auto;
+            width: 100%;
+            padding: 5% 1% 0;
+        }
+		.ship {
+			position: absolute;
+			width: 9%;
+			right: 72px;
+			top: 101px;
+		}
+		.ship_box {
+			border-radius: 35px;
+			background: #000f81;
+			color: #fff;
+			padding: .3125rem 0rem .3125rem 1rem;
+			background-image: url('img/downarrow.png');
+			background-repeat: no-repeat, repeat;
+			background-position: right 1rem center;
+
+			-moz-appearance: none;
+			-webkit-appearance: none;
+			appearance: none;
+
+			background-size: 10px 12px;
+
+		}
+		.search_select {
+			position: absolute;
+			top: -12px;
+			right: -54px;
+
+		}
+        @media (min-width: 576px) {
+            .dt-scroll-body {
+                padding: 2% 1% 0;
+            }
+        }
+
+        /* FOR LOADER */
+        .loader {
+            border: 5px solid #f3f3f300;
+            border-radius: 50%;
+            border-top: 5px solid #2d358d;
+            width: 50px;
+            height: 50px;
+            -webkit-animation: spin .8s linear infinite; /* Safari */
+            animation: spin .8s linear infinite;
+        }
+
+        /* Safari */
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .imgcenter {
+            display: none;
+            margin: 0 auto;
+            position: absolute;
+            z-index: 100000;
+            width: 100%;
+            top: 50%;
+        }
+
+        .loader {
+            margin: auto;
+        }
+		.dt-search {
+			visibility: hidden;
+		}
+		//------------------fluid iframe------------------
+			
+		.fluidMedia {
+			position: relative;
+			padding-bottom: 56.25%; proportion value to aspect ratio 16:9 (9 / 16 = 0.5625 or 56.25%) 
+			padding-top: 30px;
+			height: 0;
+			overflow: hidden;
+		}
+
+		.fluidMedia iframe {
+			position: absolute;
+			top: 10;
+			left: 2.5%;
+			width: 95%;
+			height: 400px;
+			padding-top: 0;
+			scrolling: no;
+
+		}
+		.fluidMedia2 iframe {
+			position: absolute;
+			top: 10;
+			left: 2.5%;
+			width: 95%;
+			height: 350px;
+			padding-top: 0;
+			scrolling: no;
+
+		}
+		select{
+		  padding:8px 5px;
+		  border-radius:5px;
+		  color:#333;
+		  width:250px;
+		}
+		.font-awesome .fa{
+		  font-family: "Font Awesome 5 Free", Open Sans;
+		  font-weight:501;
+		}
+	</style>
+
+	<script type="text/javascript">
+        $(document).ready(function() {
+
+        $('select').on('change', function() {
+            console.log( this.value );
+            $('#transportation').val(this.value);
+        });
+        
+            loadprofileavatar();
+            sessionStorage.setItem( 'getID', '');
+
+				  $('#transportation').on('change', () => {            
+						devices.search($("#transportation").val()).draw();
+				  });
+
+			var devices = $('#device_list').DataTable( {
+				
+		
+                "language": {
+                    searchPlaceholder: "Search",
+                    search: "Filter:",
+				},
+
+                "iDisplayLength": -1,
+                "aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+                "processing": false,
+                "scrollX": true,
+                dom: 'l<"toolbar">Bfrtip',
+                "scrollCollapse": true,
+                "paging":         false,
+
+                "bPaginate": false,
+                "bLengthChange": false,
+                "bFilter": true,
+                "bInfo": false,
+                "bAutoWidth": true,
+
+                fixedColumns:   {
+                    left: 1
+                },
+                buttons: [        ],
+                buttons: [        ], 
+                // initComplete: function(){
+                //     $("div.toolbar").html('<a class="button-33" data-toggle="modal" data-target="#myAddModal"><i class="ri-file-add-fill" style="font-size:15px;"></i> Add</a>');           
+                // },
+
+                "ajax": {
+                    "url": "data_device.php",
+                    "dataSrc": "results",
+                },
+
+
+				"order": [[ 1, "asc" ]],
+				
+				"columns": [
+
+					//{ "data": "Photo", defaultContent: '' },
+					{ "data": null, render: function ( data, type, row ) {
+                        return '<img src="./uploaded_images/'+data.Photo+'.jpg" width="80" height="80" />';
+					}},
+					{ "data": "Name", defaultContent: '' },
+					{ "data": "Identifier", defaultContent: '' },
+					{ "data": "Model", defaultContent: '' },
+					{ "data": "Group", defaultContent: '' },
+					{ "data": "Transportation", defaultContent: '' },
+                    
+					{ "data": null, render: function ( data, type, row ) {
+                        return '<div class="'+ data.Status +'"></div><div>'+ data.Status +'</div>';
+                    }}, 
+
+					// { "data": "Last updated", defaultContent: '' },
+                    
+                    {"data": "createdAt", type:"date", render: function (data) {
+                        let date = new Date(data);
+                        let month = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
+                        
+                        let getlocaltime = date.toLocaleString([], {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                        });
+
+                        return date.getFullYear() + "-" + month[date.getMonth()] + "-" + String("0" + date.getDate()).slice(-2) + "<br>" + getlocaltime;
+                    }},
+
+
+					//{ "data": "ContactPerson", defaultContent: '' },
+					{ "data": null, render: function ( data, type, row ) {
+                        return '<div style="float:left">'+ data.ContactPerson +'</div> <div> <i style="transform: scale(-1, 1);" class="fa fa-fw fa-phone icon_phone"></i></div>';
+                    }}, 
+					// { "data": "Action" },
+                    
+                    { "data": null, render: function ( data, type, row ) {
+                        /* $(".id-edit").click(function() {
+                            putValues();
+                        });
+                        $(".id-del").click(function() {
+                            showDelete();
+                        }); */
+          
+                        return '<div style="text-align:left"><a class="btn btn-success btn-xs id-edit" data-toggle="modal" data-target="#modal_edit" data-title="Edit" style="height: 40px; width: 40px; padding: 8px; color: #2d358d; margin: 8px; background-color: #fff; border: #2d358d; border-style: solid; border-width: thin; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px; border-top-left-radius: 8px; border-top-right-radius: 8px;" onclick="putId(\'' + data.objectId + '\',\'' + data.Identifier + '\')"><i class="fa fa-pencil"></i></a><button class="btn btn-danger btn-xs id-del" data-target="#modal_delete" data-title="Delete" data-toggle="modal" onclick="delobjtId(\'' + data.objectId + '\')" style="height: 40px; width: 40px; padding: 8px; color: #9d131e; margin: 8px; background-color: #fff; border: #9d131e; border-style: solid; border-width: thin; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px; border-top-left-radius: 8px; border-top-right-radius: 8px;"><i class="fa fa-times"></i></button></div>';
+                        
+                    },		
+                        orderable: false
+                    
+                    }, 
+
+				]
+			} );
+
+            // Hide the first column (index 0)
+            devices.column(5).visible(false);
+            
+
+            var btnCust = '<button type="button" class="btn btn-secondary" title="Add picture tags" ' + '<i class="glyphicon glyphicon-tag"></i>' + '</button>';
+            
+            $("#add_uploaded_image").fileinput({
+                overwriteInitial: true,
+                maxFileSize: 1500,
+                showClose: false,
+                showCaption: false,
+                browseLabel: '',
+                removeLabel: '',
+                browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
+                removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+                removeTitle: 'Cancel or reset changes',
+                elErrorContainer: '#kv-avatar-errors-1',
+                msgErrorClass: 'alert alert-block alert-danger',
+                // defaultPreviewContent: '<img src="/uploads/default_avatar_male.jpg" alt="Your Avatar">',
+                layoutTemplates: {main2: '{preview} ' +  btnCust + ' {remove} {browse}'},
+                allowedFileExtensions: ["jpg", "png", "gif"]
+            });
+            
+            $("#update_uploaded_image").fileinput({
+                overwriteInitial: true,
+                maxFileSize: 1500,
+                showClose: false,
+                showCaption: false,
+                browseLabel: '',
+                removeLabel: '',
+                browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
+                removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+                removeTitle: 'Cancel or reset changes',
+                elErrorContainer: '#kv-avatar-errors-1',
+                msgErrorClass: 'alert alert-block alert-danger',
+                // defaultPreviewContent: '<img src="/uploads/default_avatar_male.jpg" alt="Your Avatar">',
+                layoutTemplates: {main2: '{preview} ' +  btnCust + ' {remove} {browse}'},
+                allowedFileExtensions: ["jpg", "png", "gif"]
+            });
+            
+		});
+
+        function putId(objectId){
+		    sessionStorage.setItem( 'getID', objectId);
+            // RESET INPUT
+            document.getElementById("pic_preview").innerHTML = "";
+            $('#edit_Name').val("");
+            $('#edit_Identifier').val("");
+            $('#edit_Model').val("");
+            $('#edit_Group').val("");
+            $('#edit_Contact').val("");
+            getEdit();
+
+        }
+
+        function getEdit(){
+            var objectId_data = sessionStorage.getItem("getID");
+            var param = JSON.stringify({"objectId":objectId_data});
+            var compare = '?where=';
+            var url = compare.concat(param);
+
+            $.ajax({
+                type: 'GET',
+                headers: {
+                    'X-Parse-Application-Id': APP_ID,
+                    'X-Parse-REST-API-Key': REST_API_KEY,
+                    'Content-Type': "application/json"
+                }, 
+                url: BASE_URL+"1/classes/Devices"+url, 
+                data: '{"results":[{}]}',
+                data: {order: 'createdAt'},
+                dataType: "json",
+                error: function() {
+                    //alert("No data found.");
+                },
+
+                success: function (data) {
+
+                    var jstr = JSON.stringify(data);
+                    var json = JSON.parse(jstr);
+
+                    for(var i=0; i< json.results.length; i++) {
+
+                        var objectId = json.results[i].objectId;
+                        var Photo = json.results[i].Photo;
+                        var Name = json.results[i].Name;
+                        var Identifier = json.results[i].Identifier;
+                        var Model = json.results[i].Model;
+                        var Group = json.results[i].Group;
+                        // var Status = json.results[i].Status;
+                        var ContactPerson = json.results[i].ContactPerson;
+                        var Transportation = json.results[i].Transportation;
+                        var latitude = json.results[i].latitude;
+                        var longitude = json.results[i].longitude;
+
+                        document.getElementById("pic_preview").innerHTML = "<img src='./uploaded_images/"+Photo+".jpg' style='width:200px; height:200px' />";
+
+                        $('#edit_Name').val(Name);
+                        $('#edit_Identifier').val(Identifier);
+                        $('#edit_Model').val(Model);
+                        $('#edit_Group').val(Group);
+                        $('#edit_Contact').val(ContactPerson);
+                        $('.mapedit_Latitude').val(latitude);
+                        $('.mapedit_Longitude').val(longitude);
+                        // $('#transportation').val(Transportation);
+                        $("#transportation option[value='"+Transportation+"']").prop('selected', true);
+                        sessionStorage.setItem("edit_Latitude",latitude);
+                        sessionStorage.setItem("edit_Longitude",longitude);
+                        
+                        //$('.mapedit_Latitude').val(localStorage.getItem("edit_Latitude"));
+                        //$('.mapedit_Longitude').val(localStorage.getItem("edit_Longitude"));
+                        var iframe = document.getElementById('editIframe');
+                        iframe.src = iframe.src;
+                    }
+                    
+                }
+            });	
+
+        }
+        
+        function delobjtId(objectId){
+            sessionStorage.setItem( 'getID', objectId);
+            // get_row();
+        }
+		//============================= MAP ===============================
+		$(document).ready(function(){
+			$('#addIframe')[0].contentWindow.location.reload(true);
+			setInterval(function() {
+				$('#add_Latitude').val(sessionStorage.getItem("add_Latitude"));
+				$('#add_Longitude').val(sessionStorage.getItem("add_Longitude"));
+			},100);
+			$('#editIframe')[0].contentWindow.location.reload(true);
+			setInterval(function() {
+				$('#edit_Latitude').val(sessionStorage.getItem("edit_Latitude"));
+				$('#edit_Longitude').val(sessionStorage.getItem("edit_Longitude"));
+			},100);
+
+		});
+		
+
+    </script>
+</head>
+
+<body id="page-top">
+    <div class="imgcenter">
+        <div class="loader"></div>
+    </div>
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#" style="background-color: #fff;">
+                <div class="sidebar-brand-icon"><!--  rotate-n-15 -->
+                    <!-- <i class="fas fa-laugh-wink"></i> -->
+					<img src="img/fame_logo2.png" class="fame_logo" style="margin: 5%;"/>
+                </div>
+                <div class="sidebar-brand-text mx-3">FAME </div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li id="map2" class="menu-item map nav-item">
+                <a class="nav-link" href="map.html">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                    <span class="tooltip_menu">Map</span>
+				</a>
+            </li>
+            <li id="notifications" class="menu-item notifications nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="tooltip_menu">Notifications</span>
+				</a>
+            </li>
+            <li id="dashboard" class="menu-item dashboard nav-item">
+                <a class="nav-link" href="dashboard.html">
+                    <i class="fa-solid fa-bars-progress"></i>
+                    <span class="tooltip_menu">Dashboard</span>
+				</a>
+            </li>
+            <li id="devices" class="menu-item devices nav-item active">
+                <a class="nav-link" href="#">
+                    <i class="fa-solid fa-satellite-dish"></i>
+                    <span class="tooltip_menu">Devices</span>
+				</a>
+            </li>
+            <li id="reports" class="menu-item reports nav-item">
+                <a class="nav-link" href="report1.html">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span class="tooltip_menu">Report</span>
+				</a>
+            </li>
+             <li id="settings" class="menu-item settings nav-item">
+                <a class="nav-link" href="permission.html">
+                    <i class="fa-solid fa-gear"></i>
+                    <span class="tooltip_menu">Settings</span>
+				</a>
+            </li>
+             <li class="menu-item nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fa-solid fa-circle-question"></i>
+                    <span class="tooltip_menu">Help</span>
+				</a>
+            </li>
+
+            <!-- Nav Item - User Information -->
+            <div style="position: relative; margin-top: auto; clear: both;">
+                <li class="nav-item dropdown no-arrow" style="border-bottom: none;">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div id="imgprofile" alt="avatar"></div>
+                        <!-- <img class="img-profile rounded-circle"
+                            src="img/undraw_profile.svg"> -->
+                    </a>
+                    <!-- Dropdown - User Information -->
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                        aria-labelledby="userDropdown" style="z-index: 1002;">
+                        <a class="dropdown-item" href="profile.html">
+                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Profile
+                        </a>
+                        <!-- <a class="dropdown-item" href="#">
+                            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Settings
+                        </a> -->
+                        <a class="dropdown-item" href="activitylog.html">
+                            <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Activity Log
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Logout
+                        </a>
+                    </div>
+                </li>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light topbar mb-4 static-top">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+					<p class="mb-4">Assets</p>
+                    <h1 class="h3 mb-2 text-gray-800">Devices</h1>
+                    
+					<div class="ship">
+					<label>Filter</label>
+						<select id="transportation" name="ship_category" class="form-control form-control-sm m-2 search_select fa ship_box">  
+								<option value="" disabled selected>----</option>
+								<option value=" " class="fa"> &#xf21a   All</option>
+								<option value="Ship" class="fa"> &#xf21a  Ship</option>
+								<option value="Boat" class="fa"> &#xf21a  Boat</option>
+								<option value="Truck " class="fa"> &#xf0d1  Truck</option>
+								<option value="Motocycle" class="fa"> &#xf21c  Motocycle</option>
+						</select>
+
+
+					</div>
+					
+                    <!-- DataTales Example -->
+                    <div class=""><!-- card shadow mb-4 -->
+                        <div class="card-body card shadow">
+                            <div class="table-responsive">
+							<table id="device_list" class="table table-bordered" style="font-weight: bold;">
+									<thead>
+										<tr>
+											<th>Photo</th>
+											<th>Name</th>
+											<th>Identifier</th>
+											<th>Model</th>
+											<th>Group</th>
+											<th style="display : none;">transportation</th>
+											<th>Status</th>
+											<th>Last updated</th>
+											<th>Contact person</th>
+											<th>Action</th>										
+										</tr>
+									</thead>
+							</table>
+							<table style="width: 100%;">
+							<tr>
+                                <td class="box_device">
+                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal_add" style="border: none; background-color: #ffffff; color: #006bfe; font-weight: bolder;">
+                                        + Add device
+                                    </button>
+                                </td>
+                            </tr>
+							</table>
+                           </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; FAME PH 2026</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+     
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-default" id="logout" href="#">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HERE FOR ADD DEVICE -->
+    <div class="modal fade" id="modal_add" tabindex="-1" role="dialog" aria-labelledby="addmodal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h4 class="modal-title">Add Device</h4>
+			
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+            
+            </div>
+            <div class="box-body">
+            <div class="form-group">
+                <label for="add_uploaded_image">Photo</label>
+                <div class="kv-avatar">
+                    <!-- <div class="file-loading"> -->
+                    <div class="">
+                        <form action="upload.php" method="post" enctype="multipart/form-data">
+                        <input id="add_uploaded_image" class="add_productimage" name="add_uploaded_image" type="file" accept="image/jpg" value="Choose File"><!--  type="file" -->
+                        <input type="submit" value="Upload Image" id="upload_images" name="submit" style="display:none">
+                    </form>
+                    </div>
+                    <br/>
+                    <div class="box_reminder">
+                        <b><span style="color:red">Reminders :</span></b> Please before uploading the image name it same with Identifier and make it sure in jpg format with dimension 512x512
+                    </div>
+                </div>
+            </div>
+			<input type="hidden" id="date_activity"/>
+			<input type="hidden" id="newuser_datetime"/>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control adddevicesname_recent" id="add_Name" name="Name" placeholder="Name" autocomplete="off"/>
+            </div>
+
+            <div class="form-group">
+                <label for="identify">Identifier</label>
+                <input type="text" class="form-control" id="add_Identifier" name="Identifier" placeholder="Enter Identifier" autocomplete="off" />
+            </div>
+
+            <div class="form-group">
+                <label for="model">Model</label>
+                <input type="text" class="form-control" id="add_Model" name="Model" placeholder="Enter Model" autocomplete="off"/>
+            </div>
+            
+            <div class="form-group">
+                <label for="group">Group</label>
+                <input type="text" class="form-control" id="add_Group" name="Group" placeholder="Enter Group" autocomplete="off"/>
+            </div>
+			
+			<div class="form-group">
+			<label for="Tranpo">Transportation</label>
+                <select id="transportation" class="form-control fa">
+				<option value="----">----</option>
+				<option value="Ship" class="fa"> &#xf21a  Ship</option>
+				<option value="Boat" class="fa"> &#xf21a  Boat</option>
+				<option value="Truck " class="fa"> &#xf0d1  Truck</option>
+				<option value="Motocycle" class="fa"> &#xf21c  Motorcycle</option>			 
+				</select>
+            </div>
+            <div style="height: 400px; width: 100%;" class="form-group fluidMedia">
+			<iframe id="addIframe" frameborder="0" scrolling="no" src="add_map.html"></iframe>
+			</div>
+			<div>
+			<table><tr style="visibility: none; text-align: center;">
+				<td><div class="form-group" style="text-align: left;"><label><b>Latitude</b></label>
+				<input type="text" name="" id="add_Latitude" placeholder="" class="form-control add_Latitude" disabled/></div></td>
+				
+				<td><div class="form-group" style="text-align: left;"><label><b>Longitude</b></label>
+				<input type="text" name="" id="add_Longitude" placeholder="" class="form-control add_Longitude" disabled/></div></td>
+				</tr></table>
+			</div>
+            <!-- <div class="form-group">
+                <label for="status">Status</label>
+                <select id="add_Status" class="form-control" name="add_Status">
+                <option value="Online">Online</option>
+                <option value="Offline">Offline</option>
+                </select>
+            </div> -->
+            
+            <div class="form-group">
+                <label for="contact">Contact Person</label>
+                <input type="text" class="form-control" id="add_Contact" name="Contact" placeholder="Enter Contact person" autocomplete="off"/>
+            </div>
+            
+
+            </div>
+
+            <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" onclick="CheckDimension()">Save</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+        
+    <!-- HERE FOR EDIT DEVICE -->
+    <div class="modal fade" id="modal_edit" tabindex="-1" role="dialog" aria-labelledby="editmodal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h4 class="modal-title">Edit Device</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+            
+            </div>
+            <div class="box-body">
+
+                <div class="form-group">
+                    <label>Image Preview: </label>
+                    <div id="pic_preview">
+                    </div>
+                  </div>
+  
+            <div class="form-group">
+                <label for="update_uploaded_image">Photo</label>
+                <div class="kv-avatar">
+                    <!-- <div class="file-loading"> -->
+                    <div class="">
+                        <form action="upload2.php" method="post" enctype="multipart/form-data">
+                        <input id="update_uploaded_image" class="add_productimage" name="update_uploaded_image" type="file" accept="image/jpg" value="Choose File"><!--  type="file" -->
+                        <input type="submit" value="Upload Image" id="upload_images2" name="submit" style="display:none">
+						</form>
+                    </div>
+                    <br/>
+                    <div class="box_reminder">
+                        <b><span style="color:red">Reminders :</span></b> Please before uploading the image name it same with Identifier and make it sure in jpg format with dimension 512x512
+                    </div>
+                </div>
+            </div>
+			<input type="hidden" id="editdate_activity"/>
+			<input type="hidden" id="edituser_datetime"/>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control editdevicesname_recent" id="edit_Name" name="Name" placeholder="Name" autocomplete="off"/>
+            </div>
+
+            <div class="form-group">
+                <label for="identify">Identifier</label>
+                <input type="text" class="form-control" id="edit_Identifier" name="Identifier" placeholder="Enter Identifier" autocomplete="off" />
+            </div>
+
+            <div class="form-group">
+                <label for="model">Model</label>
+                <input type="text" class="form-control" id="edit_Model" name="Model" placeholder="Enter Model" autocomplete="off"/>
+            </div>
+			
+            <div class="form-group">
+                <label for="Tranpo">Transportation</label>
+                <select id="transportation" class="form-control fa">
+				<option value="----">----</option>
+				<option value="Ship" class="fa"> &#xf21a  Ship</option>
+				<option value="Boat" class="fa"> &#xf21a  Boat</option>
+				<option value="Truck " class="fa"> &#xf0d1  Truck</option>
+				<option value="Motocycle" class="fa"> &#xf21c  Motorcycle</option>
+				 
+				</select>
+            </div>
+            
+            <div class="form-group">
+                <label for="group">Group</label>
+                <input type="text" class="form-control" id="edit_Group" name="Group" placeholder="Enter Group" autocomplete="off"/>
+            </div>
+			 <div style="height: 400px; width: 100%;" class="form-group fluidMedia">
+			<iframe id="editIframe" frameborder="0" scrolling="no" src="edit_map.html"></iframe>
+			</div>
+			<div>
+			<table><tr style="visibility: none; text-align: center;">
+				<td><div class="form-group" style="text-align: left;"><label><b>Latitude</b></label>
+				<input type="text" name="" id="edit_Latitude" placeholder="" class="form-control mapedit_Latitude" disabled/></div></td>
+				
+				<td><div class="form-group" style="text-align: left;"><label><b>Longitude</b></label>
+				<input type="text" name="" id="edit_Longitude" placeholder="" class="form-control mapedit_Longitude" disabled/></div></td>
+				</tr></table>
+			</div>
+            
+            <!-- <div class="form-group">
+                <label for="status">Status</label>
+                <select id="edit_Status" class="form-control" name="edit_Status">
+                <option value="Online">Online</option>
+                <option value="Offline">Offline</option>
+                </select>
+            </div> -->
+            
+            <div class="form-group">
+                <label for="contact">Contact Person</label>
+                <input type="text" class="form-control" id="edit_Contact" name="Contact" placeholder="Enter Contact person" autocomplete="off"/>
+            </div>
+            
+
+            </div>
+
+            <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" onclick="reCheckDimension()">Update</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+	
+	<!-- remove brand modal --> 
+	<div class="modal fade" id="modal_delete" tabindex="-1" role="dialog" aria-labelledby="deletemodal" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+		  <h4 class="modal-title">Remove Device</h4>
+			 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+			
+		  </div>
+
+		  <form role="form" action="products/remove" method="post" id="removeForm">
+			<div class="modal-body">
+			  <p>Do you really want to remove <span class="get_row"></span>?</p> 
+			</div>
+			<div class="modal-footer">
+			  <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+			  <button type="submit" class="btn btn-default" data-dismiss="modal" onclick="delete_row()">Yes</button>
+			</div>
+		  </form>
+
+
+		</div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+			
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/datatables-demo.js"></script>
+	<script src="https://kit.fontawesome.com/74e07481c2.js" crossorigin="anonymous"></script>
+
+    <script src="js/fileinput.min.js"></script>
+   
+    <script type="text/javascript">
+    function CheckDimension() {
+        
+        var ext = $('#add_uploaded_image').val().split('.').pop();
+        if($.inArray(ext, ['jpg','JPG']) == -1) {
+
+        if(ext != ""){
+            alert('Invalid extension ".'+ext+' ", only ".jpg" is allowed!');
+        } else {
+            alert('Image required, Kindly upload the image.');
+        }
+
+
+        } else {
+            //Get reference of File.
+            var fileUpload = document.getElementById("add_uploaded_image");
+
+            //Check whether the file is valid Image.
+            var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(.jpg)$");
+            if (regex.test(fileUpload.value.toLowerCase())) {
+
+                //Check whether HTML5 is supported.
+                if (typeof (fileUpload.files) != "undefined") {
+                    //Initiate the FileReader object.
+                    var reader = new FileReader();
+                    //Read the contents of Image File.
+                    reader.readAsDataURL(fileUpload.files[0]);
+                    reader.onload = function (e) {
+                        //Initiate the JavaScript Image object.
+                        var image = new Image();
+
+                        //Set the Base64 string return from FileReader as source.
+                        image.src = e.target.result;
+                            
+                        //Validate the File Height and Width.
+                        image.onload = function () {
+                            let height = this.height;
+                            let width = this.width;
+                            if (height > 512 || width > 512) {
+
+                            //show width and height to user
+                                // document.getElementById("width").innerHTML = width;
+                                // document.getElementById("height").innerHTML= height;
+                                alert("Height and Width must not exceed 512px.");
+                                return false;
+                            }
+                                
+                            add_device();
+							add_recentactivity();
+                            // alert("Uploaded image has valid Height and Width.");
+                            return true;
+                        };
+
+                    }
+                } else {
+                    alert("This browser does not support HTML5.");
+                    return false;
+                }
+            } else {
+                alert("Please select a valid Image file.");
+                return false;
+            }            
+        }
+
+    }
+    
+    function add_device() {
+        
+        var photo = $('#add_uploaded_image').val();
+        var name = $('#add_Name').val();
+        var identifier = $('#add_Identifier').val();
+        var model = $('#add_Model').val();
+        var group = $('#add_Group').val();
+        var contactperson = $('#add_Contact').val();
+        var transportation = $('#transportation').find(":selected").val();
+		var add_longitude = $('.add_Longitude').val();
+		var add_latitude = $('.add_Latitude').val();
+		
+        //-----MY FILTER HERE
+        if (($.trim(name).length != "") || ($.trim(name).length != "0")) {
+        if (($.trim(identifier).length != "") || ($.trim(identifier).length != "0")) {
+        if (($.trim(model).length != "") || ($.trim(model).length != "0")) {
+        if (($.trim(group).length != "") || ($.trim(group).length != "0")) {
+        if (($.trim(contactperson).length != "") || ($.trim(contactperson).length != "0")) {
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("POST", BASE_URL+"1/classes/Devices", true);
+        xmlhttp.setRequestHeader("X-Parse-Application-Id", APP_ID);
+        xmlhttp.setRequestHeader("X-Parse-REST-API-Key", REST_API_KEY);
+        //   xmlhttp.setRequestHeader("X-Parse-Master-Key","x74LkLK7v04GUHLypIqbgX34Ad4hzNsSVT8cMMRU");
+        xmlhttp.setRequestHeader("Content-Type", "application/json");
+
+        xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4) {
+            var result = JSON.parse(xmlhttp.responseText);
+            if (result.objectId) {
+                //alert("saved an object with id: " + result.objectId);
+                //alert("Product upload is successful.");
+                $(".imgcenter").css("display", "block");
+
+                setTimeout(function() {
+                    $("#upload_images").click();
+					add_recentactivity();
+                }, 3000);
+                
+                }
+            }
+        }
+
+        var data = JSON.stringify({Photo : identifier, Name : name, Identifier : identifier, Model : model, Group : group, Status : "Online", ContactPerson : contactperson, Transportation : transportation, count : "1", longitude : add_longitude, latitude : add_latitude});
+        xmlhttp.send(data);
+
+
+        } else { alert("Kindly fill up the contact"); $('#add_Contact').val("");}
+        } else { alert("Kindly fill up the group"); $('#add_Group').val("");}
+        } else { alert("Kindly fill up the model"); $('#add_Model').val("");}
+        } else { alert("Kindly fill up the identifier"); $('#add_Identifier').val("");}
+        } else { alert("Kindly fill up the name"); $('#add_Name').val("");}
+                        
+    };
+
+    function reCheckDimension() {
+        
+        var ext = $('#update_uploaded_image').val().split('.').pop();
+
+        if (ext != "") {
+            if($.inArray(ext, ['jpg','JPG']) == -1) {
+
+            if(ext != ""){
+                alert('Invalid extension ".'+ext+' ", only ".jpg" is allowed!');
+            } else {
+                alert('Image required, Kindly upload the image.');
+            }
+            
+            } else {
+                //Get reference of File.
+                var fileUpload = document.getElementById("update_uploaded_image");
+
+                //Check whether the file is valid Image.
+                var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(.jpg)$");
+                if (regex.test(fileUpload.value.toLowerCase())) {
+
+                    //Check whether HTML5 is supported.
+                    if (typeof (fileUpload.files) != "undefined") {
+                        //Initiate the FileReader object.
+                        var reader = new FileReader();
+                        //Read the contents of Image File.
+                        reader.readAsDataURL(fileUpload.files[0]);
+                        reader.onload = function (e) {
+                            //Initiate the JavaScript Image object.
+                            var image = new Image();
+
+                            //Set the Base64 string return from FileReader as source.
+                            image.src = e.target.result;
+                                
+                            //Validate the File Height and Width.
+                            image.onload = function () {
+                                let height = this.height;
+                                let width = this.width;
+                                if (height > 512 || width > 512) {
+
+                                //show width and height to user
+                                    // document.getElementById("width").innerHTML = width;
+                                    // document.getElementById("height").innerHTML= height;
+                                    alert("Height and Width must not exceed 512px.");
+                                    return false;
+                                }
+                                    
+                                update_device();
+                                // alert("Uploaded image has valid Height and Width.");
+                                return true;
+                            };
+
+                        }
+                    } else {
+                        alert("This browser does not support HTML5.");
+                        return false;
+                    }
+                } else {
+                    alert("Please select a valid Image file.");
+                    return false;
+                }            
+            }
+        } else {
+          // alert("no uploaded image");
+          update_device();
+        }
+
+    }
+    
+    function update_device() {
+
+        var objID_device =	sessionStorage.getItem('getID');
+        var photo = $('#update_uploaded_image').val();
+        var name = $('#edit_Name').val();
+        var identifier = $('#edit_Identifier').val();
+        var model = $('#edit_Model').val();
+        var group = $('#edit_Group').val();
+        var transportation = $('#transportation').find(":selected").val();
+        var contactperson = $('#edit_Contact').val();
+        var edit_Latitude = $('.edit_Latitude').val();
+        var edit_Longitude = $('.edit_Longitude').val();
+
+        //-----MY FILTER HERE
+        if (($.trim(name).length != "") || ($.trim(name).length != "0")) {
+        if (($.trim(identifier).length != "") || ($.trim(identifier).length != "0")) {
+        if (($.trim(model).length != "") || ($.trim(model).length != "0")) {
+        if (($.trim(group).length != "") || ($.trim(group).length != "0")) {
+        if (($.trim(contactperson).length != "") || ($.trim(contactperson).length != "0")) {
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("PUT", BASE_URL+"1/classes/Devices/"+objID_device, true);
+        xmlhttp.setRequestHeader("X-Parse-Application-Id", APP_ID);
+        xmlhttp.setRequestHeader("X-Parse-REST-API-Key", REST_API_KEY);
+        // xmlhttp.setRequestHeader("X-Parse-Master-Key","x74LkLK7v04GUHLypIqbgX34Ad4hzNsSVT8cMMRU");
+        // xmlhttp.setRequestHeader('X-Parse-Session-Token', sessionToken);
+        xmlhttp.setRequestHeader("Content-Type", "application/json");
+
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4) {
+                var result = JSON.parse(xmlhttp.responseText);
+                $(".imgcenter").css("display", "block");
+                
+                setTimeout(function() {
+					update_recentactivity();
+                    var get_image1 = $("#update_uploaded_image").val();/* .add_productimage */
+            
+                    if (get_image1 == "") {
+                        $('#device_list').DataTable().ajax.reload();
+                        $('#modal_edit').modal('hide');
+                        $('.close').click();
+                        $(".imgcenter").css("display", "none");
+                        // window.location.href='devices.html';
+                    } else if (get_image1 != ""){
+                        $("#upload_images2").click();
+                    }
+
+                }, 3000);
+                
+            }
+        }
+
+        var data = JSON.stringify({Photo : identifier, Name : name, Identifier : identifier, Model : model, Group : group, Status : "Online", ContactPerson : contactperson, Transportation : transportation, longitude : edit_Longitude, latitude : edit_Latitude });
+        xmlhttp.send(data);
+
+
+        } else { alert("Kindly fill up the contact"); $('#edit_Contact').val("");}
+        } else { alert("Kindly fill up the group"); $('#edit_Group').val("");}
+        } else { alert("Kindly fill up the model"); $('#edit_Model').val("");}
+        } else { alert("Kindly fill up the identifier"); $('#edit_Identifier').val("");}
+        } else { alert("Kindly fill up the name"); $('#edit_Name').val("");}
+                        
+    };
+
+    function delete_row(){
+        var id = sessionStorage.getItem( 'getID');
+        var oldURL = BASE_URL+"1/classes/Devices/";
+        var newURL = oldURL.concat(sessionStorage.getItem( 'getID'));
+		recentdelete();
+        $.ajax({
+            type: 'DELETE',
+            headers: {
+                'X-Parse-Application-Id': APP_ID,
+                'X-Parse-REST-API-Key': REST_API_KEY
+                // 'X-Parse-Master-Key': "x74LkLK7v04GUHLypIqbgX34Ad4hzNsSVT8cMMRU"
+            },
+            url: newURL, 
+            dataType: "json",
+            error: function() {
+            //alert(url);
+            },
+            success: function (data) {
+
+                $('#'+id).remove();
+                $(".imgcenter").css("display", "block");
+                setTimeout(function() {
+                    $('#device_list').DataTable().ajax.reload();
+                    $('#modal_delete').modal('hide');
+                    $('.close').click();
+                    $(".imgcenter").css("display", "none");
+                    // window.location.href='devices.html';
+                }, 3000);
+
+            }
+        });
+    }
+
+	//============ recent activity =============================
+		setInterval(function() {
+			document.getElementById("date_activity").value = user_activity();
+			document.getElementById("newuser_datetime").value = newdate();
+			document.getElementById("editdate_activity").value = edituser_activity();
+			document.getElementById("edituser_datetime").value = editnewdate();
+			
+		}, 2000);
+
+		function user_activity() {
+		var d = new Date(),
+			minutes = d.getMinutes().toString().length == 1 ? '0'+d.getMinutes() : d.getMinutes(),
+			hours = d.getHours().toString().length == 1 ? '0'+d.getHours() : d.getHours(),
+			//ampm = d.getHours() >= 12 ? 'PM' : 'AM',
+			months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nove','Dec'];
+
+		return months[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear();
+		}
+		function newdate() {	
+			var d = new Date(),
+			minutes = d.getMinutes().toString().length == 1 ? '0'+d.getMinutes() : d.getMinutes(),
+			hours = d.getHours().toString().length == 1 ? '0'+d.getHours() : d.getHours(),
+			ampm = d.getHours() >= 12 ? 'PM' : 'AM',
+			months = ['1','2','3','4','5','6','7','8','9','10','11','12'];
+			return d.getDate()+'/'+months[d.getMonth()]+'/'+d.getFullYear()+' '+hours+':'+minutes+ampm;
+		}
+		function edituser_activity() {
+		var d = new Date(),
+			minutes = d.getMinutes().toString().length == 1 ? '0'+d.getMinutes() : d.getMinutes(),
+			hours = d.getHours().toString().length == 1 ? '0'+d.getHours() : d.getHours(),
+			//ampm = d.getHours() >= 12 ? 'PM' : 'AM',
+			months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nove','Dec'];
+
+		return months[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear();
+		}
+		function editnewdate() {
+			var d = new Date(),
+			minutes = d.getMinutes().toString().length == 1 ? '0'+d.getMinutes() : d.getMinutes(),
+			hours = d.getHours().toString().length == 1 ? '0'+d.getHours() : d.getHours(),
+			ampm = d.getHours() >= 12 ? 'PM' : 'AM',
+			months = ['1','2','3','4','5','6','7','8','9','10','11','12'];
+			return d.getDate()+'/'+months[d.getMonth()]+'/'+d.getFullYear()+' '+hours+':'+minutes+ampm;
+		}
+	    
+	    function add_recentactivity() {
+        
+		var recent_fullname = $('.adddevicesname_recent').val();
+		var recent_newuser = localStorage.getItem("myfullname");
+		var recent_newadd = "Added new Device";
+		var recent_date = $('#date_activity').val();
+		var recent_time = $('#newuser_datetime').val();
+		var recent_newregister = "is registered";
+		var recent_addimg = "adduser.png";
+
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("POST", BASE_URL+"1/classes/Recentactivity", true);
+        xmlhttp.setRequestHeader("X-Parse-Application-Id", APP_ID);
+        xmlhttp.setRequestHeader("X-Parse-REST-API-Key", REST_API_KEY);
+        //   xmlhttp.setRequestHeader("X-Parse-Master-Key","x74LkLK7v04GUHLypIqbgX34Ad4hzNsSVT8cMMRU");
+        xmlhttp.setRequestHeader("Content-Type", "application/json");
+
+        xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4) {
+            var result = JSON.parse(xmlhttp.responseText);
+            if (result.objectId) {
+                //alert("saved an object with id: " + result.objectId);
+                //alert("Product upload is successful.");
+                $(".imgcenter").css("display", "block");
+
+                setTimeout(function() {
+                    $("#upload_images").click();
+                }, 3000);
+                
+                }
+            }
+        }
+
+        var data = JSON.stringify({recentfullname : recent_fullname, recentnewuser : recent_newuser, recentnewadd : recent_newadd, recentdate : recent_date, recenttime : recent_time, recentnewregister : recent_newregister, recentaddimg : recent_addimg });
+        xmlhttp.send(data);
+                        
+    };
+	//======================= UPDATE ===========================================
+
+	    function update_recentactivity() {
+        
+		var recent_fullname = $('.editdevicesname_recent').val();
+		var recent_newuser = localStorage.getItem("myfullname");
+		var recent_newadd = "Updated to";
+		var recent_date = $('#editdate_activity').val();
+		var recent_time = $('#edituser_datetime').val();
+		var recent_newregister = "was edited&nbsp;&nbsp;by&nbsp;&nbsp;" + recent_newuser;
+		var recent_addimg = "updateuser.png";
+
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("POST", BASE_URL+"1/classes/Recentactivity", true);
+        xmlhttp.setRequestHeader("X-Parse-Application-Id", APP_ID);
+        xmlhttp.setRequestHeader("X-Parse-REST-API-Key", REST_API_KEY);
+        //   xmlhttp.setRequestHeader("X-Parse-Master-Key","x74LkLK7v04GUHLypIqbgX34Ad4hzNsSVT8cMMRU");
+        xmlhttp.setRequestHeader("Content-Type", "application/json");
+
+        xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4) {
+            var result = JSON.parse(xmlhttp.responseText);
+            if (result.objectId) {
+                //alert("saved an object with id: " + result.objectId);
+                //alert("Product upload is successful.");
+                $(".imgcenter").css("display", "block");
+
+                setTimeout(function() {
+                    $("#upload_images").click();
+                }, 3000);
+                
+                }
+            }
+        }
+
+        var data = JSON.stringify({recentfullname : recent_fullname, recentnewuser : recent_newuser, recentnewadd : recent_newadd, recentdate : recent_date, recenttime : recent_time, recentnewregister : recent_newregister, recentaddimg : recent_addimg });
+        xmlhttp.send(data);
+                        
+    };
+	function recentdelete(){
+
+		var recent_fullname = $('.editdevicesname_recent').val();
+		var recent_newuser = localStorage.getItem("myfullname");
+		var recent_newadd = "Deleted";
+		var recent_date = $('#editdate_activity').val();
+		var recent_time = $('#edituser_datetime').val();
+		var recent_newregister = "was deleted by " + recent_newuser;
+		var recent_addimg = "deleteuser.png";
+		
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.open("POST", BASE_URL+"1/classes/Recentactivity", true);
+		xmlhttp.setRequestHeader("X-Parse-Application-Id", APP_ID);
+		xmlhttp.setRequestHeader("X-Parse-REST-API-Key", REST_API_KEY);
+		//xmlhttp.setRequestHeader('X-Parse-Session-Token', sessionToken);
+
+		xmlhttp.setRequestHeader("Content-Type", "application/json");
+
+		xmlhttp.onreadystatechange = function() {
+		if (xmlhttp.readyState == 4) {
+		var result = JSON.parse(xmlhttp.responseText);
+		if (result.objectId) {
+		//alert("saved successfully");
+		//localStorage.setItem("hidedry","none");
+		}
+	  }
+	}
+
+		var data = JSON.stringify({recentfullname : recent_fullname, recentnewuser : recent_newuser, recentnewadd : recent_newadd, recentdate : recent_date, recenttime : recent_time, recentnewregister : recent_newregister, recentaddimg : recent_addimg });
+        xmlhttp.send(data);
+		
+	};
+	
+	$(document).ready(function(){
+	
+			
+			var checkedbox_map = localStorage.getItem("map");
+			var checkedbox_notifications = localStorage.getItem("notifications");
+			var checkedbox_dashboard = localStorage.getItem("dashboard");			
+			var checkedbox_devices = localStorage.getItem("devices");
+			var checkedbox_reports = localStorage.getItem("reports");
+			var checkedbox_settings = localStorage.getItem("settings");
+			
+		$(function() {
+
+				var get_emp = localStorage.getItem("regAuthor");
+			if (get_emp == "admin") {
+				document.getElementById("map2").style.display=checkedbox_map;
+				document.getElementById("notifications").style.display=checkedbox_notifications;
+				document.getElementById("dashboard").style.display=checkedbox_dashboard;
+				document.getElementById("devices").style.display=checkedbox_devices;
+				document.getElementById("reports").style.display=checkedbox_reports;
+				document.getElementById("settings").style.display=checkedbox_settings;
+				
+			} else if (get_emp == "supervisor"){
+				document.getElementById("map2").style.display=checkedbox_map;
+				document.getElementById("notifications").style.display=checkedbox_notifications;
+				document.getElementById("dashboard").style.display=checkedbox_dashboard;
+				document.getElementById("devices").style.display=checkedbox_devices;
+				document.getElementById("reports").style.display=checkedbox_reports;
+				document.getElementById("settings").style.display=checkedbox_settings;
+				
+			} else if (get_emp == "user"){
+				document.getElementById("map2").style.display=checkedbox_map;
+				document.getElementById("notifications").style.display=checkedbox_notifications;
+				document.getElementById("dashboard").style.display=checkedbox_dashboard;
+				document.getElementById("devices").style.display=checkedbox_devices;
+				document.getElementById("reports").style.display=checkedbox_reports;
+				document.getElementById("settings").style.display=checkedbox_settings;
+			} else {
+				window.location.href = "login.html";
+			}
+			});
+	});
+	</script>
+	<!-- Bootstrap 3.3.7 -->
+	<!-- <script src="dist/js/bootstrap.min.js"></script> -->
+	<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+	<script src="https://cdn.datatables.net/buttons/3.1.2/js/dataTables.buttons.js"></script>
+	<script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.dataTables.js"></script>
+	<script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.html5.min.js"></script>
+
+    <!-- load profile avatar -->
+    <script src="js/loadprofileavatar.js"></script>
+	<script src="js/logout.js"></script>
+</body>
+
+</html>
