@@ -9,6 +9,7 @@ The FAME IoT Platform provides a dashboard for viewing and managing IoT devices,
 ## Features
 
 - User login and authentication
+- Automatic logout after 15 minutes of inactivity for improved security
 - IoT device monitoring
 - Device status monitoring
 - Online and offline device status
